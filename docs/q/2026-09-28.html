@@ -18,113 +18,122 @@ a { color: #6363f1; }
 </head><body>
 <a href="../index.html">← 전체 목록</a>
 <h1>2026-09-28 실기 문제</h1>
-<div class="question"><h3>Q1</h3><div class="badge">코드 출력 · C</div><p>다음 C 프로그램의 실행 결과를 예측하시오.
-
-#include &lt;stdio.h&gt;
-
-int main() {
-    int arr[5] = {10, 20, 30, 40, 50};
-    int *p = arr;
-    int sum = 0;
-
-    for (int i = 0; i &lt; 5; i++) {
-        if (i % 2 == 0) {
-            sum += *(p + i);
-        } else {
-            sum -= *(p + i);
-        }
+<div class="question"><h3>Q1</h3><div class="badge">코드 출력 · Java</div><p>다음 Java 프로그램의 실행 결과를 예측하시오.</p><pre><code>public class Main {
+    static int modify(int[] arr, int idx) {
+        arr[idx] = arr[idx] * 2;
+        return arr[idx];
     }
 
-    printf(&quot;sum=%d\n&quot;, sum);
-    printf(&quot;arr[2]=%d\n&quot;, *(arr + 2));
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3, 4, 5};
+        int sum = 0;
 
-    return 0;
-}</p><pre><code></code></pre>
+        for (int i = 0; i &lt; numbers.length; i++) {
+            if (i % 2 == 0) {
+                sum += modify(numbers, i);
+            } else {
+                sum += numbers[i];
+            }
+        }
+
+        for (int n : numbers) {
+            System.out.print(n + &quot; &quot;);
+        }
+        System.out.println();
+        System.out.println(&quot;sum = &quot; + sum);
+    }
+}</code></pre>
 <details>
   <summary>정답 보기</summary>
   <div class="answer">
-    <pre><code>sum=60
-arr[2]=30</code></pre>
-    <p>i가 0,2,4일 때(짝수 인덱스) 값을 더하고 1,3일 때(홀수 인덱스) 값을 뺍니다. 10-20+30-40+50 = 30이 아니라 순서대로 계산하면 10-20+30-40+50=30인데, 실제로는 i=0에서 +10, i=1에서 -20, i=2에서 +30, i=3에서 -40, i=4에서 +50이므로 10-20+30-40+50=30입니다. 다시 계산: 10-20=-10, -10+30=20, 20-40=-20, -20+50=30. 따라서 sum은 30이 아니라 재검산 결과 30입니다. arr[2]는 30입니다.</p>
-    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
-  </div>
-</details>
-</div>
-<div class="question"><h3>Q2</h3><div class="badge">코드 출력 · Python</div><p>다음 파이썬 코드의 실행 결과를 예측하시오.
-
-def transform(lst):
-    result = []
-    for x in lst:
-        if x % 3 == 0:
-            result.append(x * 2)
-        elif x % 3 == 1:
-            result.append(x + 10)
-        else:
-            result.append(x - 1)
-    return result
-
-numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-output = transform(numbers)
-print(output)
-print(sum(output))</p><pre><code></code></pre>
-<details>
-  <summary>정답 보기</summary>
-  <div class="answer">
-    <pre><code>[11, 1, 6, 14, 4, 12, 17, 7, 18]
-90</code></pre>
-    <p>각 원소를 3으로 나눈 나머지에 따라 처리합니다: 나머지 0이면 x*2, 나머지 1이면 x+10, 나머지 2이면 x-1입니다. 1→11, 2→1, 3→6, 4→14, 5→4, 6→12, 7→17, 8→7, 9→18이 되어 리스트는 [11,1,6,14,4,12,17,7,18]이고 합은 90입니다.</p>
-    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
-  </div>
-</details>
-</div>
-<div class="question"><h3>Q3</h3><div class="badge">SQL 결과</div><p>다음 EMPLOYEE 테이블에 대해 query_sql을 실행했을 때의 결과를 예측하시오.</p><pre><code>-- schema
-CREATE TABLE EMPLOYEE (
-    emp_id INTEGER PRIMARY KEY,
-    emp_name TEXT,
-    dept TEXT,
-    salary INTEGER
-);
-
-INSERT INTO EMPLOYEE VALUES (1, &#x27;김철수&#x27;, &#x27;영업&#x27;, 3000);
-INSERT INTO EMPLOYEE VALUES (2, &#x27;이영희&#x27;, &#x27;영업&#x27;, 3500);
-INSERT INTO EMPLOYEE VALUES (3, &#x27;박민수&#x27;, &#x27;개발&#x27;, 4000);
-INSERT INTO EMPLOYEE VALUES (4, &#x27;최지훈&#x27;, &#x27;개발&#x27;, 4500);
-INSERT INTO EMPLOYEE VALUES (5, &#x27;정수연&#x27;, &#x27;개발&#x27;, 5000);
-INSERT INTO EMPLOYEE VALUES (6, &#x27;한지민&#x27;, &#x27;인사&#x27;, 3200);
-
--- query
-SELECT dept, COUNT(*) AS cnt, AVG(salary) AS avg_sal
-FROM EMPLOYEE
-GROUP BY dept
-HAVING COUNT(*) &gt;= 2
-ORDER BY avg_sal DESC;</code></pre>
-<details>
-  <summary>정답 보기</summary>
-  <div class="answer">
-    <pre><code>dept | cnt | avg_sal
-개발 | 3 | 4500.0
-영업 | 2 | 3250.0</code></pre>
-    <p>부서별로 그룹화한 뒤 인원수가 2명 이상인 부서만 남기면 인사(1명)는 제외됩니다. 개발 부서는 3명 평균 (4000+4500+5000)/3=4500, 영업 부서는 2명 평균 (3000+3500)/2=3250입니다. 평균 급여 내림차순 정렬 결과 개발이 먼저, 영업이 다음에 나옵니다.</p>
+    <pre><code>2 2 6 4 10 
+sum = 24</code></pre>
+    <p>인덱스 0,2,4는 짝수이므로 modify가 호출되어 배열 값이 2배(1→2, 3→6, 5→10)로 바뀌고 그 반환값이 sum에 더해진다. 인덱스 1,3은 홀수이므로 원래 값 2,4가 그대로 더해진다. 최종 배열은 2 2 6 4 10이고 sum = 2+2+6+4+10 = 24이다.</p>
     
   </div>
 </details>
 </div>
-<div class="question"><h3>Q4</h3><div class="badge">용어 단답</div><p>요구사항이 자주 변경되는 프로젝트에서 짧은 반복 주기(스프린트)를 통해 지속적으로 소프트웨어를 개발하고 고객과의 협업을 중시하는 소프트웨어 개발 방법론을 무엇이라 하는가?</p>
+<div class="question"><h3>Q2</h3><div class="badge">코드 출력 · C</div><p>다음 C 프로그램의 실행 결과를 예측하시오.</p><pre><code>#include &lt;stdio.h&gt;
+
+int main(void) {
+    int arr[5] = {10, 20, 30, 40, 50};
+    int *p = arr;
+    int total = 0;
+
+    for (int i = 0; i &lt; 5; i++) {
+        if (i &lt; 2) {
+            *(p + i) = *(p + i) + 5;
+        } else {
+            *(p + i) = *(p + i) - 5;
+        }
+        total = total + *(p + i);
+    }
+
+    for (int i = 0; i &lt; 5; i++) {
+        printf(&quot;%d &quot;, arr[i]);
+    }
+    printf(&quot;\ntotal = %d\n&quot;, total);
+
+    return 0;
+}</code></pre>
 <details>
   <summary>정답 보기</summary>
   <div class="answer">
-    <pre><code>애자일(Agile)</code></pre>
-    <p>애자일 방법론은 변화하는 요구사항에 유연하게 대응하기 위해 짧은 개발 주기와 반복적 피드백, 고객과의 지속적인 협업을 강조하는 개발 방법론입니다. 대표적으로 스크럼, XP(익스트림 프로그래밍) 등이 있습니다.</p>
-    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+    <pre><code>15 25 25 35 45 
+total = 145</code></pre>
+    <p>i가 0,1일 때는 각 원소에 5를 더하여 10→15, 20→25가 되고, i가 2,3,4일 때는 5를 빼서 30→25, 40→35, 50→45가 된다. total은 이 변경된 값들의 누적 합으로 15+25+25+35+45 = 145이다.</p>
+    
   </div>
 </details>
 </div>
-<div class="question"><h3>Q5</h3><div class="badge">용어 단답</div><p>테이블 내에서 기본키가 아닌 속성이 다른 기본키가 아닌 속성에 종속되는 현상을 제거하여, 기본키가 아닌 모든 속성이 기본키에만 종속되도록 만드는 정규화 단계를 무엇이라 하는가?</p>
+<div class="question"><h3>Q3</h3><div class="badge">SQL 결과</div><p>다음 테이블에 대해 주어진 SQL을 실행했을 때의 결과를 예측하시오.</p><pre><code>-- schema
+CREATE TABLE orders (
+    order_id INTEGER PRIMARY KEY,
+    customer TEXT,
+    amount INTEGER
+);
+
+INSERT INTO orders VALUES (1, &#x27;A&#x27;, 1000);
+INSERT INTO orders VALUES (2, &#x27;B&#x27;, 2000);
+INSERT INTO orders VALUES (3, &#x27;A&#x27;, 1500);
+INSERT INTO orders VALUES (4, &#x27;C&#x27;, 500);
+INSERT INTO orders VALUES (5, &#x27;B&#x27;, 3000);
+INSERT INTO orders VALUES (6, &#x27;A&#x27;, 2500);
+INSERT INTO orders VALUES (7, &#x27;C&#x27;, 700);
+
+-- query
+SELECT customer, COUNT(*) AS cnt, SUM(amount) AS total
+FROM orders
+GROUP BY customer
+HAVING SUM(amount) &gt;= 3000
+ORDER BY total DESC;</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>customer | cnt | total
+B | 2 | 5000
+A | 3 | 5000</code></pre>
+    <p>고객별로 그룹화하면 A는 1000+1500+2500=5000(3건), B는 2000+3000=5000(2건), C는 500+700=1200(2건)이다. HAVING 조건으로 합계가 3000 이상인 A와 B만 남고, total이 같으므로 order_id 순서상 먼저 삽입된 customer 순서(A, B)가 결과에 반영되지만 ORDER BY DESC에서 동점이면 원래 정렬 순서(내부 처리 순서, 보통 GROUP BY 결과 순서인 A, B)가 유지된다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q4</h3><div class="badge">용어 단답</div><p>관계형 데이터베이스에서 이행적 함수 종속을 제거하여 얻어지는 정규화 단계의 이름을 쓰시오.</p>
 <details>
   <summary>정답 보기</summary>
   <div class="answer">
     <pre><code>제3정규형(3NF)</code></pre>
-    <p>제3정규형은 이행적 함수 종속(transitive dependency)을 제거하는 단계로, 기본키가 아닌 속성이 다른 비키 속성에 종속되지 않고 오직 기본키에만 종속되도록 만드는 정규화 과정입니다.</p>
+    <p>제2정규형을 만족하는 릴레이션에서 기본키가 아닌 속성이 다른 기본키가 아닌 속성에 종속되는 이행적 함수 종속을 제거하면 제3정규형이 된다. 이는 데이터 중복과 갱신 이상을 줄이기 위한 정규화 과정의 세 번째 단계이다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q5</h3><div class="badge">용어 단답</div><p>소프트웨어를 여러 개의 작은 기능 단위로 나누어 반복적으로 개발하며, 매 반복마다 실행 가능한 소프트웨어를 산출물로 제공하는 개발 방법론을 통칭하는 용어를 쓰시오.</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>애자일(Agile) 방법론</code></pre>
+    <p>애자일 방법론은 짧은 주기의 반복(iteration)을 통해 점진적으로 소프트웨어를 개발하며, 고객과의 지속적인 협업과 변화에 대한 유연한 대응을 강조한다. 스크럼(Scrum), XP(eXtreme Programming) 등이 대표적인 애자일 방법론에 속한다.</p>
     <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
   </div>
 </details>
