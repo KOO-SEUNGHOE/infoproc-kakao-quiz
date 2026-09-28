@@ -103,8 +103,8 @@ def generate(num_questions: int, model: str) -> list:
 
 
 def main():
-    num_questions = int(os.environ.get("NUM_QUESTIONS", "5"))
-    model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-5")
+    num_questions = int(os.environ.get("NUM_QUESTIONS") or "5")
+    model = os.environ.get("ANTHROPIC_MODEL") or "claude-sonnet-5"
     today = date.fromisoformat(sys.argv[1]) if len(sys.argv) > 1 else date.today()
 
     questions = generate(num_questions, model)
