@@ -35,13 +35,17 @@ Anthropic API 사용료만 듭니다. 하루 5문제, 매일 발송 기준으로
 ### 1. 카카오 개발자 앱 만들기
 
 1. https://developers.kakao.com 에서 애플리케이션을 생성합니다.
-2. **앱 설정 > 플랫폼 > Web** 에 `https://<GitHub 아이디>.github.io` 를 등록합니다.
-   (이걸 빼먹으면 카톡 메시지의 [문제 풀기] 버튼이 열리지 않습니다.)
-3. **제품 설정 > 카카오 로그인** 을 활성화하고, Redirect URI에 `http://localhost:8888` 을
+2. **앱 > 제품 링크 관리 > 웹 도메인** 에 `https://<GitHub 아이디>.github.io` 를 등록합니다.
+   (이걸 빼먹으면 카톡 메시지의 [문제 풀기] 버튼이 열리지 않습니다. "플랫폼 키" 메뉴 안 JavaScript
+   키의 "JavaScript SDK 도메인"과는 다른 항목이니 헷갈리지 마세요 — 그건 브라우저 JS SDK 전용이라
+   이 프로젝트엔 필요 없습니다.)
+3. **앱 > 플랫폼 키 > REST API 키** 카드를 열어 **리다이렉트 URI**에 `http://localhost:8888` 을
    등록합니다. (로컬에서 토큰을 발급받을 때만 쓰고, 실제 서비스에는 쓰이지 않습니다.)
 4. **카카오 로그인 > 동의항목** 에서 "카카오톡 메시지 전송"(`talk_message`)을 사용 설정합니다.
-5. (선택) 보안이 더 필요하면 **보안 > Client Secret** 을 활성화하고 값을 메모해둡니다. 켰다면
-   아래 `get_token.py` 실행 시, 그리고 GitHub Secret `KAKAO_CLIENT_SECRET` 에도 넣어야 합니다.
+5. 같은 REST API 키 카드 안 **클라이언트 시크릿** 섹션에서 코드를 확인해 메모해둡니다. REST API
+   키는 기본적으로 클라이언트 시크릿이 **활성화된 상태로 생성**되므로, 끄지 않았다면 이 값은
+   선택이 아니라 필수입니다 (안 보내면 토큰 발급이 실패합니다). 아래 `get_token.py` 실행 시,
+   그리고 GitHub Secret `KAKAO_CLIENT_SECRET` 에도 이 값을 넣어야 합니다.
 
 ### 2. 로컬에서 토큰 발급
 
@@ -67,7 +71,7 @@ REST API 키를 입력하면 브라우저가 열려 카카오 로그인 동의 �
    |---|---|
    | `ANTHROPIC_API_KEY` | Anthropic API 키 |
    | `KAKAO_REST_API_KEY` | 카카오 앱의 REST API 키 |
-   | `KAKAO_CLIENT_SECRET` | Client Secret을 켰다면 그 값, 안 켰으면 빈 문자열 |
+   | `KAKAO_CLIENT_SECRET` | REST API 키 카드의 클라이언트 시크릿 코드 (기본 활성화라 대부분 필수, 직접 껐다면 빈 문자열) |
    | `KAKAO_REFRESH_TOKEN` | `get_token.py` 출력값 |
    | `GH_PAT` | Secrets 쓰기 권한이 있는 GitHub Personal Access Token (classic: `repo` 스코프, 또는 fine-grained: 이 저장소의 "Secrets" 쓰기 권한) — 리프레시 토큰 자동 갱신용 |
 
