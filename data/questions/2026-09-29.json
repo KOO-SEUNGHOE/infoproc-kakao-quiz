@@ -1,0 +1,57 @@
+{
+  "date": "2026-09-29",
+  "questions": [
+    {
+      "type": "code",
+      "language": "Java",
+      "title": "배열과 반복문을 이용한 합계 계산",
+      "prompt": "다음 Java 프로그램의 실행 결과를 예측하시오.",
+      "code": "public class Main {\n    public static void main(String[] args) {\n        int[] arr = {3, 6, 9, 12, 15};\n        int sum = 0;\n        int count = 0;\n\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] % 3 == 0 && arr[i] % 2 == 0) {\n                sum += arr[i];\n                count++;\n            }\n        }\n\n        System.out.println(\"sum=\" + sum);\n        System.out.println(\"count=\" + count);\n    }\n}",
+      "answer": "sum=18\ncount=2",
+      "explanation": "배열 요소 중 3의 배수이면서 동시에 2의 배수(즉 6의 배수)인 값은 6과 12이다. 두 값을 더하면 sum은 18이고, 조건을 만족하는 원소 개수는 2개이므로 count는 2가 된다.",
+      "id": 1,
+      "verified": true
+    },
+    {
+      "type": "code",
+      "language": "Python",
+      "title": "리스트 컴프리헨션과 함수 활용",
+      "prompt": "다음 Python 프로그램의 실행 결과를 예측하시오.",
+      "code": "def process(numbers):\n    result = []\n    for n in numbers:\n        if n % 2 == 0:\n            result.append(n * 2)\n        else:\n            result.append(n + 10)\n    return result\n\n\ndata = [1, 2, 3, 4, 5, 6]\nprocessed = process(data)\ntotal = sum(processed)\n\nprint(processed)\nprint(total)",
+      "answer": "[11, 4, 13, 8, 15, 12]\n63",
+      "explanation": "홀수는 10을 더하고 짝수는 2를 곱한다. 1→11, 2→4, 3→13, 4→8, 5→15, 6→12가 되어 리스트는 [11, 4, 13, 8, 15, 12]이다. 이 값들의 합은 11+4+13+8+15+12=63이다.",
+      "id": 2,
+      "verified": true
+    },
+    {
+      "type": "sql",
+      "title": "GROUP BY와 HAVING을 이용한 부서별 집계",
+      "prompt": "다음 employees 테이블을 대상으로 주어진 SQL을 실행했을 때의 결과를 예측하시오.",
+      "schema_sql": "CREATE TABLE employees (\n    emp_id INTEGER PRIMARY KEY,\n    name TEXT,\n    dept TEXT,\n    salary INTEGER\n);\n\nINSERT INTO employees VALUES (1, '김철수', '영업', 3000);\nINSERT INTO employees VALUES (2, '이영희', '영업', 3500);\nINSERT INTO employees VALUES (3, '박민수', '개발', 4000);\nINSERT INTO employees VALUES (4, '최지훈', '개발', 4500);\nINSERT INTO employees VALUES (5, '정수아', '개발', 5000);\nINSERT INTO employees VALUES (6, '한소희', '인사', 2800);",
+      "query_sql": "SELECT dept, COUNT(*) AS cnt, AVG(salary) AS avg_sal\nFROM employees\nGROUP BY dept\nHAVING COUNT(*) >= 2\nORDER BY avg_sal DESC;",
+      "answer": "dept | cnt | avg_sal\n개발 | 3 | 4500.0\n영업 | 2 | 3250.0",
+      "explanation": "부서별로 그룹화한 뒤 인원수가 2명 이상인 부서만 남긴다. 인사 부서는 1명이라 제외된다. 개발 부서는 3명(4000,4500,5000)으로 평균 4500이고, 영업 부서는 2명(3000,3500)으로 평균 3250이며, 평균 내림차순으로 정렬하면 개발이 먼저 나온다.",
+      "id": 3,
+      "llm_answer": "개발|3|4500.0\n영업|2|3250.0",
+      "verified": true
+    },
+    {
+      "type": "term",
+      "title": "데이터베이스 정규화 개념",
+      "prompt": "릴레이션에서 기본키가 아닌 모든 속성이 기본키에 대해 완전 함수적 종속(부분 함수적 종속 제거)을 만족하도록 분해하는 정규화 단계를 무엇이라 하는가?",
+      "answer": "제2정규형(2NF)",
+      "explanation": "제1정규형을 만족한 릴레이션에서 부분 함수적 종속을 제거하여 모든 비주요 속성이 기본키 전체에 완전 함수적 종속되도록 만드는 과정이 제2정규형이다. 이는 복합키를 가진 테이블에서 특정 속성이 키의 일부에만 종속되는 문제를 해결한다.",
+      "id": 4,
+      "verified": false
+    },
+    {
+      "type": "term",
+      "title": "네트워크 계층 프로토콜",
+      "prompt": "OSI 7계층 중 전송 계층(4계층)에서 동작하며, 연결 지향적이고 신뢰성 있는 데이터 전송을 보장하는 프로토콜은 무엇인가?",
+      "answer": "TCP",
+      "explanation": "TCP(Transmission Control Protocol)는 3-way handshake를 통해 연결을 설정하고, 순서 제어와 오류 검출 및 재전송을 통해 신뢰성 있는 데이터 전송을 보장한다. 이는 비연결형이며 신뢰성을 보장하지 않는 UDP와 대비된다.",
+      "id": 5,
+      "verified": false
+    }
+  ]
+}

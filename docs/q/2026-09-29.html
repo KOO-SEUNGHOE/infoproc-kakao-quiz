@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보처리기사 실기 - 2026-09-29</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "Malgun Gothic", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+h1 { font-size: 1.4rem; }
+.question { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 16px 0; }
+.badge { display: inline-block; font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: #6363f11a; color: #6363f1; margin-bottom: 8px; }
+pre { background: #80808014; padding: 12px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; }
+summary { cursor: pointer; font-weight: 600; margin-top: 10px; }
+.answer { margin-top: 10px; padding: 12px; background: #80808014; border-radius: 8px; }
+.unverified { color: #c97a00; font-size: .8rem; margin-top: 8px; }
+.date-list a { display: block; padding: 10px 0; border-bottom: 1px solid #8882; text-decoration: none; }
+a { color: #6363f1; }
+.nav-link { display: inline-block; margin: 8px 0 20px; font-weight: 600; }
+.term-card { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 12px 0; }
+.term-name { font-size: 1.05rem; font-weight: 700; }
+.term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
+.term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
+.term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+</style>
+</head><body>
+<a href="../index.html">← 전체 목록</a>
+<h1>2026-09-29 실기 문제</h1>
+<div class="question"><h3>Q1</h3><div class="badge">코드 출력 · Java</div><p>다음 Java 프로그램의 실행 결과를 예측하시오.</p><pre><code>public class Main {
+    public static void main(String[] args) {
+        int[] arr = {3, 6, 9, 12, 15};
+        int sum = 0;
+        int count = 0;
+
+        for (int i = 0; i &lt; arr.length; i++) {
+            if (arr[i] % 3 == 0 &amp;&amp; arr[i] % 2 == 0) {
+                sum += arr[i];
+                count++;
+            }
+        }
+
+        System.out.println(&quot;sum=&quot; + sum);
+        System.out.println(&quot;count=&quot; + count);
+    }
+}</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>sum=18
+count=2</code></pre>
+    <p>배열 요소 중 3의 배수이면서 동시에 2의 배수(즉 6의 배수)인 값은 6과 12이다. 두 값을 더하면 sum은 18이고, 조건을 만족하는 원소 개수는 2개이므로 count는 2가 된다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q2</h3><div class="badge">코드 출력 · Python</div><p>다음 Python 프로그램의 실행 결과를 예측하시오.</p><pre><code>def process(numbers):
+    result = []
+    for n in numbers:
+        if n % 2 == 0:
+            result.append(n * 2)
+        else:
+            result.append(n + 10)
+    return result
+
+
+data = [1, 2, 3, 4, 5, 6]
+processed = process(data)
+total = sum(processed)
+
+print(processed)
+print(total)</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>[11, 4, 13, 8, 15, 12]
+63</code></pre>
+    <p>홀수는 10을 더하고 짝수는 2를 곱한다. 1→11, 2→4, 3→13, 4→8, 5→15, 6→12가 되어 리스트는 [11, 4, 13, 8, 15, 12]이다. 이 값들의 합은 11+4+13+8+15+12=63이다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q3</h3><div class="badge">SQL 결과</div><p>다음 employees 테이블을 대상으로 주어진 SQL을 실행했을 때의 결과를 예측하시오.</p><pre><code>-- schema
+CREATE TABLE employees (
+    emp_id INTEGER PRIMARY KEY,
+    name TEXT,
+    dept TEXT,
+    salary INTEGER
+);
+
+INSERT INTO employees VALUES (1, &#x27;김철수&#x27;, &#x27;영업&#x27;, 3000);
+INSERT INTO employees VALUES (2, &#x27;이영희&#x27;, &#x27;영업&#x27;, 3500);
+INSERT INTO employees VALUES (3, &#x27;박민수&#x27;, &#x27;개발&#x27;, 4000);
+INSERT INTO employees VALUES (4, &#x27;최지훈&#x27;, &#x27;개발&#x27;, 4500);
+INSERT INTO employees VALUES (5, &#x27;정수아&#x27;, &#x27;개발&#x27;, 5000);
+INSERT INTO employees VALUES (6, &#x27;한소희&#x27;, &#x27;인사&#x27;, 2800);
+
+-- query
+SELECT dept, COUNT(*) AS cnt, AVG(salary) AS avg_sal
+FROM employees
+GROUP BY dept
+HAVING COUNT(*) &gt;= 2
+ORDER BY avg_sal DESC;</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>dept | cnt | avg_sal
+개발 | 3 | 4500.0
+영업 | 2 | 3250.0</code></pre>
+    <p>부서별로 그룹화한 뒤 인원수가 2명 이상인 부서만 남긴다. 인사 부서는 1명이라 제외된다. 개발 부서는 3명(4000,4500,5000)으로 평균 4500이고, 영업 부서는 2명(3000,3500)으로 평균 3250이며, 평균 내림차순으로 정렬하면 개발이 먼저 나온다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q4</h3><div class="badge">용어 단답</div><p>릴레이션에서 기본키가 아닌 모든 속성이 기본키에 대해 완전 함수적 종속(부분 함수적 종속 제거)을 만족하도록 분해하는 정규화 단계를 무엇이라 하는가?</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>제2정규형(2NF)</code></pre>
+    <p>제1정규형을 만족한 릴레이션에서 부분 함수적 종속을 제거하여 모든 비주요 속성이 기본키 전체에 완전 함수적 종속되도록 만드는 과정이 제2정규형이다. 이는 복합키를 가진 테이블에서 특정 속성이 키의 일부에만 종속되는 문제를 해결한다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q5</h3><div class="badge">용어 단답</div><p>OSI 7계층 중 전송 계층(4계층)에서 동작하며, 연결 지향적이고 신뢰성 있는 데이터 전송을 보장하는 프로토콜은 무엇인가?</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>TCP</code></pre>
+    <p>TCP(Transmission Control Protocol)는 3-way handshake를 통해 연결을 설정하고, 순서 제어와 오류 검출 및 재전송을 통해 신뢰성 있는 데이터 전송을 보장한다. 이는 비연결형이며 신뢰성을 보장하지 않는 UDP와 대비된다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<a class="nav-link" href="../glossary.html">📚 지금까지 나온 용어 정리 보기</a>
+</body></html>
