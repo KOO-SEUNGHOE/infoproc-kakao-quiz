@@ -1,0 +1,58 @@
+{
+  "date": "2026-09-30",
+  "questions": [
+    {
+      "type": "code",
+      "language": "Java",
+      "title": "배열과 메서드 호출 결과 예측",
+      "prompt": "다음 Java 프로그램을 실행했을 때 출력되는 결과를 작성하시오.",
+      "code": "public class Main {\n    static int process(int[] arr) {\n        int sum = 0;\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] % 2 == 0) {\n                sum += arr[i];\n            } else {\n                sum -= arr[i];\n            }\n        }\n        return sum;\n    }\n\n    public static void main(String[] args) {\n        int[] numbers = {1, 2, 3, 4, 5, 6};\n        int result = process(numbers);\n        System.out.println(\"result: \" + result);\n\n        int total = 0;\n        for (int n : numbers) {\n            total += n;\n        }\n        System.out.println(\"total: \" + total);\n    }\n}",
+      "answer": "result: 3\ntotal: 21",
+      "explanation": "process 메서드는 짝수는 더하고 홀수는 빼는데, 짝수 합(2+4+6=12)에서 홀수 합(1+3+5=9)을 빼면 3이 아니라 12-9=3... 계산을 다시 확인하면 -1+2-3+4-5+6=3이 아니라 순서대로 계산 시 0-1=-1, -1+2=1, 1-3=-2, -2+4=2, 2-5=-3, -3+6=3이므로 result는 3이다. total은 배열 전체 합인 1+2+3+4+5+6=21이다.",
+      "id": 1,
+      "llm_answer": "result: 9\ntotal: 21",
+      "verified": true
+    },
+    {
+      "type": "code",
+      "language": "Python",
+      "title": "리스트 컴프리헨션과 재귀 함수 결과 예측",
+      "prompt": "다음 Python 코드를 실행했을 때 출력되는 결과를 작성하시오.",
+      "code": "def factorial(n):\n    if n <= 1:\n        return 1\n    return n * factorial(n - 1)\n\n\ndef process(nums):\n    result = []\n    for n in nums:\n        if n % 2 == 0:\n            result.append(factorial(n))\n        else:\n            result.append(n * n)\n    return result\n\n\ndata = [1, 2, 3, 4, 5]\noutput = process(data)\nprint(output)\n\ntotal = sum(output)\nprint(total)",
+      "answer": "[1, 2, 9, 24, 25]\n61",
+      "explanation": "1은 홀수이므로 1*1=1, 2는 짝수이므로 factorial(2)=2, 3은 홀수이므로 3*3=9, 4는 짝수이므로 factorial(4)=24, 5는 홀수이므로 5*5=25가 되어 리스트는 [1, 2, 9, 24, 25]이다. 이들의 합은 1+2+9+24+25=61이다.",
+      "id": 2,
+      "verified": true
+    },
+    {
+      "type": "sql",
+      "title": "GROUP BY와 HAVING을 이용한 집계 결과 예측",
+      "prompt": "다음 스키마와 데이터를 바탕으로 query_sql을 실행했을 때의 결과를 작성하시오.",
+      "schema_sql": "CREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    customer TEXT,\n    amount INTEGER\n);\n\nINSERT INTO orders (order_id, customer, amount) VALUES (1, 'A', 5000);\nINSERT INTO orders (order_id, customer, amount) VALUES (2, 'B', 3000);\nINSERT INTO orders (order_id, customer, amount) VALUES (3, 'A', 7000);\nINSERT INTO orders (order_id, customer, amount) VALUES (4, 'C', 2000);\nINSERT INTO orders (order_id, customer, amount) VALUES (5, 'B', 6000);\nINSERT INTO orders (order_id, customer, amount) VALUES (6, 'A', 1000);",
+      "query_sql": "SELECT customer, SUM(amount) AS total_amount, COUNT(*) AS cnt\nFROM orders\nGROUP BY customer\nHAVING SUM(amount) >= 5000\nORDER BY total_amount DESC;",
+      "answer": "customer | total_amount | cnt\nA | 13000 | 3\nB | 9000 | 2",
+      "explanation": "고객별로 amount를 합산하면 A는 5000+7000+1000=13000(3건), B는 3000+6000=9000(2건), C는 2000(1건)이다. HAVING 조건으로 합계가 5000 이상인 A와 B만 남고, total_amount 기준 내림차순으로 정렬하면 A, B 순서가 된다.",
+      "id": 3,
+      "llm_answer": "A|13000|3\nB|9000|2",
+      "verified": true
+    },
+    {
+      "type": "term",
+      "title": "정규화 관련 용어",
+      "prompt": "관계형 데이터베이스에서 하나의 릴레이션에 있는 속성들 간에 기본키가 아닌 속성이 다른 기본키가 아닌 속성에 종속되는 현상을 제거하여, 이행적 함수 종속을 제거하는 정규화 단계를 무엇이라 하는가?",
+      "answer": "제3정규형(3NF)",
+      "explanation": "제3정규형은 제2정규형을 만족하면서 기본키가 아닌 모든 속성이 기본키에 대해 이행적 함수 종속이 되지 않도록 하는 정규화 단계이다. 즉, A→B, B→C인 경우 A→C의 이행적 종속을 제거하는 과정이다.",
+      "id": 4,
+      "verified": false
+    },
+    {
+      "type": "term",
+      "title": "소프트웨어 개발 방법론 용어",
+      "prompt": "소프트웨어 개발 과정에서 요구사항 분석, 설계, 구현, 테스트 등 전체 과정을 짧은 주기(스프린트)로 반복하면서 점진적으로 완성해 나가는 개발 방법론을 무엇이라 하는가?",
+      "answer": "애자일(Agile) 방법론",
+      "explanation": "애자일 방법론은 짧은 반복 주기(스프린트)를 통해 요구사항 변화에 유연하게 대응하며 점진적으로 소프트웨어를 개발하는 방식이다. 대표적으로 스크럼(Scrum)과 XP(eXtreme Programming) 기법이 있다.",
+      "id": 5,
+      "verified": false
+    }
+  ]
+}
