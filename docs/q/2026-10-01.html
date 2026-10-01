@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보처리기사 실기 - 2026-10-01</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "Malgun Gothic", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+h1 { font-size: 1.4rem; }
+.question { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 16px 0; }
+.badge { display: inline-block; font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: #6363f11a; color: #6363f1; margin-bottom: 8px; }
+pre { background: #80808014; padding: 12px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; }
+summary { cursor: pointer; font-weight: 600; margin-top: 10px; }
+.answer { margin-top: 10px; padding: 12px; background: #80808014; border-radius: 8px; }
+.unverified { color: #c97a00; font-size: .8rem; margin-top: 8px; }
+.date-list a { display: block; padding: 10px 0; border-bottom: 1px solid #8882; text-decoration: none; }
+a { color: #6363f1; }
+.nav-link { display: inline-block; margin: 8px 0 20px; font-weight: 600; }
+.term-card { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 12px 0; }
+.term-name { font-size: 1.05rem; font-weight: 700; }
+.term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
+.term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
+.term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+</style>
+</head><body>
+<a href="../index.html">← 전체 목록</a>
+<h1>2026-10-01 실기 문제</h1>
+<div class="question"><h3>Q1</h3><div class="badge">코드 출력 · Java</div><p>다음 Java 프로그램을 실행했을 때 출력되는 결과를 쓰시오.</p><pre><code>public class Main {
+    static int modify(int[] arr, int idx) {
+        arr[idx] = arr[idx] * 2;
+        return arr[idx] + idx;
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3, 4, 5};
+        int sum = 0;
+
+        for (int i = 0; i &lt; numbers.length; i++) {
+            sum += modify(numbers, i);
+        }
+
+        for (int i = 0; i &lt; numbers.length; i++) {
+            System.out.print(numbers[i] + &quot; &quot;);
+        }
+        System.out.println();
+        System.out.println(&quot;sum=&quot; + sum);
+    }
+}</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>2 4 6 8 10 
+sum=40</code></pre>
+    <p>modify 메서드는 배열의 idx번째 값을 2배로 바꾸고 (바뀐 값 + idx)를 반환한다. 배열은 참조로 전달되므로 numbers 배열은 {2,4,6,8,10}으로 변경된다. sum은 (2+0)+(4+1)+(6+2)+(8+3)+(10+4) = 2+5+8+11+14 = 40이다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q2</h3><div class="badge">코드 출력 · C</div><p>다음 C 프로그램을 실행했을 때 출력되는 결과를 쓰시오.</p><pre><code>#include &lt;stdio.h&gt;
+
+int calc(int *p, int n) {
+    int result = 0;
+    for (int i = 0; i &lt; n; i++) {
+        result += *(p + i);
+        if (i % 2 == 0) {
+            *(p + i) = *(p + i) + 10;
+        }
+    }
+    return result;
+}
+
+int main() {
+    int arr[5] = {1, 2, 3, 4, 5};
+    int total = calc(arr, 5);
+
+    for (int i = 0; i &lt; 5; i++) {
+        printf(&quot;%d &quot;, arr[i]);
+    }
+    printf(&quot;\n&quot;);
+    printf(&quot;total=%d\n&quot;, total);
+
+    return 0;
+}</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>11 2 13 4 15 
+total=15</code></pre>
+    <p>calc 함수는 각 원소를 더해 result에 누적하면서(원본 값 1,2,3,4,5의 합 = 15), 인덱스가 짝수(0,2,4)인 원소에는 10을 더한다. 따라서 배열은 11,2,13,4,15로 바뀌고, total은 변경 전 값들의 합인 15가 반환된다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q3</h3><div class="badge">SQL 결과</div><p>다음 schema_sql로 테이블을 생성하고 query_sql을 실행했을 때의 결과를 쓰시오.</p><pre><code>-- schema
+CREATE TABLE orders (
+    order_id INTEGER PRIMARY KEY,
+    customer VARCHAR(20),
+    amount INTEGER
+);
+
+INSERT INTO orders VALUES (1, &#x27;kim&#x27;, 1000);
+INSERT INTO orders VALUES (2, &#x27;lee&#x27;, 2000);
+INSERT INTO orders VALUES (3, &#x27;kim&#x27;, 1500);
+INSERT INTO orders VALUES (4, &#x27;park&#x27;, 3000);
+INSERT INTO orders VALUES (5, &#x27;lee&#x27;, 500);
+INSERT INTO orders VALUES (6, &#x27;kim&#x27;, 2500);
+INSERT INTO orders VALUES (7, &#x27;park&#x27;, 1000);
+
+-- query
+SELECT customer, COUNT(*) AS cnt, SUM(amount) AS total
+FROM orders
+GROUP BY customer
+HAVING SUM(amount) &gt;= 3000
+ORDER BY total DESC;</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>customer | cnt | total
+kim | 3 | 5000
+park | 2 | 4000</code></pre>
+    <p>customer별로 그룹화하여 합계를 구하면 kim=1000+1500+2500=5000(3건), lee=2000+500=2500(2건), park=3000+1000=4000(2건)이다. HAVING 조건(합계 3000 이상)을 만족하는 kim과 park만 남고, total 기준 내림차순 정렬하면 kim(5000), park(4000) 순서가 된다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q4</h3><div class="badge">용어 단답</div><p>관계형 데이터베이스에서 테이블 내 속성들 간의 중복을 제거하고 삽입, 삭제, 갱신 시 발생할 수 있는 이상 현상(Anomaly)을 최소화하기 위해 테이블을 분해하는 과정을 무엇이라 하는가?</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>정규화(Normalization)</code></pre>
+    <p>정규화는 데이터 중복을 최소화하고 삽입/삭제/갱신 이상(Anomaly)을 방지하기 위해 릴레이션을 여러 개의 작은 릴레이션으로 분해하는 과정이다. 제1정규형부터 제5정규형(혹은 BCNF)까지 단계적으로 진행된다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q5</h3><div class="badge">용어 단답</div><p>요구사항을 작은 단위의 기능으로 나누어 짧은 주기(보통 1~4주) 단위로 설계-개발-테스트를 반복하며 점진적으로 소프트웨어를 완성해가는 개발 방법론을 무엇이라 하는가?</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>애자일(Agile)</code></pre>
+    <p>애자일 방법론은 짧은 반복 주기(스프린트/이터레이션)를 통해 고객 피드백을 빠르게 반영하면서 점진적으로 소프트웨어를 개발하는 방식이다. 대표적으로 스크럼(Scrum), XP(eXtreme Programming) 등이 있다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<a class="nav-link" href="../glossary.html">📚 지금까지 나온 용어 정리 보기</a>
+</body></html>
