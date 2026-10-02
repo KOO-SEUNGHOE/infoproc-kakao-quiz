@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-02",
+  "questions": [
+    {
+      "type": "code",
+      "language": "Python",
+      "title": "파이썬 리스트와 함수 출력 예측",
+      "prompt": "다음 파이썬 코드를 실행했을 때 출력되는 결과를 쓰시오.",
+      "code": "def modify_list(lst):\n    lst.append(100)\n    lst[0] = lst[0] * 2\n    return lst\n\n\nnumbers = [1, 2, 3]\nresult = modify_list(numbers)\nprint(numbers)\nprint(result)\n\ntotal = 0\nfor n in result:\n    if n % 2 == 0:\n        total += n\nprint(total)",
+      "answer": "[2, 2, 3, 100]\n[2, 2, 3, 100]\n104",
+      "explanation": "리스트는 가변 객체이므로 함수 내부에서 append와 인덱스 변경을 하면 원본 numbers도 동일하게 변경되어 numbers와 result는 같은 객체 [2, 2, 3, 100]을 출력한다. 이후 짝수(2, 2, 100)만 더하면 2+2+100=104가 된다.",
+      "id": 1,
+      "verified": true
+    },
+    {
+      "type": "code",
+      "language": "C",
+      "title": "C 배열과 포인터 연산 출력 예측",
+      "prompt": "다음 C 코드를 실행했을 때 출력되는 결과를 쓰시오.",
+      "code": "#include <stdio.h>\n\nint main(void) {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr;\n    int sum = 0;\n\n    for (int i = 0; i < 5; i++) {\n        if (i % 2 == 0) {\n            sum += *(p + i);\n        } else {\n            sum -= *(p + i);\n        }\n    }\n\n    printf(\"%d\\n\", sum);\n    printf(\"%d\\n\", *p + *(p + 4));\n\n    return 0;\n}",
+      "answer": "30\n60",
+      "explanation": "i가 0,2,4일 때는 더하고 1,3일 때는 빼므로 10-20+30-40+50=30... 다시 계산하면 10(더함)-20(뺌)+30(더함)-40(뺌)+50(더함)=30. 실제 계산: 10-20+30-40+50 = 30이 아니라 순서대로 10-20=-10, -10+30=20, 20-40=-20, -20+50=30이므로 sum은 30이다. *p는 arr[0]=10, *(p+4)는 arr[4]=50이므로 합은 60이다.",
+      "_recompute": true,
+      "id": 2,
+      "llm_answer": "70\n60",
+      "verified": true
+    },
+    {
+      "type": "sql",
+      "title": "부서별 급여 집계 SQL 결과 예측",
+      "prompt": "다음 schema_sql과 query_sql을 실행했을 때 반환되는 결과를 작성하시오.",
+      "schema_sql": "CREATE TABLE employee (\n    emp_id INTEGER PRIMARY KEY,\n    name TEXT,\n    dept TEXT,\n    salary INTEGER\n);\n\nINSERT INTO employee VALUES (1, '김철수', '영업', 3000);\nINSERT INTO employee VALUES (2, '이영희', '영업', 3500);\nINSERT INTO employee VALUES (3, '박민수', '개발', 4000);\nINSERT INTO employee VALUES (4, '최지은', '개발', 4500);\nINSERT INTO employee VALUES (5, '정우성', '개발', 5000);\nINSERT INTO employee VALUES (6, '한소희', '총무', 2800);",
+      "query_sql": "SELECT dept, COUNT(*) AS cnt, SUM(salary) AS total_salary\nFROM employee\nGROUP BY dept\nHAVING COUNT(*) >= 2\nORDER BY total_salary DESC;",
+      "answer": "dept | cnt | total_salary\n개발 | 3 | 13500\n영업 | 2 | 6500",
+      "explanation": "부서별로 그룹화한 후 인원이 2명 이상인 부서만 필터링하면 총무(1명)는 제외된다. 개발은 3명에 급여 합계 13500, 영업은 2명에 급여 합계 6500이며, 총 급여 기준 내림차순 정렬이므로 개발이 먼저 나온다.",
+      "id": 3,
+      "llm_answer": "개발, 3, 13500\n영업, 2, 6500",
+      "verified": true
+    },
+    {
+      "type": "term",
+      "title": "응집도 개념",
+      "prompt": "모듈 내부의 처리 요소들이 서로 관련이 있는 정도를 나타내며, 값이 높을수록 모듈의 독립성과 재사용성이 좋아지는 소프트웨어 설계 품질 지표를 무엇이라 하는가?",
+      "answer": "응집도(Cohesion)",
+      "explanation": "응집도는 모듈 내부 구성 요소들이 하나의 목적을 위해 얼마나 밀접하게 관련되어 있는지를 나타내는 척도이다. 응집도가 높을수록 모듈의 독립성이 강해지고 유지보수가 쉬워지므로 좋은 설계로 평가된다. 결합도와 반대로 응집도는 높을수록 바람직하다.",
+      "id": 4,
+      "verified": false
+    },
+    {
+      "type": "term",
+      "title": "정규화 개념",
+      "prompt": "데이터베이스 설계 시 데이터 중복을 최소화하고 삽입·삭제·갱신 이상(anomaly)을 방지하기 위해 테이블을 분해하는 과정을 무엇이라 하는가?",
+      "answer": "정규화(Normalization)",
+      "explanation": "정규화는 함수적 종속성을 분석하여 릴레이션을 여러 개의 작은 릴레이션으로 분해함으로써 데이터 중복을 줄이고 삽입, 삭제, 갱신 시 발생할 수 있는 이상 현상을 방지하는 과정이다. 제1정규형부터 보이스-코드 정규형 등 단계적으로 진행된다.",
+      "id": 5,
+      "verified": false
+    }
+  ]
+}

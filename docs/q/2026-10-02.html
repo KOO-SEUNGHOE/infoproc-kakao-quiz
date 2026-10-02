@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보처리기사 실기 - 2026-10-02</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "Malgun Gothic", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+h1 { font-size: 1.4rem; }
+.question { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 16px 0; }
+.badge { display: inline-block; font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: #6363f11a; color: #6363f1; margin-bottom: 8px; }
+pre { background: #80808014; padding: 12px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; }
+summary { cursor: pointer; font-weight: 600; margin-top: 10px; }
+.answer { margin-top: 10px; padding: 12px; background: #80808014; border-radius: 8px; }
+.unverified { color: #c97a00; font-size: .8rem; margin-top: 8px; }
+.date-list a { display: block; padding: 10px 0; border-bottom: 1px solid #8882; text-decoration: none; }
+a { color: #6363f1; }
+.nav-link { display: inline-block; margin: 8px 0 20px; font-weight: 600; }
+.term-card { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 12px 0; }
+.term-name { font-size: 1.05rem; font-weight: 700; }
+.term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
+.term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
+.term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+</style>
+</head><body>
+<a href="../index.html">← 전체 목록</a>
+<h1>2026-10-02 실기 문제</h1>
+<div class="question"><h3>Q1</h3><div class="badge">코드 출력 · Python</div><p>다음 파이썬 코드를 실행했을 때 출력되는 결과를 쓰시오.</p><pre><code>def modify_list(lst):
+    lst.append(100)
+    lst[0] = lst[0] * 2
+    return lst
+
+
+numbers = [1, 2, 3]
+result = modify_list(numbers)
+print(numbers)
+print(result)
+
+total = 0
+for n in result:
+    if n % 2 == 0:
+        total += n
+print(total)</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>[2, 2, 3, 100]
+[2, 2, 3, 100]
+104</code></pre>
+    <p>리스트는 가변 객체이므로 함수 내부에서 append와 인덱스 변경을 하면 원본 numbers도 동일하게 변경되어 numbers와 result는 같은 객체 [2, 2, 3, 100]을 출력한다. 이후 짝수(2, 2, 100)만 더하면 2+2+100=104가 된다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q2</h3><div class="badge">코드 출력 · C</div><p>다음 C 코드를 실행했을 때 출력되는 결과를 쓰시오.</p><pre><code>#include &lt;stdio.h&gt;
+
+int main(void) {
+    int arr[5] = {10, 20, 30, 40, 50};
+    int *p = arr;
+    int sum = 0;
+
+    for (int i = 0; i &lt; 5; i++) {
+        if (i % 2 == 0) {
+            sum += *(p + i);
+        } else {
+            sum -= *(p + i);
+        }
+    }
+
+    printf(&quot;%d\n&quot;, sum);
+    printf(&quot;%d\n&quot;, *p + *(p + 4));
+
+    return 0;
+}</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>30
+60</code></pre>
+    <p>i가 0,2,4일 때는 더하고 1,3일 때는 빼므로 10-20+30-40+50=30... 다시 계산하면 10(더함)-20(뺌)+30(더함)-40(뺌)+50(더함)=30. 실제 계산: 10-20+30-40+50 = 30이 아니라 순서대로 10-20=-10, -10+30=20, 20-40=-20, -20+50=30이므로 sum은 30이다. *p는 arr[0]=10, *(p+4)는 arr[4]=50이므로 합은 60이다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q3</h3><div class="badge">SQL 결과</div><p>다음 schema_sql과 query_sql을 실행했을 때 반환되는 결과를 작성하시오.</p><pre><code>-- schema
+CREATE TABLE employee (
+    emp_id INTEGER PRIMARY KEY,
+    name TEXT,
+    dept TEXT,
+    salary INTEGER
+);
+
+INSERT INTO employee VALUES (1, &#x27;김철수&#x27;, &#x27;영업&#x27;, 3000);
+INSERT INTO employee VALUES (2, &#x27;이영희&#x27;, &#x27;영업&#x27;, 3500);
+INSERT INTO employee VALUES (3, &#x27;박민수&#x27;, &#x27;개발&#x27;, 4000);
+INSERT INTO employee VALUES (4, &#x27;최지은&#x27;, &#x27;개발&#x27;, 4500);
+INSERT INTO employee VALUES (5, &#x27;정우성&#x27;, &#x27;개발&#x27;, 5000);
+INSERT INTO employee VALUES (6, &#x27;한소희&#x27;, &#x27;총무&#x27;, 2800);
+
+-- query
+SELECT dept, COUNT(*) AS cnt, SUM(salary) AS total_salary
+FROM employee
+GROUP BY dept
+HAVING COUNT(*) &gt;= 2
+ORDER BY total_salary DESC;</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>dept | cnt | total_salary
+개발 | 3 | 13500
+영업 | 2 | 6500</code></pre>
+    <p>부서별로 그룹화한 후 인원이 2명 이상인 부서만 필터링하면 총무(1명)는 제외된다. 개발은 3명에 급여 합계 13500, 영업은 2명에 급여 합계 6500이며, 총 급여 기준 내림차순 정렬이므로 개발이 먼저 나온다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q4</h3><div class="badge">용어 단답</div><p>모듈 내부의 처리 요소들이 서로 관련이 있는 정도를 나타내며, 값이 높을수록 모듈의 독립성과 재사용성이 좋아지는 소프트웨어 설계 품질 지표를 무엇이라 하는가?</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>응집도(Cohesion)</code></pre>
+    <p>응집도는 모듈 내부 구성 요소들이 하나의 목적을 위해 얼마나 밀접하게 관련되어 있는지를 나타내는 척도이다. 응집도가 높을수록 모듈의 독립성이 강해지고 유지보수가 쉬워지므로 좋은 설계로 평가된다. 결합도와 반대로 응집도는 높을수록 바람직하다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q5</h3><div class="badge">용어 단답</div><p>데이터베이스 설계 시 데이터 중복을 최소화하고 삽입·삭제·갱신 이상(anomaly)을 방지하기 위해 테이블을 분해하는 과정을 무엇이라 하는가?</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>정규화(Normalization)</code></pre>
+    <p>정규화는 함수적 종속성을 분석하여 릴레이션을 여러 개의 작은 릴레이션으로 분해함으로써 데이터 중복을 줄이고 삽입, 삭제, 갱신 시 발생할 수 있는 이상 현상을 방지하는 과정이다. 제1정규형부터 보이스-코드 정규형 등 단계적으로 진행된다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<a class="nav-link" href="../glossary.html">📚 지금까지 나온 용어 정리 보기</a>
+</body></html>
