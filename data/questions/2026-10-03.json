@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-03",
+  "questions": [
+    {
+      "type": "code",
+      "title": "C 포인터와 배열 연산",
+      "language": "C",
+      "prompt": "다음 C 프로그램의 실행 결과를 출력하시오.",
+      "code": "#include <stdio.h>\n\nint main(void) {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr;\n    int sum = 0;\n\n    for (int i = 0; i < 5; i++) {\n        sum += *(p + i);\n        if (i % 2 == 0) {\n            *(p + i) = *(p + i) + 1;\n        }\n    }\n\n    for (int i = 0; i < 5; i++) {\n        printf(\"%d \", arr[i]);\n    }\n    printf(\"\\n\");\n    printf(\"sum=%d\\n\", sum);\n\n    return 0;\n}",
+      "answer": "11 20 31 40 51 \nsum=150",
+      "explanation": "sum은 수정 전 원래 값 10,20,30,40,50을 더해 150이 된다. i가 짝수(0,2,4)일 때만 해당 원소에 1을 더하므로 인덱스 0,2,4의 값이 각각 11, 31, 51로 바뀌고 나머지는 그대로 20, 40이다. 따라서 배열은 11 20 31 40 51이 출력된다.",
+      "id": 1,
+      "verified": true
+    },
+    {
+      "type": "code",
+      "title": "Python 리스트와 함수 재귀",
+      "language": "Python",
+      "prompt": "다음 Python 프로그램의 실행 결과를 출력하시오.",
+      "code": "def process(lst, idx, acc):\n    if idx >= len(lst):\n        return acc\n    if lst[idx] % 2 == 0:\n        acc.append(lst[idx] * 2)\n    else:\n        acc.append(lst[idx] + 1)\n    return process(lst, idx + 1, acc)\n\n\nnumbers = [3, 4, 7, 8, 9]\nresult = process(numbers, 0, [])\nprint(result)\n\ntotal = 0\nfor n in result:\n    total += n\nprint(total)",
+      "answer": "[4, 8, 8, 16, 10]\n46",
+      "explanation": "각 원소에 대해 짝수면 2배, 홀수면 1을 더한다: 3→4, 4→8, 7→8, 8→16, 9→10이 되어 result는 [4, 8, 8, 16, 10]이다. 이 리스트의 합은 4+8+8+16+10=46이다.",
+      "id": 2,
+      "verified": true
+    },
+    {
+      "type": "sql",
+      "title": "부서별 급여 집계 조회",
+      "prompt": "다음 schema_sql로 테이블을 생성하고 데이터를 입력한 후, query_sql을 실행했을 때의 결과를 작성하시오.",
+      "schema_sql": "CREATE TABLE employee (\n    emp_id INTEGER PRIMARY KEY,\n    name TEXT,\n    dept TEXT,\n    salary INTEGER\n);\n\nINSERT INTO employee VALUES (1, '김철수', '영업', 3000);\nINSERT INTO employee VALUES (2, '이영희', '영업', 3500);\nINSERT INTO employee VALUES (3, '박민수', '개발', 4000);\nINSERT INTO employee VALUES (4, '최지은', '개발', 4500);\nINSERT INTO employee VALUES (5, '정우성', '개발', 5000);\nINSERT INTO employee VALUES (6, '한소희', '인사', 3200);",
+      "query_sql": "SELECT dept, COUNT(*) AS cnt, SUM(salary) AS total_salary\nFROM employee\nGROUP BY dept\nHAVING COUNT(*) >= 2\nORDER BY total_salary DESC;",
+      "answer": "dept | cnt | total_salary\n개발 | 3 | 13500\n영업 | 2 | 6500",
+      "explanation": "GROUP BY dept로 부서별 그룹을 만들고 HAVING COUNT(*) >= 2 조건으로 인원이 2명 이상인 부서만 남긴다. 인사 부서는 1명이라 제외되고, 개발(3명, 합계 13500)과 영업(2명, 합계 6500)이 남으며 total_salary 내림차순으로 정렬되어 개발이 먼저 나온다.",
+      "id": 3,
+      "llm_answer": "개발 | 3 | 13500\n영업 | 2 | 6500",
+      "verified": true
+    },
+    {
+      "type": "term",
+      "title": "정규화 관련 용어",
+      "prompt": "데이터베이스 설계에서 하나의 릴레이션(테이블)에 속성 간의 함수적 종속 관계를 분석하여, 데이터의 중복을 최소화하고 삽입/삭제/갱신 이상(anomaly)을 방지하기 위해 테이블을 분해해 나가는 과정을 무엇이라 하는가?",
+      "answer": "정규화(Normalization)",
+      "explanation": "정규화는 함수적 종속성을 기반으로 테이블을 여러 개로 분해하여 데이터 중복을 줄이고 이상 현상을 방지하는 데이터베이스 설계 기법이다. 1정규형부터 BCNF, 4정규형 등 단계적으로 진행된다.",
+      "id": 4,
+      "verified": false
+    },
+    {
+      "type": "term",
+      "title": "소프트웨어 개발 방법론 용어",
+      "prompt": "소프트웨어 개발 과정에서 요구사항 분석, 설계, 구현, 테스트 등의 전체 과정을 짧은 주기(이터레이션)로 반복하면서 점진적으로 완성도를 높여가는 개발 방법론으로, 고객과의 지속적인 협업과 변화에 대한 유연한 대응을 강조하는 방법론을 무엇이라 하는가?",
+      "answer": "애자일(Agile) 방법론",
+      "explanation": "애자일 방법론은 폭포수 모델과 달리 짧은 반복 주기(스프린트)를 통해 소프트웨어를 점진적으로 개발하며, 고객 피드백을 빠르게 반영하고 변화하는 요구사항에 유연하게 대응하는 것을 핵심 가치로 한다. 대표적으로 스크럼(Scrum), XP(eXtreme Programming) 등이 있다.",
+      "id": 5,
+      "verified": false
+    }
+  ]
+}

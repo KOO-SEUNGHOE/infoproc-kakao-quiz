@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보처리기사 실기 - 2026-10-03</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "Malgun Gothic", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+h1 { font-size: 1.4rem; }
+.question { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 16px 0; }
+.badge { display: inline-block; font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: #6363f11a; color: #6363f1; margin-bottom: 8px; }
+pre { background: #80808014; padding: 12px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; }
+summary { cursor: pointer; font-weight: 600; margin-top: 10px; }
+.answer { margin-top: 10px; padding: 12px; background: #80808014; border-radius: 8px; }
+.unverified { color: #c97a00; font-size: .8rem; margin-top: 8px; }
+.date-list a { display: block; padding: 10px 0; border-bottom: 1px solid #8882; text-decoration: none; }
+a { color: #6363f1; }
+.nav-link { display: inline-block; margin: 8px 0 20px; font-weight: 600; }
+.term-card { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 12px 0; }
+.term-name { font-size: 1.05rem; font-weight: 700; }
+.term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
+.term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
+.term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+</style>
+</head><body>
+<a href="../index.html">← 전체 목록</a>
+<h1>2026-10-03 실기 문제</h1>
+<div class="question"><h3>Q1</h3><div class="badge">코드 출력 · C</div><p>다음 C 프로그램의 실행 결과를 출력하시오.</p><pre><code>#include &lt;stdio.h&gt;
+
+int main(void) {
+    int arr[5] = {10, 20, 30, 40, 50};
+    int *p = arr;
+    int sum = 0;
+
+    for (int i = 0; i &lt; 5; i++) {
+        sum += *(p + i);
+        if (i % 2 == 0) {
+            *(p + i) = *(p + i) + 1;
+        }
+    }
+
+    for (int i = 0; i &lt; 5; i++) {
+        printf(&quot;%d &quot;, arr[i]);
+    }
+    printf(&quot;\n&quot;);
+    printf(&quot;sum=%d\n&quot;, sum);
+
+    return 0;
+}</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>11 20 31 40 51 
+sum=150</code></pre>
+    <p>sum은 수정 전 원래 값 10,20,30,40,50을 더해 150이 된다. i가 짝수(0,2,4)일 때만 해당 원소에 1을 더하므로 인덱스 0,2,4의 값이 각각 11, 31, 51로 바뀌고 나머지는 그대로 20, 40이다. 따라서 배열은 11 20 31 40 51이 출력된다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q2</h3><div class="badge">코드 출력 · Python</div><p>다음 Python 프로그램의 실행 결과를 출력하시오.</p><pre><code>def process(lst, idx, acc):
+    if idx &gt;= len(lst):
+        return acc
+    if lst[idx] % 2 == 0:
+        acc.append(lst[idx] * 2)
+    else:
+        acc.append(lst[idx] + 1)
+    return process(lst, idx + 1, acc)
+
+
+numbers = [3, 4, 7, 8, 9]
+result = process(numbers, 0, [])
+print(result)
+
+total = 0
+for n in result:
+    total += n
+print(total)</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>[4, 8, 8, 16, 10]
+46</code></pre>
+    <p>각 원소에 대해 짝수면 2배, 홀수면 1을 더한다: 3→4, 4→8, 7→8, 8→16, 9→10이 되어 result는 [4, 8, 8, 16, 10]이다. 이 리스트의 합은 4+8+8+16+10=46이다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q3</h3><div class="badge">SQL 결과</div><p>다음 schema_sql로 테이블을 생성하고 데이터를 입력한 후, query_sql을 실행했을 때의 결과를 작성하시오.</p><pre><code>-- schema
+CREATE TABLE employee (
+    emp_id INTEGER PRIMARY KEY,
+    name TEXT,
+    dept TEXT,
+    salary INTEGER
+);
+
+INSERT INTO employee VALUES (1, &#x27;김철수&#x27;, &#x27;영업&#x27;, 3000);
+INSERT INTO employee VALUES (2, &#x27;이영희&#x27;, &#x27;영업&#x27;, 3500);
+INSERT INTO employee VALUES (3, &#x27;박민수&#x27;, &#x27;개발&#x27;, 4000);
+INSERT INTO employee VALUES (4, &#x27;최지은&#x27;, &#x27;개발&#x27;, 4500);
+INSERT INTO employee VALUES (5, &#x27;정우성&#x27;, &#x27;개발&#x27;, 5000);
+INSERT INTO employee VALUES (6, &#x27;한소희&#x27;, &#x27;인사&#x27;, 3200);
+
+-- query
+SELECT dept, COUNT(*) AS cnt, SUM(salary) AS total_salary
+FROM employee
+GROUP BY dept
+HAVING COUNT(*) &gt;= 2
+ORDER BY total_salary DESC;</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>dept | cnt | total_salary
+개발 | 3 | 13500
+영업 | 2 | 6500</code></pre>
+    <p>GROUP BY dept로 부서별 그룹을 만들고 HAVING COUNT(*) &gt;= 2 조건으로 인원이 2명 이상인 부서만 남긴다. 인사 부서는 1명이라 제외되고, 개발(3명, 합계 13500)과 영업(2명, 합계 6500)이 남으며 total_salary 내림차순으로 정렬되어 개발이 먼저 나온다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q4</h3><div class="badge">용어 단답</div><p>데이터베이스 설계에서 하나의 릴레이션(테이블)에 속성 간의 함수적 종속 관계를 분석하여, 데이터의 중복을 최소화하고 삽입/삭제/갱신 이상(anomaly)을 방지하기 위해 테이블을 분해해 나가는 과정을 무엇이라 하는가?</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>정규화(Normalization)</code></pre>
+    <p>정규화는 함수적 종속성을 기반으로 테이블을 여러 개로 분해하여 데이터 중복을 줄이고 이상 현상을 방지하는 데이터베이스 설계 기법이다. 1정규형부터 BCNF, 4정규형 등 단계적으로 진행된다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q5</h3><div class="badge">용어 단답</div><p>소프트웨어 개발 과정에서 요구사항 분석, 설계, 구현, 테스트 등의 전체 과정을 짧은 주기(이터레이션)로 반복하면서 점진적으로 완성도를 높여가는 개발 방법론으로, 고객과의 지속적인 협업과 변화에 대한 유연한 대응을 강조하는 방법론을 무엇이라 하는가?</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>애자일(Agile) 방법론</code></pre>
+    <p>애자일 방법론은 폭포수 모델과 달리 짧은 반복 주기(스프린트)를 통해 소프트웨어를 점진적으로 개발하며, 고객 피드백을 빠르게 반영하고 변화하는 요구사항에 유연하게 대응하는 것을 핵심 가치로 한다. 대표적으로 스크럼(Scrum), XP(eXtreme Programming) 등이 있다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<a class="nav-link" href="../glossary.html">📚 지금까지 나온 용어 정리 보기</a>
+</body></html>
