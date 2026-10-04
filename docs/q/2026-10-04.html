@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보처리기사 실기 - 2026-10-04</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "Malgun Gothic", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+h1 { font-size: 1.4rem; }
+.question { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 16px 0; }
+.badge { display: inline-block; font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: #6363f11a; color: #6363f1; margin-bottom: 8px; }
+pre { background: #80808014; padding: 12px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; }
+summary { cursor: pointer; font-weight: 600; margin-top: 10px; }
+.answer { margin-top: 10px; padding: 12px; background: #80808014; border-radius: 8px; }
+.unverified { color: #c97a00; font-size: .8rem; margin-top: 8px; }
+.date-list a { display: block; padding: 10px 0; border-bottom: 1px solid #8882; text-decoration: none; }
+a { color: #6363f1; }
+.nav-link { display: inline-block; margin: 8px 0 20px; font-weight: 600; }
+.term-card { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 12px 0; }
+.term-name { font-size: 1.05rem; font-weight: 700; }
+.term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
+.term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
+.term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+</style>
+</head><body>
+<a href="../index.html">← 전체 목록</a>
+<h1>2026-10-04 실기 문제</h1>
+<div class="question"><h3>Q1</h3><div class="badge">코드 출력 · C</div><p>다음 C 프로그램의 실행 결과를 예측하시오.</p><pre><code>#include &lt;stdio.h&gt;
+
+int main(void) {
+    int arr[5] = {10, 20, 30, 40, 50};
+    int *p = arr;
+    int sum = 0;
+
+    for (int i = 0; i &lt; 5; i++) {
+        sum += *(p + i);
+        if (i % 2 == 0) {
+            arr[i] = arr[i] + i;
+        }
+    }
+
+    for (int i = 0; i &lt; 5; i++) {
+        printf(&quot;%d &quot;, arr[i]);
+    }
+    printf(&quot;\n&quot;);
+    printf(&quot;sum = %d\n&quot;, sum);
+
+    return 0;
+}</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>10 20 32 40 54 
+sum = 150</code></pre>
+    <p>첫 번째 반복문에서 sum은 수정 전 배열 값들의 합인 10+20+30+40+50=150이 됩니다. i가 짝수(0,2,4)일 때만 arr[i]에 i를 더하므로 arr[0]=10+0=10, arr[2]=30+2=32, arr[4]=50+4=54가 되고 나머지는 그대로입니다. 따라서 최종 배열은 10 21 32 43 54이고 sum은 150입니다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q2</h3><div class="badge">코드 출력 · Java</div><p>다음 Java 프로그램의 실행 결과를 예측하시오.</p><pre><code>public class Main {
+    static class Animal {
+        String name = &quot;동물&quot;;
+
+        void sound() {
+            System.out.println(name + &quot;이 소리를 낸다&quot;);
+        }
+
+        void info() {
+            System.out.println(&quot;이름: &quot; + name);
+            sound();
+        }
+    }
+
+    static class Dog extends Animal {
+        Dog() {
+            name = &quot;강아지&quot;;
+        }
+
+        @Override
+        void sound() {
+            System.out.println(name + &quot;이 멍멍 짖는다&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        Animal a = new Animal();
+        Animal d = new Dog();
+
+        a.info();
+        d.info();
+    }
+}</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>이름: 동물
+동물이 소리를 낸다
+이름: 강아지
+강아지이 멍멍 짖는다</code></pre>
+    <p>a는 Animal 객체이므로 info()에서 sound()를 호출하면 Animal의 sound()가 실행됩니다. d는 Dog 객체를 Animal 타입 참조로 가리키지만, 메서드 오버라이딩에 의해 동적 바인딩이 일어나 info() 내부의 sound() 호출은 Dog의 sound()가 실행됩니다. name 필드는 오버라이딩되지 않으므로 Dog 생성자에서 설정한 &#x27;강아지&#x27;가 그대로 출력됩니다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q3</h3><div class="badge">SQL 결과</div><p>다음 SQLite 스키마와 데이터를 바탕으로 쿼리를 실행했을 때의 결과를 예측하시오.</p><pre><code>-- schema
+CREATE TABLE orders (
+    order_id INTEGER PRIMARY KEY,
+    customer VARCHAR(20),
+    amount INTEGER
+);
+
+INSERT INTO orders VALUES (1, &#x27;A&#x27;, 1000);
+INSERT INTO orders VALUES (2, &#x27;B&#x27;, 2000);
+INSERT INTO orders VALUES (3, &#x27;A&#x27;, 1500);
+INSERT INTO orders VALUES (4, &#x27;C&#x27;, 3000);
+INSERT INTO orders VALUES (5, &#x27;B&#x27;, 500);
+INSERT INTO orders VALUES (6, &#x27;A&#x27;, 2500);
+
+-- query
+SELECT customer, COUNT(*) AS cnt, SUM(amount) AS total
+FROM orders
+GROUP BY customer
+HAVING SUM(amount) &gt;= 2500
+ORDER BY total DESC;</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>customer | cnt | total
+A | 3 | 5000
+C | 1 | 3000
+B | 2 | 2500</code></pre>
+    <p>customer별로 그룹화하면 A는 1000+1500+2500=5000(3건), B는 2000+500=2500(2건), C는 3000(1건)입니다. HAVING SUM(amount) &gt;= 2500 조건을 모두 만족하므로 세 그룹이 모두 남고, total 기준 내림차순 정렬하면 A(5000), C(3000), B(2500) 순서가 됩니다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q4</h3><div class="badge">용어 단답</div><p>객체 생성 방식을 서브클래스에서 결정하도록 하여, 객체 생성 로직을 캡슐화하는 생성 패턴으로, 부모 클래스에서 객체 생성을 위한 인터페이스만 정의하고 실제 생성은 자식 클래스에 위임하는 디자인 패턴의 이름은 무엇인가?</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>팩토리 메서드 패턴(Factory Method Pattern)</code></pre>
+    <p>팩토리 메서드 패턴은 객체 생성을 캡슐화하여 상위 클래스에서는 인터페이스만 정의하고, 실제 어떤 클래스의 인스턴스를 만들지는 하위 클래스가 결정하도록 하는 생성 패턴입니다. 이를 통해 객체 생성 코드와 사용 코드를 분리하여 유연성과 확장성을 높일 수 있습니다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q5</h3><div class="badge">용어 단답</div><p>공격자가 정상적인 사용자인 것처럼 속여 TCP 세션을 가로채고, 서버와 클라이언트 사이의 통신에 끼어들어 인증을 우회하고 데이터를 조작하거나 탈취하는 공격 기법을 무엇이라고 하는가?</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>세션 하이재킹(Session Hijacking)</code></pre>
+    <p>세션 하이재킹은 정상 사용자의 세션 식별자(세션 ID)를 가로채거나 예측하여 이미 인증된 세션을 탈취하는 공격입니다. 공격자는 이를 통해 별도의 인증 과정 없이 사용자의 권한으로 시스템에 접근할 수 있게 됩니다. TCP 시퀀스 번호를 추측하여 세션을 가로채는 방식이 대표적입니다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<a class="nav-link" href="../glossary.html">📚 지금까지 나온 용어 정리 보기</a>
+</body></html>

@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-04",
+  "questions": [
+    {
+      "type": "code",
+      "language": "C",
+      "title": "C 배열과 포인터 연산",
+      "prompt": "다음 C 프로그램의 실행 결과를 예측하시오.",
+      "code": "#include <stdio.h>\n\nint main(void) {\n    int arr[5] = {10, 20, 30, 40, 50};\n    int *p = arr;\n    int sum = 0;\n\n    for (int i = 0; i < 5; i++) {\n        sum += *(p + i);\n        if (i % 2 == 0) {\n            arr[i] = arr[i] + i;\n        }\n    }\n\n    for (int i = 0; i < 5; i++) {\n        printf(\"%d \", arr[i]);\n    }\n    printf(\"\\n\");\n    printf(\"sum = %d\\n\", sum);\n\n    return 0;\n}",
+      "answer": "10 20 32 40 54 \nsum = 150",
+      "explanation": "첫 번째 반복문에서 sum은 수정 전 배열 값들의 합인 10+20+30+40+50=150이 됩니다. i가 짝수(0,2,4)일 때만 arr[i]에 i를 더하므로 arr[0]=10+0=10, arr[2]=30+2=32, arr[4]=50+4=54가 되고 나머지는 그대로입니다. 따라서 최종 배열은 10 21 32 43 54이고 sum은 150입니다.",
+      "id": 1,
+      "llm_answer": "10 21 32 43 54 \nsum = 150",
+      "verified": true
+    },
+    {
+      "type": "code",
+      "language": "Java",
+      "title": "Java 상속과 메서드 오버라이딩",
+      "prompt": "다음 Java 프로그램의 실행 결과를 예측하시오.",
+      "code": "public class Main {\n    static class Animal {\n        String name = \"동물\";\n\n        void sound() {\n            System.out.println(name + \"이 소리를 낸다\");\n        }\n\n        void info() {\n            System.out.println(\"이름: \" + name);\n            sound();\n        }\n    }\n\n    static class Dog extends Animal {\n        Dog() {\n            name = \"강아지\";\n        }\n\n        @Override\n        void sound() {\n            System.out.println(name + \"이 멍멍 짖는다\");\n        }\n    }\n\n    public static void main(String[] args) {\n        Animal a = new Animal();\n        Animal d = new Dog();\n\n        a.info();\n        d.info();\n    }\n}",
+      "answer": "이름: 동물\n동물이 소리를 낸다\n이름: 강아지\n강아지이 멍멍 짖는다",
+      "explanation": "a는 Animal 객체이므로 info()에서 sound()를 호출하면 Animal의 sound()가 실행됩니다. d는 Dog 객체를 Animal 타입 참조로 가리키지만, 메서드 오버라이딩에 의해 동적 바인딩이 일어나 info() 내부의 sound() 호출은 Dog의 sound()가 실행됩니다. name 필드는 오버라이딩되지 않으므로 Dog 생성자에서 설정한 '강아지'가 그대로 출력됩니다.",
+      "id": 2,
+      "verified": true
+    },
+    {
+      "type": "sql",
+      "title": "GROUP BY와 HAVING을 이용한 집계 조회",
+      "prompt": "다음 SQLite 스키마와 데이터를 바탕으로 쿼리를 실행했을 때의 결과를 예측하시오.",
+      "schema_sql": "CREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    customer VARCHAR(20),\n    amount INTEGER\n);\n\nINSERT INTO orders VALUES (1, 'A', 1000);\nINSERT INTO orders VALUES (2, 'B', 2000);\nINSERT INTO orders VALUES (3, 'A', 1500);\nINSERT INTO orders VALUES (4, 'C', 3000);\nINSERT INTO orders VALUES (5, 'B', 500);\nINSERT INTO orders VALUES (6, 'A', 2500);",
+      "query_sql": "SELECT customer, COUNT(*) AS cnt, SUM(amount) AS total\nFROM orders\nGROUP BY customer\nHAVING SUM(amount) >= 2500\nORDER BY total DESC;",
+      "answer": "customer | cnt | total\nA | 3 | 5000\nC | 1 | 3000\nB | 2 | 2500",
+      "explanation": "customer별로 그룹화하면 A는 1000+1500+2500=5000(3건), B는 2000+500=2500(2건), C는 3000(1건)입니다. HAVING SUM(amount) >= 2500 조건을 모두 만족하므로 세 그룹이 모두 남고, total 기준 내림차순 정렬하면 A(5000), C(3000), B(2500) 순서가 됩니다.",
+      "id": 3,
+      "llm_answer": "A|3|5000\nC|1|3000\nB|2|2500",
+      "verified": true
+    },
+    {
+      "type": "term",
+      "title": "디자인 패턴 분류",
+      "prompt": "객체 생성 방식을 서브클래스에서 결정하도록 하여, 객체 생성 로직을 캡슐화하는 생성 패턴으로, 부모 클래스에서 객체 생성을 위한 인터페이스만 정의하고 실제 생성은 자식 클래스에 위임하는 디자인 패턴의 이름은 무엇인가?",
+      "answer": "팩토리 메서드 패턴(Factory Method Pattern)",
+      "explanation": "팩토리 메서드 패턴은 객체 생성을 캡슐화하여 상위 클래스에서는 인터페이스만 정의하고, 실제 어떤 클래스의 인스턴스를 만들지는 하위 클래스가 결정하도록 하는 생성 패턴입니다. 이를 통해 객체 생성 코드와 사용 코드를 분리하여 유연성과 확장성을 높일 수 있습니다.",
+      "id": 4,
+      "verified": false
+    },
+    {
+      "type": "term",
+      "title": "네트워크 공격 기법",
+      "prompt": "공격자가 정상적인 사용자인 것처럼 속여 TCP 세션을 가로채고, 서버와 클라이언트 사이의 통신에 끼어들어 인증을 우회하고 데이터를 조작하거나 탈취하는 공격 기법을 무엇이라고 하는가?",
+      "answer": "세션 하이재킹(Session Hijacking)",
+      "explanation": "세션 하이재킹은 정상 사용자의 세션 식별자(세션 ID)를 가로채거나 예측하여 이미 인증된 세션을 탈취하는 공격입니다. 공격자는 이를 통해 별도의 인증 과정 없이 사용자의 권한으로 시스템에 접근할 수 있게 됩니다. TCP 시퀀스 번호를 추측하여 세션을 가로채는 방식이 대표적입니다.",
+      "id": 5,
+      "verified": false
+    }
+  ]
+}
