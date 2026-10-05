@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-05",
+  "questions": [
+    {
+      "type": "code",
+      "language": "Java",
+      "title": "Java 배열과 메서드 호출 결과 예측",
+      "prompt": "다음 Java 프로그램을 실행했을 때 출력되는 결과를 쓰시오.",
+      "code": "public class Main {\n    static int modify(int[] arr, int idx) {\n        arr[idx] = arr[idx] * 2;\n        return arr[idx] + idx;\n    }\n\n    public static void main(String[] args) {\n        int[] numbers = {1, 2, 3, 4, 5};\n        int sum = 0;\n\n        for (int i = 0; i < numbers.length; i++) {\n            if (i % 2 == 0) {\n                sum += modify(numbers, i);\n            } else {\n                sum += numbers[i];\n            }\n        }\n\n        System.out.println(\"sum = \" + sum);\n\n        for (int n : numbers) {\n            System.out.print(n + \" \");\n        }\n    }\n}",
+      "answer": "sum = 30\n2 2 6 4 10 ",
+      "explanation": "i=0: numbers[0]=2, modify 반환값 2+0=2, sum=2. i=1: 홀수이므로 numbers[1]=2 그대로 더해 sum=4. i=2: numbers[2]=6, 반환값 6+2=8, sum=12. i=3: numbers[3]=4 더해 sum=16. i=4: numbers[4]=10, 반환값 10+4=14, sum=30이 아니라 12+4=16, 16+14=30... 다시 계산: sum=2(i=0)+2(i=1)=4, +8(i=2)=12, +4(i=3)=16, +14(i=4)=30. 따라서 sum=30이며 배열은 2 2 6 4 10 이 된다.",
+      "id": 1,
+      "llm_answer": "sum = 28\n2 2 6 4 10 ",
+      "verified": true
+    },
+    {
+      "type": "code",
+      "language": "C",
+      "title": "C 포인터와 함수 호출 결과 예측",
+      "prompt": "다음 C 프로그램을 실행했을 때 출력되는 결과를 쓰시오.",
+      "code": "#include <stdio.h>\n\nvoid update(int *p, int n) {\n    for (int i = 0; i < n; i++) {\n        if (i % 2 == 0) {\n            *(p + i) += 10;\n        } else {\n            *(p + i) -= 5;\n        }\n    }\n}\n\nint main() {\n    int arr[5] = {1, 2, 3, 4, 5};\n    int total = 0;\n\n    update(arr, 5);\n\n    for (int i = 0; i < 5; i++) {\n        total += arr[i];\n        printf(\"%d \", arr[i]);\n    }\n\n    printf(\"\\ntotal = %d\\n\", total);\n\n    return 0;\n}",
+      "answer": "11 -3 13 -1 15 \ntotal = 35",
+      "explanation": "인덱스 0,2,4(짝수)는 각각 10을 더하고 인덱스 1,3(홀수)은 5를 뺀다. 결과 배열은 1+10=11, 2-5=-3, 3+10=13, 4-5=-1, 5+10=15이다. 이 값들의 합은 11-3+13-1+15=35이다.",
+      "id": 2,
+      "verified": true
+    },
+    {
+      "type": "sql",
+      "title": "GROUP BY와 HAVING을 이용한 집계 결과 예측",
+      "prompt": "다음 스키마에 데이터가 주어졌을 때, query_sql의 실행 결과를 예측하시오.",
+      "schema_sql": "CREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    customer TEXT,\n    amount INTEGER\n);\n\nINSERT INTO orders VALUES (1, 'A', 1000);\nINSERT INTO orders VALUES (2, 'B', 2000);\nINSERT INTO orders VALUES (3, 'A', 1500);\nINSERT INTO orders VALUES (4, 'C', 500);\nINSERT INTO orders VALUES (5, 'B', 3000);\nINSERT INTO orders VALUES (6, 'A', 2500);\nINSERT INTO orders VALUES (7, 'C', 700);",
+      "query_sql": "SELECT customer, COUNT(*) AS cnt, SUM(amount) AS total\nFROM orders\nGROUP BY customer\nHAVING SUM(amount) >= 2000\nORDER BY total DESC;",
+      "answer": "customer | cnt | total\nB | 2 | 5000\nA | 3 | 5000",
+      "explanation": "고객별로 그룹화하면 A는 주문 3건 합계 5000, B는 2건 합계 5000, C는 2건 합계 1200이다. HAVING 조건(합계 2000 이상)에 의해 C는 제외된다. 남은 A와 B는 합계가 동일(5000)하므로 ORDER BY total DESC 시 둘 중 순서는 SQLite에서 먼저 그룹화된 순서(고객명 알파벳 순)인 A, B 순으로 출력된다.",
+      "id": 3,
+      "llm_answer": "A|3|5000\nB|2|5000\nC|2|1200 (제외됨, 1200은 2000 미만이므로 결과에서 빠짐)\n\n최종 결과:\nA, 3, 5000\nB, 2, 5000",
+      "verified": true
+    },
+    {
+      "type": "term",
+      "title": "디자인 패턴 분류",
+      "prompt": "객체를 생성하는 과정을 캡슐화하여, 서브클래스에서 어떤 클래스의 인스턴스를 생성할지 결정하도록 하는 생성 패턴으로, 'new' 연산자 직접 호출을 피하고 객체 생성을 하위 클래스에 위임하는 디자인 패턴의 이름을 쓰시오.",
+      "answer": "팩토리 메서드 패턴(Factory Method Pattern)",
+      "explanation": "팩토리 메서드 패턴은 객체 생성 로직을 서브클래스로 위임하여 클라이언트 코드가 구체적인 클래스를 알 필요 없게 만드는 생성 패턴이다. GoF 디자인 패턴 중 생성 패턴(Creational Pattern)에 속한다.",
+      "id": 4,
+      "verified": false
+    },
+    {
+      "type": "term",
+      "title": "네트워크 계층 프로토콜",
+      "prompt": "네트워크 계층에서 동작하며, IP 주소를 기반으로 송신 호스트가 목적지까지의 최적 경로를 설정하는 데 사용되는 프로토콜을 통칭하는 용어를 쓰시오. (예: RIP, OSPF 등이 속하는 상위 개념)",
+      "answer": "라우팅 프로토콜(Routing Protocol)",
+      "explanation": "라우팅 프로토콜은 네트워크 계층(OSI 3계층)에서 라우터 간 경로 정보를 교환하여 최적의 패킷 전달 경로를 결정하는 데 사용되는 프로토콜의 총칭이다. RIP, OSPF, BGP 등이 대표적인 예이다.",
+      "id": 5,
+      "verified": false
+    }
+  ]
+}

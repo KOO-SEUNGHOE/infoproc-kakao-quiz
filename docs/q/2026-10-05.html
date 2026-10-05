@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보처리기사 실기 - 2026-10-05</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "Malgun Gothic", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+h1 { font-size: 1.4rem; }
+.question { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 16px 0; }
+.badge { display: inline-block; font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: #6363f11a; color: #6363f1; margin-bottom: 8px; }
+pre { background: #80808014; padding: 12px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; }
+summary { cursor: pointer; font-weight: 600; margin-top: 10px; }
+.answer { margin-top: 10px; padding: 12px; background: #80808014; border-radius: 8px; }
+.unverified { color: #c97a00; font-size: .8rem; margin-top: 8px; }
+.date-list a { display: block; padding: 10px 0; border-bottom: 1px solid #8882; text-decoration: none; }
+a { color: #6363f1; }
+.nav-link { display: inline-block; margin: 8px 0 20px; font-weight: 600; }
+.term-card { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 12px 0; }
+.term-name { font-size: 1.05rem; font-weight: 700; }
+.term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
+.term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
+.term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+</style>
+</head><body>
+<a href="../index.html">← 전체 목록</a>
+<h1>2026-10-05 실기 문제</h1>
+<div class="question"><h3>Q1</h3><div class="badge">코드 출력 · Java</div><p>다음 Java 프로그램을 실행했을 때 출력되는 결과를 쓰시오.</p><pre><code>public class Main {
+    static int modify(int[] arr, int idx) {
+        arr[idx] = arr[idx] * 2;
+        return arr[idx] + idx;
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3, 4, 5};
+        int sum = 0;
+
+        for (int i = 0; i &lt; numbers.length; i++) {
+            if (i % 2 == 0) {
+                sum += modify(numbers, i);
+            } else {
+                sum += numbers[i];
+            }
+        }
+
+        System.out.println(&quot;sum = &quot; + sum);
+
+        for (int n : numbers) {
+            System.out.print(n + &quot; &quot;);
+        }
+    }
+}</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>sum = 30
+2 2 6 4 10 </code></pre>
+    <p>i=0: numbers[0]=2, modify 반환값 2+0=2, sum=2. i=1: 홀수이므로 numbers[1]=2 그대로 더해 sum=4. i=2: numbers[2]=6, 반환값 6+2=8, sum=12. i=3: numbers[3]=4 더해 sum=16. i=4: numbers[4]=10, 반환값 10+4=14, sum=30이 아니라 12+4=16, 16+14=30... 다시 계산: sum=2(i=0)+2(i=1)=4, +8(i=2)=12, +4(i=3)=16, +14(i=4)=30. 따라서 sum=30이며 배열은 2 2 6 4 10 이 된다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q2</h3><div class="badge">코드 출력 · C</div><p>다음 C 프로그램을 실행했을 때 출력되는 결과를 쓰시오.</p><pre><code>#include &lt;stdio.h&gt;
+
+void update(int *p, int n) {
+    for (int i = 0; i &lt; n; i++) {
+        if (i % 2 == 0) {
+            *(p + i) += 10;
+        } else {
+            *(p + i) -= 5;
+        }
+    }
+}
+
+int main() {
+    int arr[5] = {1, 2, 3, 4, 5};
+    int total = 0;
+
+    update(arr, 5);
+
+    for (int i = 0; i &lt; 5; i++) {
+        total += arr[i];
+        printf(&quot;%d &quot;, arr[i]);
+    }
+
+    printf(&quot;\ntotal = %d\n&quot;, total);
+
+    return 0;
+}</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>11 -3 13 -1 15 
+total = 35</code></pre>
+    <p>인덱스 0,2,4(짝수)는 각각 10을 더하고 인덱스 1,3(홀수)은 5를 뺀다. 결과 배열은 1+10=11, 2-5=-3, 3+10=13, 4-5=-1, 5+10=15이다. 이 값들의 합은 11-3+13-1+15=35이다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q3</h3><div class="badge">SQL 결과</div><p>다음 스키마에 데이터가 주어졌을 때, query_sql의 실행 결과를 예측하시오.</p><pre><code>-- schema
+CREATE TABLE orders (
+    order_id INTEGER PRIMARY KEY,
+    customer TEXT,
+    amount INTEGER
+);
+
+INSERT INTO orders VALUES (1, &#x27;A&#x27;, 1000);
+INSERT INTO orders VALUES (2, &#x27;B&#x27;, 2000);
+INSERT INTO orders VALUES (3, &#x27;A&#x27;, 1500);
+INSERT INTO orders VALUES (4, &#x27;C&#x27;, 500);
+INSERT INTO orders VALUES (5, &#x27;B&#x27;, 3000);
+INSERT INTO orders VALUES (6, &#x27;A&#x27;, 2500);
+INSERT INTO orders VALUES (7, &#x27;C&#x27;, 700);
+
+-- query
+SELECT customer, COUNT(*) AS cnt, SUM(amount) AS total
+FROM orders
+GROUP BY customer
+HAVING SUM(amount) &gt;= 2000
+ORDER BY total DESC;</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>customer | cnt | total
+B | 2 | 5000
+A | 3 | 5000</code></pre>
+    <p>고객별로 그룹화하면 A는 주문 3건 합계 5000, B는 2건 합계 5000, C는 2건 합계 1200이다. HAVING 조건(합계 2000 이상)에 의해 C는 제외된다. 남은 A와 B는 합계가 동일(5000)하므로 ORDER BY total DESC 시 둘 중 순서는 SQLite에서 먼저 그룹화된 순서(고객명 알파벳 순)인 A, B 순으로 출력된다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q4</h3><div class="badge">용어 단답</div><p>객체를 생성하는 과정을 캡슐화하여, 서브클래스에서 어떤 클래스의 인스턴스를 생성할지 결정하도록 하는 생성 패턴으로, &#x27;new&#x27; 연산자 직접 호출을 피하고 객체 생성을 하위 클래스에 위임하는 디자인 패턴의 이름을 쓰시오.</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>팩토리 메서드 패턴(Factory Method Pattern)</code></pre>
+    <p>팩토리 메서드 패턴은 객체 생성 로직을 서브클래스로 위임하여 클라이언트 코드가 구체적인 클래스를 알 필요 없게 만드는 생성 패턴이다. GoF 디자인 패턴 중 생성 패턴(Creational Pattern)에 속한다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q5</h3><div class="badge">용어 단답</div><p>네트워크 계층에서 동작하며, IP 주소를 기반으로 송신 호스트가 목적지까지의 최적 경로를 설정하는 데 사용되는 프로토콜을 통칭하는 용어를 쓰시오. (예: RIP, OSPF 등이 속하는 상위 개념)</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>라우팅 프로토콜(Routing Protocol)</code></pre>
+    <p>라우팅 프로토콜은 네트워크 계층(OSI 3계층)에서 라우터 간 경로 정보를 교환하여 최적의 패킷 전달 경로를 결정하는 데 사용되는 프로토콜의 총칭이다. RIP, OSPF, BGP 등이 대표적인 예이다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<a class="nav-link" href="../glossary.html">📚 지금까지 나온 용어 정리 보기</a>
+</body></html>
