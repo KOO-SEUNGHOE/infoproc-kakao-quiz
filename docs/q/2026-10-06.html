@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보처리기사 실기 - 2026-10-06</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "Malgun Gothic", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+h1 { font-size: 1.4rem; }
+.question { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 16px 0; }
+.badge { display: inline-block; font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: #6363f11a; color: #6363f1; margin-bottom: 8px; }
+pre { background: #80808014; padding: 12px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; }
+summary { cursor: pointer; font-weight: 600; margin-top: 10px; }
+.answer { margin-top: 10px; padding: 12px; background: #80808014; border-radius: 8px; }
+.unverified { color: #c97a00; font-size: .8rem; margin-top: 8px; }
+.date-list a { display: block; padding: 10px 0; border-bottom: 1px solid #8882; text-decoration: none; }
+a { color: #6363f1; }
+.nav-link { display: inline-block; margin: 8px 0 20px; font-weight: 600; }
+.term-card { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 12px 0; }
+.term-name { font-size: 1.05rem; font-weight: 700; }
+.term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
+.term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
+.term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+</style>
+</head><body>
+<a href="../index.html">← 전체 목록</a>
+<h1>2026-10-06 실기 문제</h1>
+<div class="question"><h3>Q1</h3><div class="badge">코드 출력 · Java</div><p>다음 Java 프로그램의 실행 결과를 예측하시오.</p><pre><code>public class Main {
+    static int modify(int[] arr, int idx) {
+        arr[idx] = arr[idx] * 2;
+        return arr[idx];
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3, 4, 5};
+        int sum = 0;
+
+        for (int i = 0; i &lt; numbers.length; i++) {
+            if (i % 2 == 0) {
+                sum += modify(numbers, i);
+            } else {
+                sum += numbers[i];
+            }
+        }
+
+        for (int i = 0; i &lt; numbers.length; i++) {
+            System.out.print(numbers[i] + &quot; &quot;);
+        }
+        System.out.println();
+        System.out.println(&quot;sum = &quot; + sum);
+    }
+}</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>2 2 6 4 10 
+sum = 24</code></pre>
+    <p>인덱스가 짝수(0,2,4)일 때 modify 메서드가 배열 값을 2배로 바꾸고 그 값을 반환한다. numbers는 {1,2,3,4,5}에서 0,2,4번째 값이 2,6,10으로 바뀌어 최종 배열은 {2,2,6,4,10}이 된다. sum은 2(i=0)+2(i=1)+6(i=2)+4(i=3)+10(i=4) = 24이다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q2</h3><div class="badge">코드 출력 · C</div><p>다음 C 프로그램의 실행 결과를 예측하시오.</p><pre><code>#include &lt;stdio.h&gt;
+
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int calc(int *arr, int size) {
+    int result = 0;
+    for (int i = 0; i &lt; size; i++) {
+        result += arr[i];
+        if (i &gt; 0) {
+            arr[i] = arr[i] + arr[i - 1];
+        }
+    }
+    return result;
+}
+
+int main(void) {
+    int nums[5] = {10, 20, 30, 40, 50};
+
+    swap(&amp;nums[0], &amp;nums[4]);
+
+    int total = calc(nums, 5);
+
+    for (int i = 0; i &lt; 5; i++) {
+        printf(&quot;%d &quot;, nums[i]);
+    }
+    printf(&quot;\n&quot;);
+    printf(&quot;total = %d\n&quot;, total);
+
+    return 0;
+}</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>50 70 100 140 150 
+total = 150</code></pre>
+    <p>swap으로 nums[0]과 nums[4]가 교환되어 배열은 {50,20,30,40,10}이 된다. calc 함수에서 result는 교환 직후의 원래 값들(50,20,30,40,10)의 합인 150으로 계산되고, 동시에 배열은 누적합 형태로 갱신되어 {50,70,100,140,150}이 되지만 마지막 원소는 result 계산 전 arr[4]=10과 arr[3]=140의 합인 150이 아니라 갱신 순서에 따라 160이 된다. 따라서 최종 배열은 {50,70,100,140,160}, total은 150이다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q3</h3><div class="badge">SQL 결과</div><p>다음 schema_sql로 테이블을 생성하고 데이터를 삽입한 후, query_sql을 실행했을 때의 결과를 예측하시오.</p><pre><code>-- schema
+CREATE TABLE orders (
+    order_id INTEGER PRIMARY KEY,
+    customer VARCHAR(20),
+    amount INTEGER
+);
+
+INSERT INTO orders VALUES (1, &#x27;Kim&#x27;, 10000);
+INSERT INTO orders VALUES (2, &#x27;Lee&#x27;, 20000);
+INSERT INTO orders VALUES (3, &#x27;Kim&#x27;, 15000);
+INSERT INTO orders VALUES (4, &#x27;Park&#x27;, 5000);
+INSERT INTO orders VALUES (5, &#x27;Lee&#x27;, 30000);
+INSERT INTO orders VALUES (6, &#x27;Park&#x27;, 25000);
+INSERT INTO orders VALUES (7, &#x27;Kim&#x27;, 5000);
+
+-- query
+SELECT customer, COUNT(*) AS cnt, SUM(amount) AS total
+FROM orders
+GROUP BY customer
+HAVING SUM(amount) &gt;= 30000
+ORDER BY total DESC;</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>customer | cnt | total
+Lee | 2 | 50000
+Park | 2 | 30000
+Kim | 3 | 30000</code></pre>
+    <p>customer별로 그룹화하여 합계를 구하면 Kim=30000(3건), Lee=50000(2건), Park=30000(2건)이다. HAVING 조건은 합계가 30000 이상인 그룹만 남기므로 Kim, Lee, Park 모두 해당되지만 ORDER BY total DESC로 정렬하면 Lee(50000), Park(30000), Kim(30000) 순이 되고 동률인 Park과 Kim은 입력 순서(그룹 생성 순서)에 따라 결정된다. SQLite 기본 정렬 안정성에 따라 Kim이 Park보다 먼저 나오는 경우가 일반적이므로 Lee, Kim, Park 순으로 출력된다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q4</h3><div class="badge">용어 단답</div><p>요구사항이 자주 변경되는 환경에 적합하며, 짧은 주기(스프린트)로 반복적인 개발과 고객 피드백을 중시하는 소프트웨어 개발 방법론을 무엇이라 하는가?</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>애자일(Agile)</code></pre>
+    <p>애자일 방법론은 계획보다 변화에 대한 유연한 대응을 중시하며, 짧은 반복 주기(스프린트)를 통해 고객과 지속적으로 소통하며 점진적으로 소프트웨어를 완성해 나가는 개발 방법론이다. 대표적으로 스크럼(Scrum), XP(eXtreme Programming) 등이 있다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q5</h3><div class="badge">용어 단답</div><p>릴레이션에서 기본키가 아닌 모든 속성이 기본키에 대해 이행적 함수 종속을 가지지 않도록 제거하는 정규화 단계는 제 몇 정규형인가?</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>제3정규형(3NF)</code></pre>
+    <p>제3정규형은 제2정규형을 만족하면서 기본키가 아닌 속성들이 기본키에 이행적 함수 종속(A→B, B→C이면 A→C)되지 않도록 분해하는 단계이다. 이를 통해 데이터 중복과 갱신 이상을 줄일 수 있다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<a class="nav-link" href="../glossary.html">📚 지금까지 나온 용어 정리 보기</a>
+</body></html>
