@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-07",
+  "questions": [
+    {
+      "type": "code",
+      "language": "Python",
+      "title": "파이썬 리스트와 함수 출력 예측",
+      "prompt": "다음 Python 코드의 실행 결과를 예측하시오.",
+      "code": "def modify(lst, value):\n    result = []\n    for item in lst:\n        if item % 2 == 0:\n            result.append(item + value)\n        else:\n            result.append(item - value)\n    return result\n\n\nnumbers = [1, 2, 3, 4, 5]\nupdated = modify(numbers, 10)\ntotal = 0\nfor n in updated:\n    total += n\n\nprint(updated)\nprint(total)",
+      "answer": "[-9, 12, -7, 14, -5]\n5",
+      "explanation": "홀수는 value(10)를 빼고 짝수는 value(10)를 더합니다. 1->-9, 2->12, 3->-7, 4->14, 5->-5가 되어 리스트는 [-9, 12, -7, 14, -5]입니다. 이 값들의 합은 -9+12-7+14-5=5이므로 total은 5가 출력됩니다.",
+      "id": 1,
+      "verified": true
+    },
+    {
+      "type": "code",
+      "language": "Java",
+      "title": "자바 배열과 메서드 출력 예측",
+      "prompt": "다음 Java 코드의 실행 결과를 예측하시오.",
+      "code": "public class Main {\n    static int process(int[] arr, int idx) {\n        if (idx >= arr.length) {\n            return 0;\n        }\n        int current = arr[idx];\n        if (current % 3 == 0) {\n            arr[idx] = current * 2;\n        } else {\n            arr[idx] = current + 1;\n        }\n        return arr[idx] + process(arr, idx + 1);\n    }\n\n    public static void main(String[] args) {\n        int[] numbers = {1, 2, 3, 4, 5, 6};\n        int sum = process(numbers, 0);\n        for (int i = 0; i < numbers.length; i++) {\n            System.out.print(numbers[i] + \" \");\n        }\n        System.out.println();\n        System.out.println(sum);\n    }\n}",
+      "answer": "2 3 6 5 6 12 \n34",
+      "explanation": "재귀적으로 배열의 각 원소를 처리합니다: 1->2(3으로 안나눠짐,+1), 2->3(+1), 3->6(3배수,*2), 4->5(+1), 5->6(+1), 6->12(3배수,*2). 변경된 배열은 [2,3,6,5,6,12]이고, 반환값의 합(각 단계의 arr[idx] 합)은 2+3+6+5+6+12=34입니다.",
+      "id": 2,
+      "verified": true
+    },
+    {
+      "type": "sql",
+      "title": "GROUP BY와 HAVING을 사용한 집계 쿼리",
+      "prompt": "다음 schema_sql로 테이블을 생성하고 데이터를 입력했을 때, query_sql의 실행 결과를 예측하시오.",
+      "schema_sql": "CREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    customer VARCHAR(20),\n    amount INTEGER\n);\n\nINSERT INTO orders VALUES (1, 'Kim', 5000);\nINSERT INTO orders VALUES (2, 'Lee', 3000);\nINSERT INTO orders VALUES (3, 'Kim', 7000);\nINSERT INTO orders VALUES (4, 'Park', 2000);\nINSERT INTO orders VALUES (5, 'Lee', 6000);\nINSERT INTO orders VALUES (6, 'Kim', 1000);\nINSERT INTO orders VALUES (7, 'Park', 9000);",
+      "query_sql": "SELECT customer, COUNT(*) AS cnt, SUM(amount) AS total\nFROM orders\nGROUP BY customer\nHAVING SUM(amount) >= 10000\nORDER BY total DESC;",
+      "answer": "customer | cnt | total\nKim | 3 | 13000\nPark | 2 | 11000",
+      "explanation": "customer별로 그룹화하여 개수와 합계를 구합니다. Kim은 5000+7000+1000=13000, Lee는 3000+6000=9000, Park은 2000+9000=11000입니다. HAVING 조건으로 합계 10000 이상인 Kim과 Park만 남고, total 내림차순으로 정렬되어 Kim이 먼저, Park이 다음에 나옵니다.",
+      "id": 3,
+      "llm_answer": "Kim|3|13000\nPark|2|11000",
+      "verified": true
+    },
+    {
+      "type": "term",
+      "title": "정규화 관련 용어",
+      "prompt": "릴레이션에서 기본키가 아닌 속성이 기본키 전체에 종속되지 않고, 기본키의 일부에만 종속되는 부분 함수 종속성을 제거하여 완전 함수 종속 관계로 만드는 정규화 단계를 무엇이라 하는가?",
+      "answer": "제2정규형(2NF)",
+      "explanation": "제2정규형은 제1정규형을 만족하면서 기본키가 아닌 모든 속성이 기본키에 완전 함수 종속되도록 부분 함수 종속을 제거하는 정규화 단계입니다. 이를 통해 데이터 중복과 이상 현상을 줄일 수 있습니다.",
+      "id": 4,
+      "verified": false
+    },
+    {
+      "type": "term",
+      "title": "네트워크 보안 공격 유형",
+      "prompt": "공격자가 정상적인 사용자와 서버 사이의 통신 세션을 가로채어, 마치 정상 사용자인 것처럼 행세하며 통신에 끼어들어 정보를 탈취하거나 조작하는 공격 기법을 무엇이라 하는가?",
+      "answer": "세션 하이재킹(Session Hijacking)",
+      "explanation": "세션 하이재킹은 이미 인증을 거쳐 성립된 세션의 식별자(세션 ID)를 탈취하여 공격자가 정당한 사용자로 위장해 세션을 가로채는 공격입니다. TCP 세션 하이재킹이 대표적인 예입니다.",
+      "id": 5,
+      "verified": false
+    }
+  ]
+}
