@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-08",
+  "questions": [
+    {
+      "type": "code",
+      "title": "Java 배열과 메서드",
+      "language": "Java",
+      "prompt": "다음 Java 프로그램의 실행 결과를 예측하시오.",
+      "code": "public class Main {\n    static int process(int[] arr) {\n        int sum = 0;\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] % 2 == 0) {\n                sum += arr[i];\n            } else {\n                sum -= arr[i];\n            }\n        }\n        return sum;\n    }\n\n    public static void main(String[] args) {\n        int[] numbers = {1, 2, 3, 4, 5, 6};\n        int result = process(numbers);\n        System.out.println(\"result = \" + result);\n\n        int count = 0;\n        for (int n : numbers) {\n            if (n > 2) {\n                count++;\n            }\n        }\n        System.out.println(\"count = \" + count);\n    }\n}",
+      "answer": "result = 3\ncount = 4",
+      "explanation": "배열 {1,2,3,4,5,6}에서 짝수(2,4,6)는 더하고 홀수(1,3,5)는 뺀다. 짝수 합은 12, 홀수 합은 9이므로 12-9=3이 result이다. 2보다 큰 원소는 3,4,5,6으로 총 4개이므로 count는 4이다.",
+      "id": 1,
+      "verified": true
+    },
+    {
+      "type": "code",
+      "title": "Python 리스트 컴프리헨션과 함수",
+      "language": "Python",
+      "prompt": "다음 Python 프로그램의 실행 결과를 예측하시오.",
+      "code": "def transform(lst):\n    result = []\n    for x in lst:\n        if x % 3 == 0:\n            result.append(x * 2)\n        else:\n            result.append(x + 1)\n    return result\n\n\ndata = [1, 2, 3, 4, 5, 6, 9]\noutput = transform(data)\nprint(output)\n\ntotal = sum(output)\nprint(total)\n\nfiltered = [v for v in output if v > 5]\nprint(filtered)",
+      "answer": "[2, 3, 6, 5, 6, 12, 18]\n52\n[6, 6, 12, 18]",
+      "explanation": "각 원소에 대해 3의 배수면 2배, 아니면 1을 더한다. 1→2, 2→3, 3→6, 4→5, 5→6, 6→12, 9→18이 되어 [2,3,6,5,6,12,18]이 나온다. 이 리스트의 합은 2+3+6+5+6+12+18=52이며, 5보다 큰 값만 필터링하면 [6,6,12,18]이다.",
+      "id": 2,
+      "verified": true
+    },
+    {
+      "type": "sql",
+      "title": "부서별 급여 집계 조회",
+      "prompt": "다음 schema_sql과 query_sql을 참고하여 쿼리의 실행 결과를 예측하시오.",
+      "schema_sql": "CREATE TABLE employee (\n    emp_id INTEGER PRIMARY KEY,\n    name TEXT,\n    dept TEXT,\n    salary INTEGER\n);\n\nINSERT INTO employee VALUES (1, '김철수', '영업', 3000);\nINSERT INTO employee VALUES (2, '이영희', '영업', 3500);\nINSERT INTO employee VALUES (3, '박민수', '개발', 4000);\nINSERT INTO employee VALUES (4, '최지훈', '개발', 4500);\nINSERT INTO employee VALUES (5, '정수진', '개발', 5000);\nINSERT INTO employee VALUES (6, '한가영', '인사', 2800);",
+      "query_sql": "SELECT dept, COUNT(*) AS cnt, AVG(salary) AS avg_sal\nFROM employee\nGROUP BY dept\nHAVING COUNT(*) >= 2\nORDER BY avg_sal DESC;",
+      "answer": "dept | cnt | avg_sal\n개발 | 3 | 4500.0\n영업 | 2 | 3250.0",
+      "explanation": "인사 부서는 직원이 1명이므로 HAVING COUNT(*) >= 2 조건에 의해 제외된다. 개발 부서는 3명(4000,4500,5000)으로 평균 4500, 영업은 2명(3000,3500)으로 평균 3250이다. 평균 급여 내림차순으로 정렬하면 개발이 먼저, 영업이 다음에 나온다.",
+      "id": 3,
+      "llm_answer": "개발|3|4500.0\n영업|2|3250.0",
+      "verified": true
+    },
+    {
+      "type": "term",
+      "title": "정규화 관련 용어",
+      "prompt": "릴레이션에서 기본키가 아닌 속성이 기본키의 일부에만 종속되는 부분 함수 종속을 제거하여 완전 함수 종속 관계로 만드는 정규화 단계를 쓰시오.",
+      "answer": "제2정규형(2NF)",
+      "explanation": "제1정규형을 만족한 릴레이션에서 기본키의 일부 속성에만 종속되는 부분 함수 종속을 제거하면 제2정규형이 된다. 이는 복합키를 가진 테이블에서 데이터 중복과 이상현상을 줄이기 위한 단계이다.",
+      "id": 4,
+      "verified": false
+    },
+    {
+      "type": "term",
+      "title": "네트워크 공격 기법",
+      "prompt": "공격자가 네트워크 패킷을 가로채어 송신자와 수신자 사이에서 몰래 통신 내용을 중계하며 도청하거나 변조하는 공격 기법을 영문 약어로 쓰시오.",
+      "answer": "MITM(Man-In-The-Middle) 공격",
+      "explanation": "MITM 공격은 통신하는 두 당사자 사이에 공격자가 끼어들어 패킷을 가로채고 도청 또는 변조하는 공격이다. ARP 스푸핑 등의 기법이 이를 수행하는 대표적인 방법으로 사용된다.",
+      "id": 5,
+      "verified": false
+    }
+  ]
+}

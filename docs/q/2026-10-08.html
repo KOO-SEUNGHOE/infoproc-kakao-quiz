@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보처리기사 실기 - 2026-10-08</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "Malgun Gothic", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+h1 { font-size: 1.4rem; }
+.question { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 16px 0; }
+.badge { display: inline-block; font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: #6363f11a; color: #6363f1; margin-bottom: 8px; }
+pre { background: #80808014; padding: 12px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; }
+summary { cursor: pointer; font-weight: 600; margin-top: 10px; }
+.answer { margin-top: 10px; padding: 12px; background: #80808014; border-radius: 8px; }
+.unverified { color: #c97a00; font-size: .8rem; margin-top: 8px; }
+.date-list a { display: block; padding: 10px 0; border-bottom: 1px solid #8882; text-decoration: none; }
+a { color: #6363f1; }
+.nav-link { display: inline-block; margin: 8px 0 20px; font-weight: 600; }
+.term-card { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 12px 0; }
+.term-name { font-size: 1.05rem; font-weight: 700; }
+.term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
+.term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
+.term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+</style>
+</head><body>
+<a href="../index.html">← 전체 목록</a>
+<h1>2026-10-08 실기 문제</h1>
+<div class="question"><h3>Q1</h3><div class="badge">코드 출력 · Java</div><p>다음 Java 프로그램의 실행 결과를 예측하시오.</p><pre><code>public class Main {
+    static int process(int[] arr) {
+        int sum = 0;
+        for (int i = 0; i &lt; arr.length; i++) {
+            if (arr[i] % 2 == 0) {
+                sum += arr[i];
+            } else {
+                sum -= arr[i];
+            }
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3, 4, 5, 6};
+        int result = process(numbers);
+        System.out.println(&quot;result = &quot; + result);
+
+        int count = 0;
+        for (int n : numbers) {
+            if (n &gt; 2) {
+                count++;
+            }
+        }
+        System.out.println(&quot;count = &quot; + count);
+    }
+}</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>result = 3
+count = 4</code></pre>
+    <p>배열 {1,2,3,4,5,6}에서 짝수(2,4,6)는 더하고 홀수(1,3,5)는 뺀다. 짝수 합은 12, 홀수 합은 9이므로 12-9=3이 result이다. 2보다 큰 원소는 3,4,5,6으로 총 4개이므로 count는 4이다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q2</h3><div class="badge">코드 출력 · Python</div><p>다음 Python 프로그램의 실행 결과를 예측하시오.</p><pre><code>def transform(lst):
+    result = []
+    for x in lst:
+        if x % 3 == 0:
+            result.append(x * 2)
+        else:
+            result.append(x + 1)
+    return result
+
+
+data = [1, 2, 3, 4, 5, 6, 9]
+output = transform(data)
+print(output)
+
+total = sum(output)
+print(total)
+
+filtered = [v for v in output if v &gt; 5]
+print(filtered)</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>[2, 3, 6, 5, 6, 12, 18]
+52
+[6, 6, 12, 18]</code></pre>
+    <p>각 원소에 대해 3의 배수면 2배, 아니면 1을 더한다. 1→2, 2→3, 3→6, 4→5, 5→6, 6→12, 9→18이 되어 [2,3,6,5,6,12,18]이 나온다. 이 리스트의 합은 2+3+6+5+6+12+18=52이며, 5보다 큰 값만 필터링하면 [6,6,12,18]이다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q3</h3><div class="badge">SQL 결과</div><p>다음 schema_sql과 query_sql을 참고하여 쿼리의 실행 결과를 예측하시오.</p><pre><code>-- schema
+CREATE TABLE employee (
+    emp_id INTEGER PRIMARY KEY,
+    name TEXT,
+    dept TEXT,
+    salary INTEGER
+);
+
+INSERT INTO employee VALUES (1, &#x27;김철수&#x27;, &#x27;영업&#x27;, 3000);
+INSERT INTO employee VALUES (2, &#x27;이영희&#x27;, &#x27;영업&#x27;, 3500);
+INSERT INTO employee VALUES (3, &#x27;박민수&#x27;, &#x27;개발&#x27;, 4000);
+INSERT INTO employee VALUES (4, &#x27;최지훈&#x27;, &#x27;개발&#x27;, 4500);
+INSERT INTO employee VALUES (5, &#x27;정수진&#x27;, &#x27;개발&#x27;, 5000);
+INSERT INTO employee VALUES (6, &#x27;한가영&#x27;, &#x27;인사&#x27;, 2800);
+
+-- query
+SELECT dept, COUNT(*) AS cnt, AVG(salary) AS avg_sal
+FROM employee
+GROUP BY dept
+HAVING COUNT(*) &gt;= 2
+ORDER BY avg_sal DESC;</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>dept | cnt | avg_sal
+개발 | 3 | 4500.0
+영업 | 2 | 3250.0</code></pre>
+    <p>인사 부서는 직원이 1명이므로 HAVING COUNT(*) &gt;= 2 조건에 의해 제외된다. 개발 부서는 3명(4000,4500,5000)으로 평균 4500, 영업은 2명(3000,3500)으로 평균 3250이다. 평균 급여 내림차순으로 정렬하면 개발이 먼저, 영업이 다음에 나온다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q4</h3><div class="badge">용어 단답</div><p>릴레이션에서 기본키가 아닌 속성이 기본키의 일부에만 종속되는 부분 함수 종속을 제거하여 완전 함수 종속 관계로 만드는 정규화 단계를 쓰시오.</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>제2정규형(2NF)</code></pre>
+    <p>제1정규형을 만족한 릴레이션에서 기본키의 일부 속성에만 종속되는 부분 함수 종속을 제거하면 제2정규형이 된다. 이는 복합키를 가진 테이블에서 데이터 중복과 이상현상을 줄이기 위한 단계이다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q5</h3><div class="badge">용어 단답</div><p>공격자가 네트워크 패킷을 가로채어 송신자와 수신자 사이에서 몰래 통신 내용을 중계하며 도청하거나 변조하는 공격 기법을 영문 약어로 쓰시오.</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>MITM(Man-In-The-Middle) 공격</code></pre>
+    <p>MITM 공격은 통신하는 두 당사자 사이에 공격자가 끼어들어 패킷을 가로채고 도청 또는 변조하는 공격이다. ARP 스푸핑 등의 기법이 이를 수행하는 대표적인 방법으로 사용된다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<a class="nav-link" href="../glossary.html">📚 지금까지 나온 용어 정리 보기</a>
+</body></html>
