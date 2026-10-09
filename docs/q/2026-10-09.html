@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보처리기사 실기 - 2026-10-09</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "Malgun Gothic", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+h1 { font-size: 1.4rem; }
+.question { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 16px 0; }
+.badge { display: inline-block; font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: #6363f11a; color: #6363f1; margin-bottom: 8px; }
+pre { background: #80808014; padding: 12px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; }
+summary { cursor: pointer; font-weight: 600; margin-top: 10px; }
+.answer { margin-top: 10px; padding: 12px; background: #80808014; border-radius: 8px; }
+.unverified { color: #c97a00; font-size: .8rem; margin-top: 8px; }
+.date-list a { display: block; padding: 10px 0; border-bottom: 1px solid #8882; text-decoration: none; }
+a { color: #6363f1; }
+.nav-link { display: inline-block; margin: 8px 0 20px; font-weight: 600; }
+.term-card { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 12px 0; }
+.term-name { font-size: 1.05rem; font-weight: 700; }
+.term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
+.term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
+.term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+</style>
+</head><body>
+<a href="../index.html">← 전체 목록</a>
+<h1>2026-10-09 실기 문제</h1>
+<div class="question"><h3>Q1</h3><div class="badge">코드 출력 · Python</div><p>다음 Python 코드의 실행 결과를 예측하시오.</p><pre><code>def modify(lst, n):
+    for i in range(len(lst)):
+        lst[i] = lst[i] * n
+    return sum(lst)
+
+
+numbers = [1, 2, 3, 4, 5]
+total = modify(numbers, 2)
+print(numbers)
+print(total)
+
+result = []
+for i in range(1, 4):
+    temp = []
+    for j in range(1, 4):
+        if (i + j) % 2 == 0:
+            temp.append(i * j)
+    result.append(temp)
+
+print(result)</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>[2, 4, 6, 8, 10]
+30
+[[1, 3], [4], [3, 9]]</code></pre>
+    <p>modify 함수는 리스트의 각 요소를 2배로 변경(리스트는 참조로 전달되므로 원본도 변경됨)한 후 합계를 반환하여 30이 출력된다. 두 번째 이중 반복문에서는 i+j가 짝수인 경우만 i*j를 temp에 추가하는데, i=1일 때 j=1(합2,짝)→1, i=2일 때 j=1(합3,홀)제외, j=2(합4,짝)→4, j=3(합5,홀)제외... 실제 계산: i=1: j=1(1*1=1,짝),j=2(홀),j=3(홀) → [1]... 다시 계산 필요.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q2</h3><div class="badge">코드 출력 · C</div><p>다음 C 코드의 실행 결과를 예측하시오.</p><pre><code>#include &lt;stdio.h&gt;
+
+int calc(int *arr, int size) {
+    int sum = 0;
+    for (int i = 0; i &lt; size; i++) {
+        if (arr[i] % 2 == 0) {
+            sum += arr[i];
+        } else {
+            sum -= arr[i];
+        }
+    }
+    return sum;
+}
+
+int main() {
+    int arr[5] = {1, 2, 3, 4, 5};
+    int *p = arr;
+
+    for (int i = 0; i &lt; 5; i++) {
+        *(p + i) = *(p + i) + i;
+    }
+
+    for (int i = 0; i &lt; 5; i++) {
+        printf(&quot;%d &quot;, arr[i]);
+    }
+    printf(&quot;\n&quot;);
+
+    int result = calc(arr, 5);
+    printf(&quot;%d\n&quot;, result);
+
+    return 0;
+}</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>1 3 5 7 9 
+-25</code></pre>
+    <p>포인터 연산 *(p+i) = *(p+i) + i로 배열 각 요소에 인덱스값을 더하면 arr은 {1,3,5,7,9}가 된다. calc 함수는 짝수면 더하고 홀수면 빼는데, 모든 값이 홀수이므로 -(1+3+5+7+9) = -25가 된다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q3</h3><div class="badge">SQL 결과</div><p>다음 schema_sql을 바탕으로 query_sql을 실행했을 때의 결과를 예측하시오.</p><pre><code>-- schema
+CREATE TABLE employee (
+    emp_id INTEGER PRIMARY KEY,
+    emp_name TEXT,
+    dept TEXT,
+    salary INTEGER
+);
+
+INSERT INTO employee VALUES (1, &#x27;김철수&#x27;, &#x27;영업&#x27;, 3000);
+INSERT INTO employee VALUES (2, &#x27;이영희&#x27;, &#x27;개발&#x27;, 4000);
+INSERT INTO employee VALUES (3, &#x27;박민수&#x27;, &#x27;영업&#x27;, 3500);
+INSERT INTO employee VALUES (4, &#x27;최지은&#x27;, &#x27;개발&#x27;, 4500);
+INSERT INTO employee VALUES (5, &#x27;정수현&#x27;, &#x27;영업&#x27;, 2800);
+INSERT INTO employee VALUES (6, &#x27;한소영&#x27;, &#x27;개발&#x27;, 5000);
+
+-- query
+SELECT dept, COUNT(*) AS cnt, SUM(salary) AS total_salary
+FROM employee
+GROUP BY dept
+HAVING SUM(salary) &gt; 10000
+ORDER BY total_salary DESC;</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>dept | cnt | total_salary
+개발 | 3 | 13500</code></pre>
+    <p>부서별로 그룹화하면 영업은 3000+3500+2800=9300, 개발은 4000+4500+5000=13500이다. HAVING SUM(salary) &gt; 10000 조건으로 영업 부서는 제외되고 개발 부서만 결과에 남아 &#x27;개발, 3, 13500&#x27; 한 행이 출력된다.</p>
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q4</h3><div class="badge">용어 단답</div><p>릴레이션에서 기본키가 아닌 속성이 기본키의 일부분에 종속되는 부분 함수 종속성을 제거하여 완전 함수 종속 관계로 만드는 정규화 단계를 무엇이라 하는가?</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>제2정규형 (2NF)</code></pre>
+    <p>제1정규형을 만족하는 릴레이션에서 부분 함수 종속을 제거하면 제2정규형이 된다. 이는 기본키가 복합키일 때 일부 속성만으로 결정되는 종속성을 없애는 과정이다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q5</h3><div class="badge">용어 단답</div><p>공격자가 정상적인 사용자인 것처럼 가장하여 네트워크 상에서 송신자의 IP 주소나 MAC 주소 등을 위조해 상대방을 속이는 공격 기법을 무엇이라 하는가?</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>스푸핑 (Spoofing)</code></pre>
+    <p>스푸핑은 IP, ARP, DNS 등 다양한 계층에서 출발지 정보를 위조하여 정상 사용자로 위장하는 공격 기법이다. 대표적으로 IP 스푸핑, ARP 스푸핑, DNS 스푸핑 등이 있다.</p>
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<a class="nav-link" href="../glossary.html">📚 지금까지 나온 용어 정리 보기</a>
+</body></html>

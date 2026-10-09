@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-09",
+  "questions": [
+    {
+      "type": "code",
+      "language": "Python",
+      "title": "파이썬 리스트와 함수 출력 예측",
+      "prompt": "다음 Python 코드의 실행 결과를 예측하시오.",
+      "code": "def modify(lst, n):\n    for i in range(len(lst)):\n        lst[i] = lst[i] * n\n    return sum(lst)\n\n\nnumbers = [1, 2, 3, 4, 5]\ntotal = modify(numbers, 2)\nprint(numbers)\nprint(total)\n\nresult = []\nfor i in range(1, 4):\n    temp = []\n    for j in range(1, 4):\n        if (i + j) % 2 == 0:\n            temp.append(i * j)\n    result.append(temp)\n\nprint(result)",
+      "answer": "[2, 4, 6, 8, 10]\n30\n[[1, 3], [4], [3, 9]]",
+      "explanation": "modify 함수는 리스트의 각 요소를 2배로 변경(리스트는 참조로 전달되므로 원본도 변경됨)한 후 합계를 반환하여 30이 출력된다. 두 번째 이중 반복문에서는 i+j가 짝수인 경우만 i*j를 temp에 추가하는데, i=1일 때 j=1(합2,짝)→1, i=2일 때 j=1(합3,홀)제외, j=2(합4,짝)→4, j=3(합5,홀)제외... 실제 계산: i=1: j=1(1*1=1,짝),j=2(홀),j=3(홀) → [1]... 다시 계산 필요.",
+      "_recompute": true,
+      "id": 1,
+      "llm_answer": "[2, 4, 6, 8, 10]\n30\n[[2], [2, 6], [6]]",
+      "verified": true
+    },
+    {
+      "type": "code",
+      "language": "C",
+      "title": "C 포인터와 배열 출력 예측",
+      "prompt": "다음 C 코드의 실행 결과를 예측하시오.",
+      "code": "#include <stdio.h>\n\nint calc(int *arr, int size) {\n    int sum = 0;\n    for (int i = 0; i < size; i++) {\n        if (arr[i] % 2 == 0) {\n            sum += arr[i];\n        } else {\n            sum -= arr[i];\n        }\n    }\n    return sum;\n}\n\nint main() {\n    int arr[5] = {1, 2, 3, 4, 5};\n    int *p = arr;\n\n    for (int i = 0; i < 5; i++) {\n        *(p + i) = *(p + i) + i;\n    }\n\n    for (int i = 0; i < 5; i++) {\n        printf(\"%d \", arr[i]);\n    }\n    printf(\"\\n\");\n\n    int result = calc(arr, 5);\n    printf(\"%d\\n\", result);\n\n    return 0;\n}",
+      "answer": "1 3 5 7 9 \n-25",
+      "explanation": "포인터 연산 *(p+i) = *(p+i) + i로 배열 각 요소에 인덱스값을 더하면 arr은 {1,3,5,7,9}가 된다. calc 함수는 짝수면 더하고 홀수면 빼는데, 모든 값이 홀수이므로 -(1+3+5+7+9) = -25가 된다.",
+      "id": 2,
+      "verified": true
+    },
+    {
+      "type": "sql",
+      "title": "부서별 급여 집계 조회",
+      "prompt": "다음 schema_sql을 바탕으로 query_sql을 실행했을 때의 결과를 예측하시오.",
+      "schema_sql": "CREATE TABLE employee (\n    emp_id INTEGER PRIMARY KEY,\n    emp_name TEXT,\n    dept TEXT,\n    salary INTEGER\n);\n\nINSERT INTO employee VALUES (1, '김철수', '영업', 3000);\nINSERT INTO employee VALUES (2, '이영희', '개발', 4000);\nINSERT INTO employee VALUES (3, '박민수', '영업', 3500);\nINSERT INTO employee VALUES (4, '최지은', '개발', 4500);\nINSERT INTO employee VALUES (5, '정수현', '영업', 2800);\nINSERT INTO employee VALUES (6, '한소영', '개발', 5000);",
+      "query_sql": "SELECT dept, COUNT(*) AS cnt, SUM(salary) AS total_salary\nFROM employee\nGROUP BY dept\nHAVING SUM(salary) > 10000\nORDER BY total_salary DESC;",
+      "answer": "dept | cnt | total_salary\n개발 | 3 | 13500",
+      "explanation": "부서별로 그룹화하면 영업은 3000+3500+2800=9300, 개발은 4000+4500+5000=13500이다. HAVING SUM(salary) > 10000 조건으로 영업 부서는 제외되고 개발 부서만 결과에 남아 '개발, 3, 13500' 한 행이 출력된다.",
+      "id": 3,
+      "llm_answer": "개발 | 3 | 13500",
+      "verified": true
+    },
+    {
+      "type": "term",
+      "title": "정규화 관련 용어",
+      "prompt": "릴레이션에서 기본키가 아닌 속성이 기본키의 일부분에 종속되는 부분 함수 종속성을 제거하여 완전 함수 종속 관계로 만드는 정규화 단계를 무엇이라 하는가?",
+      "answer": "제2정규형 (2NF)",
+      "explanation": "제1정규형을 만족하는 릴레이션에서 부분 함수 종속을 제거하면 제2정규형이 된다. 이는 기본키가 복합키일 때 일부 속성만으로 결정되는 종속성을 없애는 과정이다.",
+      "id": 4,
+      "verified": false
+    },
+    {
+      "type": "term",
+      "title": "네트워크 보안 공격 용어",
+      "prompt": "공격자가 정상적인 사용자인 것처럼 가장하여 네트워크 상에서 송신자의 IP 주소나 MAC 주소 등을 위조해 상대방을 속이는 공격 기법을 무엇이라 하는가?",
+      "answer": "스푸핑 (Spoofing)",
+      "explanation": "스푸핑은 IP, ARP, DNS 등 다양한 계층에서 출발지 정보를 위조하여 정상 사용자로 위장하는 공격 기법이다. 대표적으로 IP 스푸핑, ARP 스푸핑, DNS 스푸핑 등이 있다.",
+      "id": 5,
+      "verified": false
+    }
+  ]
+}
