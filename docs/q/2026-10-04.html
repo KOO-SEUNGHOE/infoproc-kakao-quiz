@@ -20,6 +20,10 @@ a { color: #6363f1; }
 .term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
 .term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
 .term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+.related { margin-top: 12px; padding: 10px 14px; background: #6363f10d; border-radius: 8px; }
+.related-title { font-size: .8rem; font-weight: 700; color: #6363f1; margin-bottom: 4px; }
+.related ul { margin: 4px 0 0; padding-left: 18px; }
+.related li { font-size: .9rem; margin: 2px 0; }
 </style>
 </head><body>
 <a href="../index.html">← 전체 목록</a>
@@ -52,6 +56,7 @@ int main(void) {
     <pre><code>10 20 32 40 54 
 sum = 150</code></pre>
     <p>첫 번째 반복문에서 sum은 수정 전 배열 값들의 합인 10+20+30+40+50=150이 됩니다. i가 짝수(0,2,4)일 때만 arr[i]에 i를 더하므로 arr[0]=10+0=10, arr[2]=30+2=32, arr[4]=50+4=54가 되고 나머지는 그대로입니다. 따라서 최종 배열은 10 21 32 43 54이고 sum은 150입니다.</p>
+    
     
   </div>
 </details>
@@ -98,6 +103,7 @@ sum = 150</code></pre>
 강아지이 멍멍 짖는다</code></pre>
     <p>a는 Animal 객체이므로 info()에서 sound()를 호출하면 Animal의 sound()가 실행됩니다. d는 Dog 객체를 Animal 타입 참조로 가리키지만, 메서드 오버라이딩에 의해 동적 바인딩이 일어나 info() 내부의 sound() 호출은 Dog의 sound()가 실행됩니다. name 필드는 오버라이딩되지 않으므로 Dog 생성자에서 설정한 &#x27;강아지&#x27;가 그대로 출력됩니다.</p>
     
+    
   </div>
 </details>
 </div>
@@ -130,6 +136,7 @@ C | 1 | 3000
 B | 2 | 2500</code></pre>
     <p>customer별로 그룹화하면 A는 1000+1500+2500=5000(3건), B는 2000+500=2500(2건), C는 3000(1건)입니다. HAVING SUM(amount) &gt;= 2500 조건을 모두 만족하므로 세 그룹이 모두 남고, total 기준 내림차순 정렬하면 A(5000), C(3000), B(2500) 순서가 됩니다.</p>
     
+    
   </div>
 </details>
 </div>
@@ -139,6 +146,7 @@ B | 2 | 2500</code></pre>
   <div class="answer">
     <pre><code>팩토리 메서드 패턴(Factory Method Pattern)</code></pre>
     <p>팩토리 메서드 패턴은 객체 생성을 캡슐화하여 상위 클래스에서는 인터페이스만 정의하고, 실제 어떤 클래스의 인스턴스를 만들지는 하위 클래스가 결정하도록 하는 생성 패턴입니다. 이를 통해 객체 생성 코드와 사용 코드를 분리하여 유연성과 확장성을 높일 수 있습니다.</p>
+    
     <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
   </div>
 </details>
@@ -149,6 +157,7 @@ B | 2 | 2500</code></pre>
   <div class="answer">
     <pre><code>세션 하이재킹(Session Hijacking)</code></pre>
     <p>세션 하이재킹은 정상 사용자의 세션 식별자(세션 ID)를 가로채거나 예측하여 이미 인증된 세션을 탈취하는 공격입니다. 공격자는 이를 통해 별도의 인증 과정 없이 사용자의 권한으로 시스템에 접근할 수 있게 됩니다. TCP 시퀀스 번호를 추측하여 세션을 가로채는 방식이 대표적입니다.</p>
+    
     <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
   </div>
 </details>

@@ -1,6 +1,7 @@
 """data/questions/*.json 을 읽어 GitHub Pages용 정적 사이트(docs/)를 생성한다."""
 import html
 import json
+import re
 from pathlib import Path
 
 DATA_DIR = Path("data/questions")
@@ -24,9 +25,26 @@ a { color: #6363f1; }
 .term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
 .term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
 .term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+.related { margin-top: 12px; padding: 10px 14px; background: #6363f10d; border-radius: 8px; }
+.related-title { font-size: .8rem; font-weight: 700; color: #6363f1; margin-bottom: 4px; }
+.related ul { margin: 4px 0 0; padding-left: 18px; }
+.related li { font-size: .9rem; margin: 2px 0; }
 """
 
 TYPE_LABEL = {"code": "코드 출력", "sql": "SQL 결과", "term": "용어 단답"}
+
+
+def render_related_concepts(text: str) -> str:
+    items = [line.strip(" -") for line in text.splitlines() if line.strip()]
+    if not items:
+        return ""
+    lis = "\n".join(f"<li>{html.escape(item)}</li>" for item in items)
+    return f"""
+<div class="related">
+  <div class="related-title">📎 함께 암기하기</div>
+  <ul>{lis}</ul>
+</div>
+"""
 
 
 def render_question(q: dict) -> str:
@@ -44,12 +62,15 @@ def render_question(q: dict) -> str:
     if not q.get("verified"):
         note = '<div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>'
 
+    related = render_related_concepts(q.get("related_concepts", "")) if q["type"] == "term" else ""
+
     body += f"""
 <details>
   <summary>정답 보기</summary>
   <div class="answer">
     <pre><code>{html.escape(str(q.get("answer", "")))}</code></pre>
     <p>{html.escape(q.get("explanation", ""))}</p>
+    {related}
     {note}
   </div>
 </details>
@@ -98,7 +119,7 @@ def collect_terms(days: list) -> list:
         for q in day["questions"]:
             if q["type"] != "term":
                 continue
-            key = str(q.get("answer", "")).strip().casefold()
+            key = re.sub(r"\s+", "", str(q.get("answer", ""))).casefold()
             if not key:
                 continue
             entry = grouped.setdefault(key, {
@@ -109,6 +130,7 @@ def collect_terms(days: list) -> list:
                 "date": day["date"],
                 "prompt": q.get("prompt", ""),
                 "explanation": q.get("explanation", ""),
+                "related_concepts": q.get("related_concepts", ""),
             })
     terms = list(grouped.values())
     terms.sort(key=lambda t: t["answer"])
@@ -120,11 +142,13 @@ def render_term_card(term: dict) -> str:
     count = len(term["occurrences"])
     count_badge = f'<span class="term-count">{count}번 출제</span>' if count > 1 else ""
     dates = ", ".join(o["date"] for o in term["occurrences"])
+    related = render_related_concepts(latest.get("related_concepts", ""))
     return f"""
 <div class="term-card">
   <div class="term-name">{html.escape(term["answer"])}{count_badge}</div>
   <div class="term-prompt">{html.escape(latest["prompt"])}</div>
   <p>{html.escape(latest["explanation"])}</p>
+  {related}
   <div class="term-dates">출제일: {html.escape(dates)}</div>
 </div>
 """

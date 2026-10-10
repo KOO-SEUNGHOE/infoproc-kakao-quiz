@@ -20,16 +20,21 @@ a { color: #6363f1; }
 .term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
 .term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
 .term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+.related { margin-top: 12px; padding: 10px 14px; background: #6363f10d; border-radius: 8px; }
+.related-title { font-size: .8rem; font-weight: 700; color: #6363f1; margin-bottom: 4px; }
+.related ul { margin: 4px 0 0; padding-left: 18px; }
+.related li { font-size: .9rem; margin: 2px 0; }
 </style>
 </head><body>
 <a href="index.html">← 전체 목록</a>
-<h1>지금까지 나온 용어 정리 (14개)</h1>
+<h1>지금까지 나온 용어 정리 (13개)</h1>
 <p>가나다 순으로 정렬돼 있어요. 여러 번 나온 용어는 그만큼 중요하다는 뜻이니 눈에 익혀두세요.</p>
 
 <div class="term-card">
   <div class="term-name">MITM(Man-In-The-Middle) 공격</div>
   <div class="term-prompt">공격자가 네트워크 패킷을 가로채어 송신자와 수신자 사이에서 몰래 통신 내용을 중계하며 도청하거나 변조하는 공격 기법을 영문 약어로 쓰시오.</div>
   <p>MITM 공격은 통신하는 두 당사자 사이에 공격자가 끼어들어 패킷을 가로채고 도청 또는 변조하는 공격이다. ARP 스푸핑 등의 기법이 이를 수행하는 대표적인 방법으로 사용된다.</p>
+  
   <div class="term-dates">출제일: 2026-10-08</div>
 </div>
 
@@ -38,6 +43,7 @@ a { color: #6363f1; }
   <div class="term-name">TCP</div>
   <div class="term-prompt">OSI 7계층 중 전송 계층(4계층)에서 동작하며, 연결 지향적이고 신뢰성 있는 데이터 전송을 보장하는 프로토콜은 무엇인가?</div>
   <p>TCP(Transmission Control Protocol)는 3-way handshake를 통해 연결을 설정하고, 순서 제어와 오류 검출 및 재전송을 통해 신뢰성 있는 데이터 전송을 보장한다. 이는 비연결형이며 신뢰성을 보장하지 않는 UDP와 대비된다.</p>
+  
   <div class="term-dates">출제일: 2026-09-29</div>
 </div>
 
@@ -46,6 +52,7 @@ a { color: #6363f1; }
   <div class="term-name">나선형 모델(Spiral Model)</div>
   <div class="term-prompt">요구사항 분석, 설계, 구현, 테스트 단계를 거치되 각 단계를 짧은 주기로 반복하면서 점진적으로 소프트웨어의 기능을 확장해 나가는 개발 모델로, 위험 관리를 중시하며 나선형 모델이라고도 불리는 이 모델의 이름은 무엇인가?</div>
   <p>나선형 모델은 보엠(Boehm)이 제안한 모델로, 계획 수립-위험 분석-개발-고객 평가의 사이클을 반복하며 점진적으로 완성도를 높여가는 소프트웨어 개발 생명주기 모델입니다. 위험을 지속적으로 분석하고 관리한다는 특징이 있습니다.</p>
+  
   <div class="term-dates">출제일: 2026-10-10</div>
 </div>
 
@@ -54,6 +61,7 @@ a { color: #6363f1; }
   <div class="term-name">라우팅 프로토콜(Routing Protocol)</div>
   <div class="term-prompt">네트워크 계층에서 동작하며, IP 주소를 기반으로 송신 호스트가 목적지까지의 최적 경로를 설정하는 데 사용되는 프로토콜을 통칭하는 용어를 쓰시오. (예: RIP, OSPF 등이 속하는 상위 개념)</div>
   <p>라우팅 프로토콜은 네트워크 계층(OSI 3계층)에서 라우터 간 경로 정보를 교환하여 최적의 패킷 전달 경로를 결정하는 데 사용되는 프로토콜의 총칭이다. RIP, OSPF, BGP 등이 대표적인 예이다.</p>
+  
   <div class="term-dates">출제일: 2026-10-05</div>
 </div>
 
@@ -62,6 +70,7 @@ a { color: #6363f1; }
   <div class="term-name">세션 하이재킹(Session Hijacking)<span class="term-count">2번 출제</span></div>
   <div class="term-prompt">공격자가 정상적인 사용자와 서버 사이의 통신 세션을 가로채어, 마치 정상 사용자인 것처럼 행세하며 통신에 끼어들어 정보를 탈취하거나 조작하는 공격 기법을 무엇이라 하는가?</div>
   <p>세션 하이재킹은 이미 인증을 거쳐 성립된 세션의 식별자(세션 ID)를 탈취하여 공격자가 정당한 사용자로 위장해 세션을 가로채는 공격입니다. TCP 세션 하이재킹이 대표적인 예입니다.</p>
+  
   <div class="term-dates">출제일: 2026-10-04, 2026-10-07</div>
 </div>
 
@@ -70,6 +79,7 @@ a { color: #6363f1; }
   <div class="term-name">스푸핑 (Spoofing)</div>
   <div class="term-prompt">공격자가 정상적인 사용자인 것처럼 가장하여 네트워크 상에서 송신자의 IP 주소나 MAC 주소 등을 위조해 상대방을 속이는 공격 기법을 무엇이라 하는가?</div>
   <p>스푸핑은 IP, ARP, DNS 등 다양한 계층에서 출발지 정보를 위조하여 정상 사용자로 위장하는 공격 기법이다. 대표적으로 IP 스푸핑, ARP 스푸핑, DNS 스푸핑 등이 있다.</p>
+  
   <div class="term-dates">출제일: 2026-10-09</div>
 </div>
 
@@ -78,6 +88,7 @@ a { color: #6363f1; }
   <div class="term-name">애자일(Agile)<span class="term-count">2번 출제</span></div>
   <div class="term-prompt">요구사항이 자주 변경되는 환경에 적합하며, 짧은 주기(스프린트)로 반복적인 개발과 고객 피드백을 중시하는 소프트웨어 개발 방법론을 무엇이라 하는가?</div>
   <p>애자일 방법론은 계획보다 변화에 대한 유연한 대응을 중시하며, 짧은 반복 주기(스프린트)를 통해 고객과 지속적으로 소통하며 점진적으로 소프트웨어를 완성해 나가는 개발 방법론이다. 대표적으로 스크럼(Scrum), XP(eXtreme Programming) 등이 있다.</p>
+  
   <div class="term-dates">출제일: 2026-10-01, 2026-10-06</div>
 </div>
 
@@ -86,6 +97,7 @@ a { color: #6363f1; }
   <div class="term-name">애자일(Agile) 방법론<span class="term-count">3번 출제</span></div>
   <div class="term-prompt">소프트웨어 개발 과정에서 요구사항 분석, 설계, 구현, 테스트 등의 전체 과정을 짧은 주기(이터레이션)로 반복하면서 점진적으로 완성도를 높여가는 개발 방법론으로, 고객과의 지속적인 협업과 변화에 대한 유연한 대응을 강조하는 방법론을 무엇이라 하는가?</div>
   <p>애자일 방법론은 폭포수 모델과 달리 짧은 반복 주기(스프린트)를 통해 소프트웨어를 점진적으로 개발하며, 고객 피드백을 빠르게 반영하고 변화하는 요구사항에 유연하게 대응하는 것을 핵심 가치로 한다. 대표적으로 스크럼(Scrum), XP(eXtreme Programming) 등이 있다.</p>
+  
   <div class="term-dates">출제일: 2026-09-28, 2026-09-30, 2026-10-03</div>
 </div>
 
@@ -94,6 +106,7 @@ a { color: #6363f1; }
   <div class="term-name">응집도(Cohesion)</div>
   <div class="term-prompt">모듈 내부의 처리 요소들이 서로 관련이 있는 정도를 나타내며, 값이 높을수록 모듈의 독립성과 재사용성이 좋아지는 소프트웨어 설계 품질 지표를 무엇이라 하는가?</div>
   <p>응집도는 모듈 내부 구성 요소들이 하나의 목적을 위해 얼마나 밀접하게 관련되어 있는지를 나타내는 척도이다. 응집도가 높을수록 모듈의 독립성이 강해지고 유지보수가 쉬워지므로 좋은 설계로 평가된다. 결합도와 반대로 응집도는 높을수록 바람직하다.</p>
+  
   <div class="term-dates">출제일: 2026-10-02</div>
 </div>
 
@@ -102,23 +115,17 @@ a { color: #6363f1; }
   <div class="term-name">정규화(Normalization)<span class="term-count">3번 출제</span></div>
   <div class="term-prompt">데이터베이스 설계에서 하나의 릴레이션(테이블)에 속성 간의 함수적 종속 관계를 분석하여, 데이터의 중복을 최소화하고 삽입/삭제/갱신 이상(anomaly)을 방지하기 위해 테이블을 분해해 나가는 과정을 무엇이라 하는가?</div>
   <p>정규화는 함수적 종속성을 기반으로 테이블을 여러 개로 분해하여 데이터 중복을 줄이고 이상 현상을 방지하는 데이터베이스 설계 기법이다. 1정규형부터 BCNF, 4정규형 등 단계적으로 진행된다.</p>
+  
   <div class="term-dates">출제일: 2026-10-01, 2026-10-02, 2026-10-03</div>
 </div>
 
 
 <div class="term-card">
-  <div class="term-name">제2정규형 (2NF)</div>
-  <div class="term-prompt">릴레이션에서 기본키가 아닌 속성이 기본키의 일부분에 종속되는 부분 함수 종속성을 제거하여 완전 함수 종속 관계로 만드는 정규화 단계를 무엇이라 하는가?</div>
-  <p>제1정규형을 만족하는 릴레이션에서 부분 함수 종속을 제거하면 제2정규형이 된다. 이는 기본키가 복합키일 때 일부 속성만으로 결정되는 종속성을 없애는 과정이다.</p>
-  <div class="term-dates">출제일: 2026-10-09</div>
-</div>
-
-
-<div class="term-card">
-  <div class="term-name">제2정규형(2NF)<span class="term-count">4번 출제</span></div>
+  <div class="term-name">제2정규형(2NF)<span class="term-count">5번 출제</span></div>
   <div class="term-prompt">릴레이션에서 기본키가 아닌 속성이 기본키에 완전 함수 종속되지 않고, 기본키의 일부 속성에만 종속되는 부분 함수 종속을 제거하여 만족시키는 정규형의 이름을 쓰시오.</div>
   <p>제2정규형은 제1정규형을 만족하면서 모든 비주요 속성이 기본키에 완전 함수 종속되도록 부분 함수 종속을 제거한 상태를 말합니다. 복합키 중 일부에만 종속되는 속성이 있으면 이를 분리하여 별도의 테이블로 만듭니다.</p>
-  <div class="term-dates">출제일: 2026-09-29, 2026-10-07, 2026-10-08, 2026-10-10</div>
+  
+  <div class="term-dates">출제일: 2026-09-29, 2026-10-07, 2026-10-08, 2026-10-09, 2026-10-10</div>
 </div>
 
 
@@ -126,6 +133,7 @@ a { color: #6363f1; }
   <div class="term-name">제3정규형(3NF)<span class="term-count">3번 출제</span></div>
   <div class="term-prompt">릴레이션에서 기본키가 아닌 모든 속성이 기본키에 대해 이행적 함수 종속을 가지지 않도록 제거하는 정규화 단계는 제 몇 정규형인가?</div>
   <p>제3정규형은 제2정규형을 만족하면서 기본키가 아닌 속성들이 기본키에 이행적 함수 종속(A→B, B→C이면 A→C)되지 않도록 분해하는 단계이다. 이를 통해 데이터 중복과 갱신 이상을 줄일 수 있다.</p>
+  
   <div class="term-dates">출제일: 2026-09-28, 2026-09-30, 2026-10-06</div>
 </div>
 
@@ -134,6 +142,7 @@ a { color: #6363f1; }
   <div class="term-name">팩토리 메서드 패턴(Factory Method Pattern)<span class="term-count">2번 출제</span></div>
   <div class="term-prompt">객체를 생성하는 과정을 캡슐화하여, 서브클래스에서 어떤 클래스의 인스턴스를 생성할지 결정하도록 하는 생성 패턴으로, &#x27;new&#x27; 연산자 직접 호출을 피하고 객체 생성을 하위 클래스에 위임하는 디자인 패턴의 이름을 쓰시오.</div>
   <p>팩토리 메서드 패턴은 객체 생성 로직을 서브클래스로 위임하여 클라이언트 코드가 구체적인 클래스를 알 필요 없게 만드는 생성 패턴이다. GoF 디자인 패턴 중 생성 패턴(Creational Pattern)에 속한다.</p>
+  
   <div class="term-dates">출제일: 2026-10-04, 2026-10-05</div>
 </div>
 

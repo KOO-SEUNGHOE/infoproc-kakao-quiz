@@ -20,6 +20,10 @@ a { color: #6363f1; }
 .term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
 .term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
 .term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+.related { margin-top: 12px; padding: 10px 14px; background: #6363f10d; border-radius: 8px; }
+.related-title { font-size: .8rem; font-weight: 700; color: #6363f1; margin-bottom: 4px; }
+.related ul { margin: 4px 0 0; padding-left: 18px; }
+.related li { font-size: .9rem; margin: 2px 0; }
 </style>
 </head><body>
 <a href="../index.html">← 전체 목록</a>
@@ -56,6 +60,7 @@ a { color: #6363f1; }
 total: 21</code></pre>
     <p>process 메서드는 짝수는 더하고 홀수는 빼는데, 짝수 합(2+4+6=12)에서 홀수 합(1+3+5=9)을 빼면 3이 아니라 12-9=3... 계산을 다시 확인하면 -1+2-3+4-5+6=3이 아니라 순서대로 계산 시 0-1=-1, -1+2=1, 1-3=-2, -2+4=2, 2-5=-3, -3+6=3이므로 result는 3이다. total은 배열 전체 합인 1+2+3+4+5+6=21이다.</p>
     
+    
   </div>
 </details>
 </div>
@@ -88,6 +93,7 @@ print(total)</code></pre>
 61</code></pre>
     <p>1은 홀수이므로 1*1=1, 2는 짝수이므로 factorial(2)=2, 3은 홀수이므로 3*3=9, 4는 짝수이므로 factorial(4)=24, 5는 홀수이므로 5*5=25가 되어 리스트는 [1, 2, 9, 24, 25]이다. 이들의 합은 1+2+9+24+25=61이다.</p>
     
+    
   </div>
 </details>
 </div>
@@ -119,6 +125,7 @@ A | 13000 | 3
 B | 9000 | 2</code></pre>
     <p>고객별로 amount를 합산하면 A는 5000+7000+1000=13000(3건), B는 3000+6000=9000(2건), C는 2000(1건)이다. HAVING 조건으로 합계가 5000 이상인 A와 B만 남고, total_amount 기준 내림차순으로 정렬하면 A, B 순서가 된다.</p>
     
+    
   </div>
 </details>
 </div>
@@ -128,6 +135,7 @@ B | 9000 | 2</code></pre>
   <div class="answer">
     <pre><code>제3정규형(3NF)</code></pre>
     <p>제3정규형은 제2정규형을 만족하면서 기본키가 아닌 모든 속성이 기본키에 대해 이행적 함수 종속이 되지 않도록 하는 정규화 단계이다. 즉, A→B, B→C인 경우 A→C의 이행적 종속을 제거하는 과정이다.</p>
+    
     <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
   </div>
 </details>
@@ -138,6 +146,7 @@ B | 9000 | 2</code></pre>
   <div class="answer">
     <pre><code>애자일(Agile) 방법론</code></pre>
     <p>애자일 방법론은 짧은 반복 주기(스프린트)를 통해 요구사항 변화에 유연하게 대응하며 점진적으로 소프트웨어를 개발하는 방식이다. 대표적으로 스크럼(Scrum)과 XP(eXtreme Programming) 기법이 있다.</p>
+    
     <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
   </div>
 </details>

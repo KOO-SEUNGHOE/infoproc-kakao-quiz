@@ -88,7 +88,17 @@ SYSTEM_PROMPT = """\
   수준으로 낸다.
 - 모든 문제에 대해 네가 계산한 답을 answer 필드에 채워라. 코드/SQL 문제의 answer는 실제 실행 결과와
   정확히 일치하도록 최선을 다해 계산하라. (실행 후 자동 검증되어 틀리면 실제 실행 결과로 교체된다.)
-- explanation은 한국어로 2~4문장, 왜 그 답이 나오는지 핵심 논리를 설명한다.
+- explanation은 상세한 해설로 작성한다 (한국어, 대략 4~8문장).
+  - type=code: 변수의 초기값부터 시작해서 반복/분기마다 값이 어떻게 바뀌는지 단계별로 추적하며
+    설명한다. 표나 번호 매기기(①②③ 등) 없이 자연스러운 문장으로, 하지만 각 단계를 빠짐없이 짚는다.
+  - type=sql: 테이블의 각 행이 WHERE/JOIN/GROUP BY를 거치며 어떻게 필터링·결합·집계되는지
+    단계별로 설명하고, 최종 결과 행이 왜 그 값인지 짚는다.
+  - type=term: 정의를 정확히 설명하고, 실기에서 헷갈리기 쉬운 포인트나 다른 개념과의 차이를
+    짚어준다.
+- type=term 문제에는 related_concepts 필드도 채운다. 이 용어와 "세트로" 같이 외우면 좋은 연관
+  개념 3~5가지를, 각 줄에 "개념명: 한 줄 설명" 형식으로 줄바꿈(\n)으로 구분해 적는다.
+  (예: "1NF: 모든 속성이 원자값을 가짐\n2NF: 부분 함수 종속 제거\nBCNF: 모든 결정자가 후보키")
+  단순 동의어 나열이 아니라, 시험에서 비교되거나 함께 묻는 상위/하위/유사/대조 개념으로 고른다.
 """
 
 QUESTION_TOOL = {
@@ -111,6 +121,10 @@ QUESTION_TOOL = {
                         "query_sql": {"type": "string", "description": "type=sql일 때만"},
                         "answer": {"type": "string"},
                         "explanation": {"type": "string"},
+                        "related_concepts": {
+                            "type": "string",
+                            "description": "type=term일 때만. 함께 암기할 연관 개념 3~5개, 줄바꿈으로 구분",
+                        },
                     },
                     "required": ["type", "title", "prompt", "answer", "explanation"],
                 },

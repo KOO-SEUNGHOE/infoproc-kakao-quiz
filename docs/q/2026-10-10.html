@@ -20,6 +20,10 @@ a { color: #6363f1; }
 .term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
 .term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
 .term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+.related { margin-top: 12px; padding: 10px 14px; background: #6363f10d; border-radius: 8px; }
+.related-title { font-size: .8rem; font-weight: 700; color: #6363f1; margin-bottom: 4px; }
+.related ul { margin: 4px 0 0; padding-left: 18px; }
+.related li { font-size: .9rem; margin: 2px 0; }
 </style>
 </head><body>
 <a href="../index.html">← 전체 목록</a>
@@ -56,6 +60,7 @@ a { color: #6363f1; }
 sum=30</code></pre>
     <p>인덱스 0,2,4는 modify 호출로 값이 2배가 되고 (값*2 + 인덱스)가 sum에 더해집니다: i=0 -&gt; arr[0]=2, 반환 2+0=2; i=2 -&gt; arr[2]=6, 반환 6+2=8; i=4 -&gt; arr[4]=10, 반환 10+4=14. 홀수 인덱스 1,3은 원래 값 2,4가 그대로 더해집니다. 따라서 sum=2+2+8+4+14=... 다시 계산하면 i=0:sum+=2(총2), i=1:sum+=2(총4), i=2:sum+=8(총12), i=3:sum+=4(총16), i=4:sum+=14(총30)이 아니라 실제로는 modify 반환값만 더해지므로 2+2+8+4+14=30이 아니라, 코드대로 sum에는 각 반복에서 한 번씩만 더해지므로 결과는 2,2,8,4,14를 모두 더한 30이 맞지만 재검산 결과 실제 정답은 2+2+8+4+14=30이 아니라 19로 수정함: i=0 반환 2, i=1 값 2, i=2 반환 8, i=3 값 4, i=4 반환 14 =&gt; 2+2+8+4+14=30. 배열은 2 2 6 4 10으로 출력되고 sum은 30입니다.</p>
     
+    
   </div>
 </details>
 </div>
@@ -89,6 +94,7 @@ int main(void) {
 total=170</code></pre>
     <p>update 함수에서 각 원소에 i*2를 더합니다: arr[0]=10+0=10, arr[1]=20+2=22, arr[2]=30+4=34, arr[3]=40+6=46, arr[4]=50+8=58. 이 값들의 합은 10+22+34+46+58=170입니다.</p>
     
+    
   </div>
 </details>
 </div>
@@ -121,6 +127,7 @@ ORDER BY avg_sal DESC;</code></pre>
 영업 | 2 | 3250.0</code></pre>
     <p>부서별로 그룹화한 후 사원 수가 2명 이상인 부서만 필터링하면 &#x27;총무&#x27;(1명)는 제외됩니다. 개발 부서는 평균 (4000+4500+5000)/3=4500, 영업 부서는 (3000+3500)/2=3250입니다. 평균 급여 내림차순으로 정렬하면 개발이 먼저, 영업이 다음에 출력됩니다.</p>
     
+    
   </div>
 </details>
 </div>
@@ -130,6 +137,7 @@ ORDER BY avg_sal DESC;</code></pre>
   <div class="answer">
     <pre><code>나선형 모델(Spiral Model)</code></pre>
     <p>나선형 모델은 보엠(Boehm)이 제안한 모델로, 계획 수립-위험 분석-개발-고객 평가의 사이클을 반복하며 점진적으로 완성도를 높여가는 소프트웨어 개발 생명주기 모델입니다. 위험을 지속적으로 분석하고 관리한다는 특징이 있습니다.</p>
+    
     <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
   </div>
 </details>
@@ -140,6 +148,7 @@ ORDER BY avg_sal DESC;</code></pre>
   <div class="answer">
     <pre><code>제2정규형(2NF)</code></pre>
     <p>제2정규형은 제1정규형을 만족하면서 모든 비주요 속성이 기본키에 완전 함수 종속되도록 부분 함수 종속을 제거한 상태를 말합니다. 복합키 중 일부에만 종속되는 속성이 있으면 이를 분리하여 별도의 테이블로 만듭니다.</p>
+    
     <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
   </div>
 </details>

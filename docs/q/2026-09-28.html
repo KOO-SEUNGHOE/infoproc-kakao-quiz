@@ -20,6 +20,10 @@ a { color: #6363f1; }
 .term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
 .term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
 .term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+.related { margin-top: 12px; padding: 10px 14px; background: #6363f10d; border-radius: 8px; }
+.related-title { font-size: .8rem; font-weight: 700; color: #6363f1; margin-bottom: 4px; }
+.related ul { margin: 4px 0 0; padding-left: 18px; }
+.related li { font-size: .9rem; margin: 2px 0; }
 </style>
 </head><body>
 <a href="../index.html">← 전체 목록</a>
@@ -56,6 +60,7 @@ a { color: #6363f1; }
 sum = 24</code></pre>
     <p>인덱스 0,2,4는 짝수이므로 modify가 호출되어 배열 값이 2배(1→2, 3→6, 5→10)로 바뀌고 그 반환값이 sum에 더해진다. 인덱스 1,3은 홀수이므로 원래 값 2,4가 그대로 더해진다. 최종 배열은 2 2 6 4 10이고 sum = 2+2+6+4+10 = 24이다.</p>
     
+    
   </div>
 </details>
 </div>
@@ -89,6 +94,7 @@ int main(void) {
 total = 145</code></pre>
     <p>i가 0,1일 때는 각 원소에 5를 더하여 10→15, 20→25가 되고, i가 2,3,4일 때는 5를 빼서 30→25, 40→35, 50→45가 된다. total은 이 변경된 값들의 누적 합으로 15+25+25+35+45 = 145이다.</p>
     
+    
   </div>
 </details>
 </div>
@@ -121,6 +127,7 @@ B | 2 | 5000
 A | 3 | 5000</code></pre>
     <p>고객별로 그룹화하면 A는 1000+1500+2500=5000(3건), B는 2000+3000=5000(2건), C는 500+700=1200(2건)이다. HAVING 조건으로 합계가 3000 이상인 A와 B만 남고, total이 같으므로 order_id 순서상 먼저 삽입된 customer 순서(A, B)가 결과에 반영되지만 ORDER BY DESC에서 동점이면 원래 정렬 순서(내부 처리 순서, 보통 GROUP BY 결과 순서인 A, B)가 유지된다.</p>
     
+    
   </div>
 </details>
 </div>
@@ -130,6 +137,7 @@ A | 3 | 5000</code></pre>
   <div class="answer">
     <pre><code>제3정규형(3NF)</code></pre>
     <p>제2정규형을 만족하는 릴레이션에서 기본키가 아닌 속성이 다른 기본키가 아닌 속성에 종속되는 이행적 함수 종속을 제거하면 제3정규형이 된다. 이는 데이터 중복과 갱신 이상을 줄이기 위한 정규화 과정의 세 번째 단계이다.</p>
+    
     <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
   </div>
 </details>
@@ -140,6 +148,7 @@ A | 3 | 5000</code></pre>
   <div class="answer">
     <pre><code>애자일(Agile) 방법론</code></pre>
     <p>애자일 방법론은 짧은 주기의 반복(iteration)을 통해 점진적으로 소프트웨어를 개발하며, 고객과의 지속적인 협업과 변화에 대한 유연한 대응을 강조한다. 스크럼(Scrum), XP(eXtreme Programming) 등이 대표적인 애자일 방법론에 속한다.</p>
+    
     <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
   </div>
 </details>

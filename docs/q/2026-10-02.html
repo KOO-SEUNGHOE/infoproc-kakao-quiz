@@ -20,6 +20,10 @@ a { color: #6363f1; }
 .term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
 .term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
 .term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+.related { margin-top: 12px; padding: 10px 14px; background: #6363f10d; border-radius: 8px; }
+.related-title { font-size: .8rem; font-weight: 700; color: #6363f1; margin-bottom: 4px; }
+.related ul { margin: 4px 0 0; padding-left: 18px; }
+.related li { font-size: .9rem; margin: 2px 0; }
 </style>
 </head><body>
 <a href="../index.html">← 전체 목록</a>
@@ -47,6 +51,7 @@ print(total)</code></pre>
 [2, 2, 3, 100]
 104</code></pre>
     <p>리스트는 가변 객체이므로 함수 내부에서 append와 인덱스 변경을 하면 원본 numbers도 동일하게 변경되어 numbers와 result는 같은 객체 [2, 2, 3, 100]을 출력한다. 이후 짝수(2, 2, 100)만 더하면 2+2+100=104가 된다.</p>
+    
     
   </div>
 </details>
@@ -77,6 +82,7 @@ int main(void) {
     <pre><code>30
 60</code></pre>
     <p>i가 0,2,4일 때는 더하고 1,3일 때는 빼므로 10-20+30-40+50=30... 다시 계산하면 10(더함)-20(뺌)+30(더함)-40(뺌)+50(더함)=30. 실제 계산: 10-20+30-40+50 = 30이 아니라 순서대로 10-20=-10, -10+30=20, 20-40=-20, -20+50=30이므로 sum은 30이다. *p는 arr[0]=10, *(p+4)는 arr[4]=50이므로 합은 60이다.</p>
+    
     
   </div>
 </details>
@@ -110,6 +116,7 @@ ORDER BY total_salary DESC;</code></pre>
 영업 | 2 | 6500</code></pre>
     <p>부서별로 그룹화한 후 인원이 2명 이상인 부서만 필터링하면 총무(1명)는 제외된다. 개발은 3명에 급여 합계 13500, 영업은 2명에 급여 합계 6500이며, 총 급여 기준 내림차순 정렬이므로 개발이 먼저 나온다.</p>
     
+    
   </div>
 </details>
 </div>
@@ -119,6 +126,7 @@ ORDER BY total_salary DESC;</code></pre>
   <div class="answer">
     <pre><code>응집도(Cohesion)</code></pre>
     <p>응집도는 모듈 내부 구성 요소들이 하나의 목적을 위해 얼마나 밀접하게 관련되어 있는지를 나타내는 척도이다. 응집도가 높을수록 모듈의 독립성이 강해지고 유지보수가 쉬워지므로 좋은 설계로 평가된다. 결합도와 반대로 응집도는 높을수록 바람직하다.</p>
+    
     <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
   </div>
 </details>
@@ -129,6 +137,7 @@ ORDER BY total_salary DESC;</code></pre>
   <div class="answer">
     <pre><code>정규화(Normalization)</code></pre>
     <p>정규화는 함수적 종속성을 분석하여 릴레이션을 여러 개의 작은 릴레이션으로 분해함으로써 데이터 중복을 줄이고 삽입, 삭제, 갱신 시 발생할 수 있는 이상 현상을 방지하는 과정이다. 제1정규형부터 보이스-코드 정규형 등 단계적으로 진행된다.</p>
+    
     <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
   </div>
 </details>

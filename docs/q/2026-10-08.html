@@ -20,6 +20,10 @@ a { color: #6363f1; }
 .term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
 .term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
 .term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+.related { margin-top: 12px; padding: 10px 14px; background: #6363f10d; border-radius: 8px; }
+.related-title { font-size: .8rem; font-weight: 700; color: #6363f1; margin-bottom: 4px; }
+.related ul { margin: 4px 0 0; padding-left: 18px; }
+.related li { font-size: .9rem; margin: 2px 0; }
 </style>
 </head><body>
 <a href="../index.html">← 전체 목록</a>
@@ -58,6 +62,7 @@ a { color: #6363f1; }
 count = 4</code></pre>
     <p>배열 {1,2,3,4,5,6}에서 짝수(2,4,6)는 더하고 홀수(1,3,5)는 뺀다. 짝수 합은 12, 홀수 합은 9이므로 12-9=3이 result이다. 2보다 큰 원소는 3,4,5,6으로 총 4개이므로 count는 4이다.</p>
     
+    
   </div>
 </details>
 </div>
@@ -87,6 +92,7 @@ print(filtered)</code></pre>
 52
 [6, 6, 12, 18]</code></pre>
     <p>각 원소에 대해 3의 배수면 2배, 아니면 1을 더한다. 1→2, 2→3, 3→6, 4→5, 5→6, 6→12, 9→18이 되어 [2,3,6,5,6,12,18]이 나온다. 이 리스트의 합은 2+3+6+5+6+12+18=52이며, 5보다 큰 값만 필터링하면 [6,6,12,18]이다.</p>
+    
     
   </div>
 </details>
@@ -120,6 +126,7 @@ ORDER BY avg_sal DESC;</code></pre>
 영업 | 2 | 3250.0</code></pre>
     <p>인사 부서는 직원이 1명이므로 HAVING COUNT(*) &gt;= 2 조건에 의해 제외된다. 개발 부서는 3명(4000,4500,5000)으로 평균 4500, 영업은 2명(3000,3500)으로 평균 3250이다. 평균 급여 내림차순으로 정렬하면 개발이 먼저, 영업이 다음에 나온다.</p>
     
+    
   </div>
 </details>
 </div>
@@ -129,6 +136,7 @@ ORDER BY avg_sal DESC;</code></pre>
   <div class="answer">
     <pre><code>제2정규형(2NF)</code></pre>
     <p>제1정규형을 만족한 릴레이션에서 기본키의 일부 속성에만 종속되는 부분 함수 종속을 제거하면 제2정규형이 된다. 이는 복합키를 가진 테이블에서 데이터 중복과 이상현상을 줄이기 위한 단계이다.</p>
+    
     <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
   </div>
 </details>
@@ -139,6 +147,7 @@ ORDER BY avg_sal DESC;</code></pre>
   <div class="answer">
     <pre><code>MITM(Man-In-The-Middle) 공격</code></pre>
     <p>MITM 공격은 통신하는 두 당사자 사이에 공격자가 끼어들어 패킷을 가로채고 도청 또는 변조하는 공격이다. ARP 스푸핑 등의 기법이 이를 수행하는 대표적인 방법으로 사용된다.</p>
+    
     <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
   </div>
 </details>
