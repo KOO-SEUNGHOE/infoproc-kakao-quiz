@@ -1,4 +1,5 @@
 """코드/SQL 문제의 정답을 실제 실행 결과로 검증한다."""
+import ast
 import re
 import shutil
 import sqlite3
@@ -12,6 +13,40 @@ RUN_TIMEOUT = 10
 
 class VerificationError(Exception):
     pass
+
+
+def format_python(code: str) -> str:
+    """LLM이 코드를 한 줄로 압축해 내보내는 경우가 있어, ast로 재구성해 표준 들여쓰기로 되돌린다."""
+    try:
+        return ast.unparse(ast.parse(code))
+    except SyntaxError:
+        return code
+
+
+def format_with_clang_format(code: str, file_ext: str) -> str:
+    """clang-format으로 C/Java 코드를 표준 들여쓰기 형태로 재포맷한다.
+    clang-format이 없으면(로컬 등) 원본을 그대로 돌려준다 — 포맷은 못 하지만 실행/검증은 그대로 된다."""
+    if not shutil.which("clang-format"):
+        return code
+    try:
+        result = subprocess.run(
+            ["clang-format", f"--assume-filename=x.{file_ext}"],
+            input=code, capture_output=True, text=True, timeout=RUN_TIMEOUT,
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            return result.stdout
+    except subprocess.TimeoutExpired:
+        pass
+    return code
+
+
+def format_code(language: str, code: str) -> str:
+    lang = language.lower()
+    if lang == "python":
+        return format_python(code)
+    if lang in ("c", "java"):
+        return format_with_clang_format(code, lang)
+    return code
 
 
 def _run(cmd, cwd=None):
@@ -93,6 +128,7 @@ def verify_question(question: dict) -> dict:
     qtype = question.get("type")
     try:
         if qtype == "code":
+            question["code"] = format_code(question["language"], question["code"])
             actual = run_code(question["language"], question["code"])
         elif qtype == "sql":
             actual = run_sql(question["schema_sql"], question["query_sql"])
