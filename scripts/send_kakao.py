@@ -14,6 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import requests
 
+import build_site
 from update_github_secret import update_secret
 
 TOKEN_URL = "https://kauth.kakao.com/oauth/token"
@@ -33,12 +34,12 @@ def refresh_access_token(rest_api_key: str, refresh_token_value: str, client_sec
     return resp.json()
 
 
-def send_memo(access_token: str, text: str, link_url: str) -> dict:
+def send_memo(access_token: str, text: str, link_url: str, button_title: str = "문제 풀기") -> dict:
     template_object = {
         "object_type": "text",
         "text": text,
         "link": {"web_url": link_url, "mobile_web_url": link_url},
-        "button_title": "문제 풀기",
+        "button_title": button_title,
     }
     resp = requests.post(
         SEND_URL,
@@ -59,6 +60,12 @@ def build_summary(day: dict) -> str:
     return f"[오늘의 정보처리기사 실기 문제]\n{day['date']} · {len(day['questions'])}문제 ({summary})\n지금 풀어보세요!"
 
 
+def build_glossary_summary() -> str:
+    days = [json.loads(p.read_text(encoding="utf-8")) for p in sorted(build_site.DATA_DIR.glob("*.json"))]
+    terms = build_site.collect_terms(days)
+    return f"[암기노트]\n지금까지 모은 용어 {len(terms)}개\n반복해서 나온 용어일수록 중요하다는 뜻이에요. 오가며 한 번씩 훑어보세요."
+
+
 def main():
     today = sys.argv[1] if len(sys.argv) > 1 else date.today().isoformat()
     day = json.loads(Path(f"data/questions/{today}.json").read_text(encoding="utf-8"))
@@ -73,7 +80,11 @@ def main():
 
     link_url = f"{pages_base_url}/q/{day['date']}.html"
     send_memo(access_token, build_summary(day), link_url)
-    print("카카오톡 발송 완료")
+    print("카카오톡 발송 완료 (오늘의 문제)")
+
+    glossary_url = f"{pages_base_url}/glossary.html"
+    send_memo(access_token, build_glossary_summary(), glossary_url, button_title="암기노트 보기")
+    print("카카오톡 발송 완료 (암기노트)")
 
     new_refresh_token = tokens.get("refresh_token")
     if new_refresh_token and new_refresh_token != current_refresh_token:
