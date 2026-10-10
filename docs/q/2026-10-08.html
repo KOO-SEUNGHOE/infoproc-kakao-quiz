@@ -29,31 +29,31 @@ a { color: #6363f1; }
 <a href="../index.html">← 전체 목록</a>
 <h1>2026-10-08 실기 문제</h1>
 <div class="question"><h3>Q1</h3><div class="badge">코드 출력 · Java</div><p>다음 Java 프로그램의 실행 결과를 예측하시오.</p><pre><code>public class Main {
-    static int process(int[] arr) {
-        int sum = 0;
-        for (int i = 0; i &lt; arr.length; i++) {
-            if (arr[i] % 2 == 0) {
-                sum += arr[i];
-            } else {
-                sum -= arr[i];
-            }
-        }
-        return sum;
+  static int process(int[] arr) {
+    int sum = 0;
+    for (int i = 0; i &lt; arr.length; i++) {
+      if (arr[i] % 2 == 0) {
+        sum += arr[i];
+      } else {
+        sum -= arr[i];
+      }
     }
+    return sum;
+  }
 
-    public static void main(String[] args) {
-        int[] numbers = {1, 2, 3, 4, 5, 6};
-        int result = process(numbers);
-        System.out.println(&quot;result = &quot; + result);
+  public static void main(String[] args) {
+    int[] numbers = {1, 2, 3, 4, 5, 6};
+    int result = process(numbers);
+    System.out.println(&quot;result = &quot; + result);
 
-        int count = 0;
-        for (int n : numbers) {
-            if (n &gt; 2) {
-                count++;
-            }
-        }
-        System.out.println(&quot;count = &quot; + count);
+    int count = 0;
+    for (int n : numbers) {
+      if (n &gt; 2) {
+        count++;
+      }
     }
+    System.out.println(&quot;count = &quot; + count);
+  }
 }</code></pre>
 <details>
   <summary>정답 보기</summary>
@@ -74,15 +74,11 @@ count = 4</code></pre>
         else:
             result.append(x + 1)
     return result
-
-
 data = [1, 2, 3, 4, 5, 6, 9]
 output = transform(data)
 print(output)
-
 total = sum(output)
 print(total)
-
 filtered = [v for v in output if v &gt; 5]
 print(filtered)</code></pre>
 <details>

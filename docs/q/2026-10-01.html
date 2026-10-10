@@ -29,25 +29,25 @@ a { color: #6363f1; }
 <a href="../index.html">← 전체 목록</a>
 <h1>2026-10-01 실기 문제</h1>
 <div class="question"><h3>Q1</h3><div class="badge">코드 출력 · Java</div><p>다음 Java 프로그램을 실행했을 때 출력되는 결과를 쓰시오.</p><pre><code>public class Main {
-    static int modify(int[] arr, int idx) {
-        arr[idx] = arr[idx] * 2;
-        return arr[idx] + idx;
+  static int modify(int[] arr, int idx) {
+    arr[idx] = arr[idx] * 2;
+    return arr[idx] + idx;
+  }
+
+  public static void main(String[] args) {
+    int[] numbers = {1, 2, 3, 4, 5};
+    int sum = 0;
+
+    for (int i = 0; i &lt; numbers.length; i++) {
+      sum += modify(numbers, i);
     }
 
-    public static void main(String[] args) {
-        int[] numbers = {1, 2, 3, 4, 5};
-        int sum = 0;
-
-        for (int i = 0; i &lt; numbers.length; i++) {
-            sum += modify(numbers, i);
-        }
-
-        for (int i = 0; i &lt; numbers.length; i++) {
-            System.out.print(numbers[i] + &quot; &quot;);
-        }
-        System.out.println();
-        System.out.println(&quot;sum=&quot; + sum);
+    for (int i = 0; i &lt; numbers.length; i++) {
+      System.out.print(numbers[i] + &quot; &quot;);
     }
+    System.out.println();
+    System.out.println(&quot;sum=&quot; + sum);
+  }
 }</code></pre>
 <details>
   <summary>정답 보기</summary>
@@ -63,27 +63,27 @@ sum=40</code></pre>
 <div class="question"><h3>Q2</h3><div class="badge">코드 출력 · C</div><p>다음 C 프로그램을 실행했을 때 출력되는 결과를 쓰시오.</p><pre><code>#include &lt;stdio.h&gt;
 
 int calc(int *p, int n) {
-    int result = 0;
-    for (int i = 0; i &lt; n; i++) {
-        result += *(p + i);
-        if (i % 2 == 0) {
-            *(p + i) = *(p + i) + 10;
-        }
+  int result = 0;
+  for (int i = 0; i &lt; n; i++) {
+    result += *(p + i);
+    if (i % 2 == 0) {
+      *(p + i) = *(p + i) + 10;
     }
-    return result;
+  }
+  return result;
 }
 
 int main() {
-    int arr[5] = {1, 2, 3, 4, 5};
-    int total = calc(arr, 5);
+  int arr[5] = {1, 2, 3, 4, 5};
+  int total = calc(arr, 5);
 
-    for (int i = 0; i &lt; 5; i++) {
-        printf(&quot;%d &quot;, arr[i]);
-    }
-    printf(&quot;\n&quot;);
-    printf(&quot;total=%d\n&quot;, total);
+  for (int i = 0; i &lt; 5; i++) {
+    printf(&quot;%d &quot;, arr[i]);
+  }
+  printf(&quot;\n&quot;);
+  printf(&quot;total=%d\n&quot;, total);
 
-    return 0;
+  return 0;
 }</code></pre>
 <details>
   <summary>정답 보기</summary>

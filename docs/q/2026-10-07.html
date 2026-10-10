@@ -36,14 +36,11 @@ a { color: #6363f1; }
         else:
             result.append(item - value)
     return result
-
-
 numbers = [1, 2, 3, 4, 5]
 updated = modify(numbers, 10)
 total = 0
 for n in updated:
     total += n
-
 print(updated)
 print(total)</code></pre>
 <details>
@@ -58,28 +55,28 @@ print(total)</code></pre>
 </details>
 </div>
 <div class="question"><h3>Q2</h3><div class="badge">코드 출력 · Java</div><p>다음 Java 코드의 실행 결과를 예측하시오.</p><pre><code>public class Main {
-    static int process(int[] arr, int idx) {
-        if (idx &gt;= arr.length) {
-            return 0;
-        }
-        int current = arr[idx];
-        if (current % 3 == 0) {
-            arr[idx] = current * 2;
-        } else {
-            arr[idx] = current + 1;
-        }
-        return arr[idx] + process(arr, idx + 1);
+  static int process(int[] arr, int idx) {
+    if (idx &gt;= arr.length) {
+      return 0;
     }
+    int current = arr[idx];
+    if (current % 3 == 0) {
+      arr[idx] = current * 2;
+    } else {
+      arr[idx] = current + 1;
+    }
+    return arr[idx] + process(arr, idx + 1);
+  }
 
-    public static void main(String[] args) {
-        int[] numbers = {1, 2, 3, 4, 5, 6};
-        int sum = process(numbers, 0);
-        for (int i = 0; i &lt; numbers.length; i++) {
-            System.out.print(numbers[i] + &quot; &quot;);
-        }
-        System.out.println();
-        System.out.println(sum);
+  public static void main(String[] args) {
+    int[] numbers = {1, 2, 3, 4, 5, 6};
+    int sum = process(numbers, 0);
+    for (int i = 0; i &lt; numbers.length; i++) {
+      System.out.print(numbers[i] + &quot; &quot;);
     }
+    System.out.println();
+    System.out.println(sum);
+  }
 }</code></pre>
 <details>
   <summary>정답 보기</summary>

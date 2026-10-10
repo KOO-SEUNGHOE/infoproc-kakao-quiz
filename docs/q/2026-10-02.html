@@ -32,13 +32,10 @@ a { color: #6363f1; }
     lst.append(100)
     lst[0] = lst[0] * 2
     return lst
-
-
 numbers = [1, 2, 3]
 result = modify_list(numbers)
 print(numbers)
 print(result)
-
 total = 0
 for n in result:
     if n % 2 == 0:
@@ -59,22 +56,22 @@ print(total)</code></pre>
 <div class="question"><h3>Q2</h3><div class="badge">코드 출력 · C</div><p>다음 C 코드를 실행했을 때 출력되는 결과를 쓰시오.</p><pre><code>#include &lt;stdio.h&gt;
 
 int main(void) {
-    int arr[5] = {10, 20, 30, 40, 50};
-    int *p = arr;
-    int sum = 0;
+  int arr[5] = {10, 20, 30, 40, 50};
+  int *p = arr;
+  int sum = 0;
 
-    for (int i = 0; i &lt; 5; i++) {
-        if (i % 2 == 0) {
-            sum += *(p + i);
-        } else {
-            sum -= *(p + i);
-        }
+  for (int i = 0; i &lt; 5; i++) {
+    if (i % 2 == 0) {
+      sum += *(p + i);
+    } else {
+      sum -= *(p + i);
     }
+  }
 
-    printf(&quot;%d\n&quot;, sum);
-    printf(&quot;%d\n&quot;, *p + *(p + 4));
+  printf(&quot;%d\n&quot;, sum);
+  printf(&quot;%d\n&quot;, *p + *(p + 4));
 
-    return 0;
+  return 0;
 }</code></pre>
 <details>
   <summary>정답 보기</summary>

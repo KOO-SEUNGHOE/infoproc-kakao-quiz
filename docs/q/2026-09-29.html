@@ -29,21 +29,21 @@ a { color: #6363f1; }
 <a href="../index.html">← 전체 목록</a>
 <h1>2026-09-29 실기 문제</h1>
 <div class="question"><h3>Q1</h3><div class="badge">코드 출력 · Java</div><p>다음 Java 프로그램의 실행 결과를 예측하시오.</p><pre><code>public class Main {
-    public static void main(String[] args) {
-        int[] arr = {3, 6, 9, 12, 15};
-        int sum = 0;
-        int count = 0;
+  public static void main(String[] args) {
+    int[] arr = {3, 6, 9, 12, 15};
+    int sum = 0;
+    int count = 0;
 
-        for (int i = 0; i &lt; arr.length; i++) {
-            if (arr[i] % 3 == 0 &amp;&amp; arr[i] % 2 == 0) {
-                sum += arr[i];
-                count++;
-            }
-        }
-
-        System.out.println(&quot;sum=&quot; + sum);
-        System.out.println(&quot;count=&quot; + count);
+    for (int i = 0; i &lt; arr.length; i++) {
+      if (arr[i] % 3 == 0 &amp;&amp; arr[i] % 2 == 0) {
+        sum += arr[i];
+        count++;
+      }
     }
+
+    System.out.println(&quot;sum=&quot; + sum);
+    System.out.println(&quot;count=&quot; + count);
+  }
 }</code></pre>
 <details>
   <summary>정답 보기</summary>
@@ -64,12 +64,9 @@ count=2</code></pre>
         else:
             result.append(n + 10)
     return result
-
-
 data = [1, 2, 3, 4, 5, 6]
 processed = process(data)
 total = sum(processed)
-
 print(processed)
 print(total)</code></pre>
 <details>
