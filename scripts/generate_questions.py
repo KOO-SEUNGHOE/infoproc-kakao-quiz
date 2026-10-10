@@ -165,20 +165,38 @@ def build_user_prompt(counts: dict, code_languages: list) -> str:
     return "\n".join(parts)
 
 
+REQUIRED_FIELDS_BY_TYPE = {
+    "code": {"language", "title", "prompt", "code", "answer", "explanation"},
+    "sql": {"title", "prompt", "schema_sql", "query_sql", "answer", "explanation"},
+    "term": {"title", "prompt", "answer", "explanation"},
+}
+
+
 def generate(num_questions: int, model: str) -> list:
     counts = plan_counts(num_questions)
     code_languages = random.sample(CODE_LANGUAGES, k=min(counts["code"], len(CODE_LANGUAGES)))
     client = anthropic.Anthropic()
     message = client.messages.create(
         model=model,
-        max_tokens=8000,
+        max_tokens=12000,
         system=SYSTEM_PROMPT,
         tools=[QUESTION_TOOL],
         tool_choice={"type": "tool", "name": "emit_questions"},
         messages=[{"role": "user", "content": build_user_prompt(counts, code_languages)}],
     )
+    if message.stop_reason == "max_tokens":
+        print("경고: 응답이 max_tokens에 걸려 잘렸을 수 있습니다.", file=sys.stderr)
     tool_use = next(b for b in message.content if b.type == "tool_use")
-    return tool_use.input["questions"]
+    questions = tool_use.input["questions"]
+
+    valid = []
+    for q in questions:
+        required = REQUIRED_FIELDS_BY_TYPE.get(q.get("type"))
+        if required is None or not required.issubset(q.keys()):
+            print(f"경고: 필수 필드가 빠진 문제를 건너뜁니다: {q}", file=sys.stderr)
+            continue
+        valid.append(q)
+    return valid
 
 
 def main():

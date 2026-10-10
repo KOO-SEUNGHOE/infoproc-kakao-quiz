@@ -48,13 +48,13 @@ def render_related_concepts(text: str) -> str:
 
 
 def render_question(q: dict) -> str:
-    label = TYPE_LABEL.get(q["type"], q["type"])
+    label = TYPE_LABEL.get(q.get("type"), q.get("type", "?"))
     lang = f' · {q["language"]}' if q.get("language") else ""
     body = f'<div class="badge">{label}{lang}</div>'
-    body += f'<p>{html.escape(q["prompt"])}</p>'
-    if q["type"] == "code":
+    body += f'<p>{html.escape(q.get("prompt", "(문제 내용 누락)"))}</p>'
+    if q.get("type") == "code":
         body += f'<pre><code>{html.escape(q.get("code", ""))}</code></pre>'
-    elif q["type"] == "sql":
+    elif q.get("type") == "sql":
         sql_text = f'-- schema\n{q.get("schema_sql", "")}\n\n-- query\n{q.get("query_sql", "")}'
         body += f"<pre><code>{html.escape(sql_text)}</code></pre>"
 
@@ -62,7 +62,7 @@ def render_question(q: dict) -> str:
     if not q.get("verified"):
         note = '<div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>'
 
-    related = render_related_concepts(q.get("related_concepts", "")) if q["type"] == "term" else ""
+    related = render_related_concepts(q.get("related_concepts", "")) if q.get("type") == "term" else ""
 
     body += f"""
 <details>
@@ -75,7 +75,7 @@ def render_question(q: dict) -> str:
   </div>
 </details>
 """
-    return f'<div class="question"><h3>Q{q["id"]}</h3>{body}</div>'
+    return f'<div class="question"><h3>Q{q.get("id", "?")}</h3>{body}</div>'
 
 
 def render_day(day: dict) -> str:
@@ -117,7 +117,7 @@ def collect_terms(days: list) -> list:
     grouped = {}
     for day in days:
         for q in day["questions"]:
-            if q["type"] != "term":
+            if q.get("type") != "term":
                 continue
             key = re.sub(r"\s+", "", str(q.get("answer", ""))).casefold()
             if not key:
