@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보처리기사 실기 - 2026-10-11</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "Malgun Gothic", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+h1 { font-size: 1.4rem; }
+.question { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 16px 0; }
+.badge { display: inline-block; font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: #6363f11a; color: #6363f1; margin-bottom: 8px; }
+pre { background: #80808014; padding: 12px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; }
+summary { cursor: pointer; font-weight: 600; margin-top: 10px; }
+.answer { margin-top: 10px; padding: 12px; background: #80808014; border-radius: 8px; }
+.unverified { color: #c97a00; font-size: .8rem; margin-top: 8px; }
+.date-list a { display: block; padding: 10px 0; border-bottom: 1px solid #8882; text-decoration: none; }
+a { color: #6363f1; }
+.nav-link { display: inline-block; margin: 8px 0 20px; font-weight: 600; }
+.term-card { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 12px 0; }
+.term-name { font-size: 1.05rem; font-weight: 700; }
+.term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
+.term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
+.term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+.related { margin-top: 12px; padding: 10px 14px; background: #6363f10d; border-radius: 8px; }
+.related-title { font-size: .8rem; font-weight: 700; color: #6363f1; margin-bottom: 4px; }
+.related ul { margin: 4px 0 0; padding-left: 18px; }
+.related li { font-size: .9rem; margin: 2px 0; }
+</style>
+</head><body>
+<a href="../index.html">← 전체 목록</a>
+<h1>2026-10-11 실기 문제</h1>
+<div class="question"><h3>Q1</h3><div class="badge">SQL 결과</div><p>다음 두 테이블이 있을 때, 아래 SQL의 실행 결과를 예측하시오.
+
+schema_sql 참고. 각 부서별 사원 수와 평균 급여(급여가 없는 부서는 사원수 0, 평균급여는 NULL)를 부서명과 함께 출력하되, 사원 수가 많은 순으로 정렬한다.</p><pre><code>-- schema
+CREATE TABLE dept (
+    dept_id INTEGER PRIMARY KEY,
+    dept_name TEXT
+);
+
+CREATE TABLE emp (
+    emp_id INTEGER PRIMARY KEY,
+    emp_name TEXT,
+    dept_id INTEGER,
+    salary INTEGER
+);
+
+INSERT INTO dept VALUES (1, &#x27;개발팀&#x27;);
+INSERT INTO dept VALUES (2, &#x27;영업팀&#x27;);
+INSERT INTO dept VALUES (3, &#x27;인사팀&#x27;);
+INSERT INTO dept VALUES (4, &#x27;기획팀&#x27;);
+
+INSERT INTO emp VALUES (101, &#x27;김철수&#x27;, 1, 3000);
+INSERT INTO emp VALUES (102, &#x27;이영희&#x27;, 1, 3500);
+INSERT INTO emp VALUES (103, &#x27;박민수&#x27;, 2, 2800);
+INSERT INTO emp VALUES (104, &#x27;최지은&#x27;, 1, 4000);
+INSERT INTO emp VALUES (105, &#x27;정우성&#x27;, 2, 3200);
+
+-- query
+SELECT d.dept_name, COUNT(e.emp_id) AS emp_count, AVG(e.salary) AS avg_salary
+FROM dept d
+LEFT OUTER JOIN emp e ON d.dept_id = e.dept_id
+GROUP BY d.dept_id, d.dept_name
+ORDER BY emp_count DESC;</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>dept_name | emp_count | avg_salary
+개발팀 | 3 | 3500.0
+영업팀 | 2 | 3000.0
+인사팀 | 0 | None
+기획팀 | 0 | None</code></pre>
+    <p>dept 테이블에는 개발팀, 영업팀, 인사팀, 기획팀 네 부서가 있고 emp 테이블에는 5명의 사원이 있다. LEFT OUTER JOIN을 사용하므로 dept를 기준으로 emp가 매칭되지 않아도 부서는 결과에 남는다. 개발팀(dept_id=1)에는 김철수(3000), 이영희(3500), 최지은(4000) 세 명이 매칭되어 사원수는 3, 평균급여는 (3000+3500+4000)/3=3500.0이 된다. 영업팀(dept_id=2)에는 박민수(2800), 정우성(3200) 두 명이 매칭되어 사원수는 2, 평균급여는 (2800+3200)/2=3000.0이 된다. 인사팀과 기획팀은 매칭되는 emp 행이 없으므로 emp_id가 NULL로 처리되어 COUNT(e.emp_id)는 0이 되고 AVG(salary)는 NULL이 된다. 마지막으로 emp_count 기준 내림차순 정렬하면 개발팀(3), 영업팀(2), 인사팀(0), 기획팀(0) 순서가 되며 인사팀과 기획팀은 동률이므로 삽입 순서(혹은 dept_id 순)대로 나온다.</p>
+    
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q2</h3><div class="badge">용어 단답</div><p>주체와 객체에 사전에 부여된 보안등급(Security Label)을 비교하여 접근 허용 여부를 결정하며, 사용자가 임의로 접근 권한을 변경할 수 없고 시스템(보안관리자)이 중앙에서 접근 규칙을 강제하는 접근통제 모델의 명칭을 영문 약어로 쓰시오.</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>MAC (Mandatory Access Control)</code></pre>
+    <p>MAC(강제적 접근통제)는 주체(사용자)와 객체(자원)에 각각 보안등급(비밀, 대외비 등)을 부여하고, 이 레이블을 비교하여 접근을 허용하거나 거부하는 방식이다. 자원 소유자가 임의로 권한을 변경할 수 없고 시스템 관리자가 정한 정책에 따라 강제적으로 통제되는 것이 특징이며, 군사/정부 시스템처럼 보안등급이 명확한 환경에서 주로 사용된다. 이는 자원 소유자가 접근 권한을 자유롭게 부여할 수 있는 DAC(임의적 접근통제)와 대비되며, 사용자의 역할(Role)에 따라 권한을 부여하는 RBAC와도 구분된다. 대표적으로 벨-라파둘라(Bell-LaPadula) 모델이 기밀성을 보장하는 MAC의 한 예로 자주 출제된다.</p>
+    
+<div class="related">
+  <div class="related-title">📎 함께 암기하기</div>
+  <ul><li>DAC: 자원 소유자가 접근권한을 임의로 부여하는 임의적 접근통제</li>
+<li>RBAC: 사용자의 역할(Role)에 따라 권한을 부여하는 역할기반 접근통제</li>
+<li>Bell-LaPadula 모델: 기밀성 유지를 위한 MAC 기반 모델로 No Read Up, No Write Down 원칙 적용</li>
+<li>Biba 모델: 무결성 유지를 위한 모델로 No Write Up, No Read Down 원칙 적용</li>
+<li>OTP: 매번 다른 일회용 비밀번호를 생성해 인증하는 기술</li></ul>
+</div>
+
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q3</h3><div class="badge">용어 단답</div><p>객체 간에 메시지를 주고받는 순서를 생명선(Lifeline)과 활성 구간(Activation Bar)을 사용해 시간 흐름에 따라 표현하는 UML 행위 다이어그램(동적 다이어그램)의 명칭을 쓰시오.</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>시퀀스 다이어그램 (Sequence Diagram)</code></pre>
+    <p>시퀀스 다이어그램은 UML의 행위(동적) 다이어그램 중 상호작용 다이어그램에 속하며, 객체들을 생명선(Lifeline)으로 세로로 배치하고 시간의 흐름에 따라 객체 간 주고받는 메시지를 화살표로 표현한다. 활성 구간(Activation Bar, Focus of Control)은 해당 객체가 실제로 처리를 수행하고 있는 시간을 나타낸다. 유사한 상호작용 다이어그램인 커뮤니케이션 다이어그램(Collaboration Diagram)은 시간 순서보다 객체 간 관계와 메시지 교환 구조를 강조한다는 점에서 차이가 있다. 시험에서는 시퀀스 다이어그램을 구조(정적) 다이어그램인 클래스 다이어그램과 혼동하지 않는 것이 중요하며, 동적 다이어그램에는 시퀀스, 상태(State), 액티비티(Activity), 유스케이스(Use Case), 커뮤니케이션, 타이밍 다이어그램이 포함된다.</p>
+    
+<div class="related">
+  <div class="related-title">📎 함께 암기하기</div>
+  <ul><li>커뮤니케이션 다이어그램: 객체 간 관계와 메시지 흐름을 구조적으로 표현하는 상호작용 다이어그램</li>
+<li>상태 다이어그램: 객체의 상태 변화를 이벤트에 따라 표현하는 행위 다이어그램</li>
+<li>액티비티 다이어그램: 업무 흐름이나 프로세스의 순서를 표현하는 행위 다이어그램</li>
+<li>클래스 다이어그램: 시스템의 정적 구조(클래스, 속성, 관계)를 표현하는 구조 다이어그램</li>
+<li>유스케이스 다이어그램: 시스템과 액터 간의 기능적 상호작용을 표현하는 행위 다이어그램</li></ul>
+</div>
+
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<a class="nav-link" href="../glossary.html">📚 지금까지 나온 용어 정리 보기</a>
+</body></html>

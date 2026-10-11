@@ -27,8 +27,26 @@ a { color: #6363f1; }
 </style>
 </head><body>
 <a href="index.html">← 전체 목록</a>
-<h1>지금까지 나온 용어 정리 (13개)</h1>
+<h1>지금까지 나온 용어 정리 (15개)</h1>
 <p>가나다 순으로 정렬돼 있어요. 여러 번 나온 용어는 그만큼 중요하다는 뜻이니 눈에 익혀두세요.</p>
+
+<div class="term-card">
+  <div class="term-name">MAC (Mandatory Access Control)</div>
+  <div class="term-prompt">주체와 객체에 사전에 부여된 보안등급(Security Label)을 비교하여 접근 허용 여부를 결정하며, 사용자가 임의로 접근 권한을 변경할 수 없고 시스템(보안관리자)이 중앙에서 접근 규칙을 강제하는 접근통제 모델의 명칭을 영문 약어로 쓰시오.</div>
+  <p>MAC(강제적 접근통제)는 주체(사용자)와 객체(자원)에 각각 보안등급(비밀, 대외비 등)을 부여하고, 이 레이블을 비교하여 접근을 허용하거나 거부하는 방식이다. 자원 소유자가 임의로 권한을 변경할 수 없고 시스템 관리자가 정한 정책에 따라 강제적으로 통제되는 것이 특징이며, 군사/정부 시스템처럼 보안등급이 명확한 환경에서 주로 사용된다. 이는 자원 소유자가 접근 권한을 자유롭게 부여할 수 있는 DAC(임의적 접근통제)와 대비되며, 사용자의 역할(Role)에 따라 권한을 부여하는 RBAC와도 구분된다. 대표적으로 벨-라파둘라(Bell-LaPadula) 모델이 기밀성을 보장하는 MAC의 한 예로 자주 출제된다.</p>
+  
+<div class="related">
+  <div class="related-title">📎 함께 암기하기</div>
+  <ul><li>DAC: 자원 소유자가 접근권한을 임의로 부여하는 임의적 접근통제</li>
+<li>RBAC: 사용자의 역할(Role)에 따라 권한을 부여하는 역할기반 접근통제</li>
+<li>Bell-LaPadula 모델: 기밀성 유지를 위한 MAC 기반 모델로 No Read Up, No Write Down 원칙 적용</li>
+<li>Biba 모델: 무결성 유지를 위한 모델로 No Write Up, No Read Down 원칙 적용</li>
+<li>OTP: 매번 다른 일회용 비밀번호를 생성해 인증하는 기술</li></ul>
+</div>
+
+  <div class="term-dates">출제일: 2026-10-11</div>
+</div>
+
 
 <div class="term-card">
   <div class="term-name">MITM(Man-In-The-Middle) 공격</div>
@@ -81,6 +99,24 @@ a { color: #6363f1; }
   <p>스푸핑은 IP, ARP, DNS 등 다양한 계층에서 출발지 정보를 위조하여 정상 사용자로 위장하는 공격 기법이다. 대표적으로 IP 스푸핑, ARP 스푸핑, DNS 스푸핑 등이 있다.</p>
   
   <div class="term-dates">출제일: 2026-10-09</div>
+</div>
+
+
+<div class="term-card">
+  <div class="term-name">시퀀스 다이어그램 (Sequence Diagram)</div>
+  <div class="term-prompt">객체 간에 메시지를 주고받는 순서를 생명선(Lifeline)과 활성 구간(Activation Bar)을 사용해 시간 흐름에 따라 표현하는 UML 행위 다이어그램(동적 다이어그램)의 명칭을 쓰시오.</div>
+  <p>시퀀스 다이어그램은 UML의 행위(동적) 다이어그램 중 상호작용 다이어그램에 속하며, 객체들을 생명선(Lifeline)으로 세로로 배치하고 시간의 흐름에 따라 객체 간 주고받는 메시지를 화살표로 표현한다. 활성 구간(Activation Bar, Focus of Control)은 해당 객체가 실제로 처리를 수행하고 있는 시간을 나타낸다. 유사한 상호작용 다이어그램인 커뮤니케이션 다이어그램(Collaboration Diagram)은 시간 순서보다 객체 간 관계와 메시지 교환 구조를 강조한다는 점에서 차이가 있다. 시험에서는 시퀀스 다이어그램을 구조(정적) 다이어그램인 클래스 다이어그램과 혼동하지 않는 것이 중요하며, 동적 다이어그램에는 시퀀스, 상태(State), 액티비티(Activity), 유스케이스(Use Case), 커뮤니케이션, 타이밍 다이어그램이 포함된다.</p>
+  
+<div class="related">
+  <div class="related-title">📎 함께 암기하기</div>
+  <ul><li>커뮤니케이션 다이어그램: 객체 간 관계와 메시지 흐름을 구조적으로 표현하는 상호작용 다이어그램</li>
+<li>상태 다이어그램: 객체의 상태 변화를 이벤트에 따라 표현하는 행위 다이어그램</li>
+<li>액티비티 다이어그램: 업무 흐름이나 프로세스의 순서를 표현하는 행위 다이어그램</li>
+<li>클래스 다이어그램: 시스템의 정적 구조(클래스, 속성, 관계)를 표현하는 구조 다이어그램</li>
+<li>유스케이스 다이어그램: 시스템과 액터 간의 기능적 상호작용을 표현하는 행위 다이어그램</li></ul>
+</div>
+
+  <div class="term-dates">출제일: 2026-10-11</div>
 </div>
 
 
