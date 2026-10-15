@@ -27,7 +27,7 @@ a { color: #6363f1; }
 </style>
 </head><body>
 <a href="index.html">← 전체 목록</a>
-<h1>지금까지 나온 용어 정리 (20개)</h1>
+<h1>지금까지 나온 용어 정리 (21개)</h1>
 <p>가나다 순으로 정렬돼 있어요. 여러 번 나온 용어는 그만큼 중요하다는 뜻이니 눈에 익혀두세요.</p>
 
 <div class="term-card">
@@ -94,20 +94,20 @@ a { color: #6363f1; }
 
 
 <div class="term-card">
-  <div class="term-name">OSPF (Open Shortest Path First)</div>
-  <div class="term-prompt">자신이 속한 라우터들의 링크 상태(비용, 대역폭 등) 정보를 전체 라우터에 플러딩 방식으로 전파하고, 각 라우터가 이를 바탕으로 다익스트라(Dijkstra) 알고리즘을 이용해 최단 경로 트리를 계산하는 내부 게이트웨이 프로토콜(IGP)은 무엇인가?</div>
-  <p>OSPF는 링크 상태(Link State) 알고리즘을 사용하는 대표적인 내부 게이트웨이 프로토콜로, 각 라우터가 자신과 연결된 링크의 상태 정보를 LSA(Link State Advertisement)를 통해 네트워크 전체에 플러딩하고, 이를 모아 만든 링크 상태 데이터베이스(LSDB)를 바탕으로 다익스트라 알고리즘을 수행해 최단 경로를 계산한다. 이는 이웃 라우터에게만 자신의 라우팅 테이블 전체를 주기적으로 전달하는 거리 벡터(Distance Vector) 방식의 RIP과 대비되는 특징이다. OSPF는 에어리어(Area) 개념을 도입해 대규모 네트워크를 계층적으로 관리할 수 있고 수렴 속도가 빠르다는 장점이 있다. 실기에서는 OSPF를 RIP(거리 벡터, 홉 카운트 기반)이나 BGP(자율 시스템 간 경로 벡터 프로토콜)와 혼동하지 않는 것이 중요하다.</p>
+  <div class="term-name">OSPF (Open Shortest Path First)<span class="term-count">2번 출제</span></div>
+  <div class="term-prompt">AS(자율 시스템) 내부에서 사용되는 IGP(내부 게이트웨이 프로토콜)로, 링크 상태(Link State) 알고리즘을 사용하여 각 라우터가 네트워크 전체의 토폴로지 정보를 파악한 뒤 다익스트라 알고리즘으로 최단 경로를 계산하는 라우팅 프로토콜은 무엇인가?</div>
+  <p>OSPF는 링크 상태 라우팅 프로토콜로, 각 라우터가 자신과 인접한 라우터의 링크 상태 정보를 LSA(Link State Advertisement)를 통해 전체 네트워크에 플러딩하여 모든 라우터가 동일한 네트워크 토폴로지 데이터베이스를 구성하게 한다. 이후 각 라우터는 다익스트라(Dijkstra) 최단 경로 알고리즘을 독립적으로 수행하여 자신을 기준으로 한 최단 경로 트리를 계산한다. 이는 라우팅 테이블을 이웃과 주기적으로 통째로 교환하는 거리 벡터 방식인 RIP과 대비되며, RIP은 홉 수(hop count)만을 메트릭으로 사용하고 최대 15홉이라는 제한이 있다는 점에서 OSPF와 비교 출제된다. 반면 BGP는 AS 간(외부) 라우팅에 사용되는 경로 벡터(Path Vector) 프로토콜로 OSPF와 적용 범위가 다르다는 점도 함께 기억해야 한다. ICMP는 라우팅 프로토콜이 아니라 네트워크 계층에서 오류 보고 및 제어 메시지(예: ping, traceroute)를 전달하는 프로토콜이라는 차이도 실기에서 자주 혼동되는 포인트다.</p>
   
 <div class="related">
   <div class="related-title">📎 함께 암기하기</div>
-  <ul><li>RIP: 홉 카운트 기반의 거리 벡터 라우팅 프로토콜</li>
-<li>BGP: 자율 시스템(AS) 간 경로를 교환하는 외부 게이트웨이 프로토콜</li>
-<li>IGP/EGP: 자율 시스템 내부용/외부용 라우팅 프로토콜 구분</li>
-<li>다익스트라 알고리즘: 최단 경로를 계산하는 그래프 알고리즘</li>
-<li>ICMP: 네트워크 상태 진단 및 오류 메시지를 전달하는 프로토콜</li></ul>
+  <ul><li>RIP: 거리 벡터 방식, 홉 수를 메트릭으로 사용하는 IGP(최대 15홉)</li>
+<li>BGP: AS 간 외부 라우팅에 사용되는 경로 벡터 프로토콜</li>
+<li>ICMP: 네트워크 계층 오류 보고 및 제어 메시지 프로토콜(ping, traceroute)</li>
+<li>다익스트라 알고리즘: 가중치 그래프에서 단일 출발점 최단 경로를 구하는 알고리즘</li>
+<li>AS(자율 시스템): 동일한 라우팅 정책으로 관리되는 네트워크 집합</li></ul>
 </div>
 
-  <div class="term-dates">출제일: 2026-10-14</div>
+  <div class="term-dates">출제일: 2026-10-14, 2026-10-15</div>
 </div>
 
 
@@ -135,6 +135,24 @@ a { color: #6363f1; }
 </div>
 
   <div class="term-dates">출제일: 2026-10-13</div>
+</div>
+
+
+<div class="term-card">
+  <div class="term-name">격리성(Isolation)</div>
+  <div class="term-prompt">데이터베이스 트랜잭션이 동시에 실행될 때, 하나의 트랜잭션이 완료되기 전까지 다른 트랜잭션이 그 중간 연산 결과를 볼 수 없도록 보장하는 ACID 특성을 무엇이라 하는가?</div>
+  <p>격리성은 여러 트랜잭션이 동시에 수행되더라도 각 트랜잭션이 다른 트랜잭션의 연산에 영향을 받지 않고 마치 순차적으로 실행된 것과 같은 결과를 보장하는 특성이다. 격리 수준이 낮으면 Dirty Read, Non-repeatable Read, Phantom Read 같은 이상 현상이 발생할 수 있으며, 격리 수준을 높일수록 이러한 문제는 줄어들지만 동시성 성능은 저하된다. 실기에서는 원자성(Atomicity, 전부 수행되거나 전부 취소), 일관성(Consistency, 트랜잭션 전후 DB가 일관된 상태 유지), 지속성(Durability, 커밋된 결과는 영구 반영)과 묶어서 ACID 전체를 암기해야 하며, 격리성은 특히 트랜잭션 격리 수준(Read Uncommitted, Read Committed, Repeatable Read, Serializable)과 연결지어 자주 출제된다. 인덱스와 직접 연관은 없지만 동시성 제어 기법인 락(Lock)이나 타임스탬프 기법이 격리성을 구현하는 수단으로 언급된다.</p>
+  
+<div class="related">
+  <div class="related-title">📎 함께 암기하기</div>
+  <ul><li>원자성(Atomicity): 트랜잭션의 연산이 전부 반영되거나 전부 취소됨</li>
+<li>일관성(Consistency): 트랜잭션 수행 전후 DB가 일관된 상태를 유지함</li>
+<li>지속성(Durability): 커밋된 트랜잭션의 결과는 시스템 장애에도 영구 보존됨</li>
+<li>트랜잭션 격리 수준: Read Uncommitted, Read Committed, Repeatable Read, Serializable 단계로 구분</li>
+<li>Dirty Read: 커밋되지 않은 다른 트랜잭션의 변경 데이터를 읽는 이상 현상</li></ul>
+</div>
+
+  <div class="term-dates">출제일: 2026-10-15</div>
 </div>
 
 
