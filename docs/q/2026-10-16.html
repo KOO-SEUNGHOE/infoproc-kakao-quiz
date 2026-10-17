@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보처리기사 실기 - 2026-10-16</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "Malgun Gothic", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+h1 { font-size: 1.4rem; }
+.question { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 16px 0; }
+.badge { display: inline-block; font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: #6363f11a; color: #6363f1; margin-bottom: 8px; }
+pre { background: #80808014; padding: 12px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; }
+summary { cursor: pointer; font-weight: 600; margin-top: 10px; }
+.answer { margin-top: 10px; padding: 12px; background: #80808014; border-radius: 8px; }
+.unverified { color: #c97a00; font-size: .8rem; margin-top: 8px; }
+.date-list a { display: block; padding: 10px 0; border-bottom: 1px solid #8882; text-decoration: none; }
+a { color: #6363f1; }
+.nav-link { display: inline-block; margin: 8px 0 20px; font-weight: 600; }
+.term-card { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 12px 0; }
+.term-name { font-size: 1.05rem; font-weight: 700; }
+.term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
+.term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
+.term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+.related { margin-top: 12px; padding: 10px 14px; background: #6363f10d; border-radius: 8px; }
+.related-title { font-size: .8rem; font-weight: 700; color: #6363f1; margin-bottom: 4px; }
+.related ul { margin: 4px 0 0; padding-left: 18px; }
+.related li { font-size: .9rem; margin: 2px 0; }
+</style>
+</head><body>
+<a href="../index.html">← 전체 목록</a>
+<h1>2026-10-16 실기 문제</h1>
+<div class="question"><h3>Q1</h3><div class="badge">SQL 결과</div><p>다음 테이블을 바탕으로 쿼리를 실행했을 때의 결과를 작성하시오.</p><pre><code>-- schema
+CREATE TABLE employee (
+    emp_id INTEGER PRIMARY KEY,
+    name TEXT,
+    dept TEXT,
+    salary INTEGER
+);
+
+INSERT INTO employee VALUES (1, &#x27;김철수&#x27;, &#x27;영업&#x27;, 3000);
+INSERT INTO employee VALUES (2, &#x27;이영희&#x27;, &#x27;영업&#x27;, 3500);
+INSERT INTO employee VALUES (3, &#x27;박민수&#x27;, &#x27;개발&#x27;, 4000);
+INSERT INTO employee VALUES (4, &#x27;최지훈&#x27;, &#x27;개발&#x27;, 4500);
+INSERT INTO employee VALUES (5, &#x27;정수진&#x27;, &#x27;개발&#x27;, 5000);
+INSERT INTO employee VALUES (6, &#x27;한가영&#x27;, &#x27;인사&#x27;, 2800);
+INSERT INTO employee VALUES (7, &#x27;오동훈&#x27;, &#x27;인사&#x27;, 3200);
+INSERT INTO employee VALUES (8, &#x27;서민재&#x27;, &#x27;영업&#x27;, 2900);
+
+-- query
+SELECT dept, COUNT(*) AS cnt, AVG(salary) AS avg_sal
+FROM employee
+GROUP BY dept
+HAVING COUNT(*) &gt;= 3 AND AVG(salary) &gt;= 3000
+ORDER BY avg_sal DESC;</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>dept | cnt | avg_sal
+개발 | 3 | 4500.0
+영업 | 3 | 3133.3333333333335</code></pre>
+    <p>먼저 dept 컬럼 기준으로 GROUP BY를 수행하면 영업(3명: 3000,3500,2900), 개발(3명: 4000,4500,5000), 인사(2명: 2800,3200) 세 그룹으로 나뉜다. HAVING 조건은 COUNT(*) &gt;= 3이면서 AVG(salary) &gt;= 3000인 그룹만 남기는 것이다. 인사 그룹은 인원이 2명이라 COUNT 조건을 만족하지 못해 제외된다. 영업 그룹은 인원이 3명으로 COUNT 조건은 만족하지만 평균 급여가 (3000+3500+2900)/3 = 3133.33으로 계산상 3000 이상이라 통과할 것 같지만 재검토하면 3133.33은 3000 이상이므로 실제로는 조건을 만족한다. 다시 정확히 계산하면 영업 평균은 3133.33, 개발 평균은 (4000+4500+5000)/3=4500으로 두 그룹 모두 조건을 만족하지만 ORDER BY avg_sal DESC로 정렬하면 개발이 먼저 나오고 영업이 그 다음에 나온다.</p>
+    
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q2</h3><div class="badge">용어 단답</div><p>OSI 7계층 모델에서 오류 검출 및 복구, 흐름 제어, 다중화(세그먼트화) 기능을 통해 종단 간(End-to-End) 신뢰성 있는 데이터 전송을 보장하며, TCP/UDP와 같은 프로토콜이 속하는 계층의 이름을 쓰시오.</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>전송 계층 (Transport Layer)</code></pre>
+    <p>전송 계층은 OSI 7계층 중 4계층에 해당하며, 송신 측과 수신 측 사이의 논리적 통신 경로를 제공하여 데이터를 신뢰성 있게 전달하는 역할을 한다. 주요 기능으로는 포트 번호를 이용한 다중화/역다중화, 세그먼트 단위의 분할과 재조립, 오류 검출 및 재전송, 흐름 제어와 혼잡 제어가 있다. TCP는 연결 지향형으로 신뢰성을 보장하는 반면 UDP는 비연결형으로 신뢰성을 보장하지 않는다는 점이 실기에서 자주 비교 출제된다. TCP/IP 4계층 모델에서는 이 계층이 그대로 전송 계층으로 대응되어 OSI 모델과 직접 매핑되는 몇 안 되는 계층 중 하나이다. 네트워크 계층(3계층)이 라우팅을 통한 경로 선택을 담당하는 것과 달리, 전송 계층은 종단 간 통신의 품질을 책임진다는 차이를 구분해야 한다.</p>
+    
+<div class="related">
+  <div class="related-title">📎 함께 암기하기</div>
+  <ul><li>네트워크 계층: IP 주소 기반 라우팅과 경로 선택을 담당하는 3계층</li>
+<li>세션 계층: 통신 세션의 설정, 유지, 종료를 담당하는 5계층</li>
+<li>TCP: 연결 지향형이며 3-way handshake로 신뢰성을 보장하는 프로토콜</li>
+<li>UDP: 비연결형이며 빠르지만 신뢰성을 보장하지 않는 프로토콜</li>
+<li>TCP/IP 4계층: 네트워크 인터페이스, 인터넷, 전송, 응용 계층으로 단순화된 모델</li></ul>
+</div>
+
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q3</h3><div class="badge">용어 단답</div><p>객체 생성 로직을 서브클래스나 별도의 생성 메서드에 위임하여, 클라이언트 코드가 구체적인 클래스를 직접 지정하지 않고도 객체를 생성할 수 있도록 하는 생성(Creational) 디자인 패턴의 이름을 쓰시오. (상위 클래스에서 객체 생성을 위한 인터페이스만 정의하고, 어떤 클래스의 인스턴스를 만들지는 서브클래스가 결정하는 방식)</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>팩토리 메서드 패턴 (Factory Method Pattern)</code></pre>
+    <p>팩토리 메서드 패턴은 객체 생성을 위한 인터페이스(또는 추상 메서드)를 상위 클래스에서 정의하고, 실제로 어떤 클래스의 인스턴스를 생성할지는 서브클래스에서 결정하도록 위임하는 생성 패턴이다. 이를 통해 클라이언트 코드는 구체적인 클래스 이름을 몰라도 객체를 생성할 수 있어 결합도가 낮아지고 확장성이 높아진다. 비슷한 추상 팩토리 패턴과 자주 혼동되는데, 추상 팩토리는 서로 관련된 여러 객체군을 생성하는 인터페이스를 제공하는 반면 팩토리 메서드는 단일 제품의 생성을 서브클래스에 위임한다는 점에서 차이가 있다. 정보처리기사 실기에서는 생성, 구조, 행위 패턴의 분류와 각 패턴의 대표 예시(싱글톤, 어댑터, 옵저버 등)를 함께 묻는 경우가 많으므로 분류 체계를 함께 암기해야 한다.</p>
+    
+<div class="related">
+  <div class="related-title">📎 함께 암기하기</div>
+  <ul><li>추상 팩토리 패턴: 관련된 객체군을 생성하는 인터페이스를 제공하는 생성 패턴</li>
+<li>싱글톤 패턴: 클래스의 인스턴스를 하나만 생성하도록 보장하는 생성 패턴</li>
+<li>옵저버 패턴: 객체 상태 변화를 다른 객체에 자동 통지하는 행위 패턴</li>
+<li>어댑터 패턴: 호환되지 않는 인터페이스를 연결해주는 구조 패턴</li>
+<li>빌더 패턴: 복잡한 객체의 생성 과정을 단계별로 분리하는 생성 패턴</li></ul>
+</div>
+
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<a class="nav-link" href="../glossary.html">📚 지금까지 나온 용어 정리 보기</a>
+</body></html>
