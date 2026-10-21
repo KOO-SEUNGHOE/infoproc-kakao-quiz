@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보처리기사 실기 - 2026-10-21</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "Malgun Gothic", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+h1 { font-size: 1.4rem; }
+.question { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 16px 0; }
+.badge { display: inline-block; font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: #6363f11a; color: #6363f1; margin-bottom: 8px; }
+pre { background: #80808014; padding: 12px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; }
+summary { cursor: pointer; font-weight: 600; margin-top: 10px; }
+.answer { margin-top: 10px; padding: 12px; background: #80808014; border-radius: 8px; }
+.unverified { color: #c97a00; font-size: .8rem; margin-top: 8px; }
+.date-list a { display: block; padding: 10px 0; border-bottom: 1px solid #8882; text-decoration: none; }
+a { color: #6363f1; }
+.nav-link { display: inline-block; margin: 8px 0 20px; font-weight: 600; }
+.term-card { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 12px 0; }
+.term-name { font-size: 1.05rem; font-weight: 700; }
+.term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
+.term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
+.term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+.related { margin-top: 12px; padding: 10px 14px; background: #6363f10d; border-radius: 8px; }
+.related-title { font-size: .8rem; font-weight: 700; color: #6363f1; margin-bottom: 4px; }
+.related ul { margin: 4px 0 0; padding-left: 18px; }
+.related li { font-size: .9rem; margin: 2px 0; }
+</style>
+</head><body>
+<a href="../index.html">← 전체 목록</a>
+<h1>2026-10-21 실기 문제</h1>
+<div class="question"><h3>Q1</h3><div class="badge">용어 단답</div><p>UML 다이어그램 중, 객체들 사이에서 주고받는 메시지를 시간 흐름에 따라 세로축(생명선)과 가로축(메시지 순서)으로 표현하여 상호작용을 나타내는 다이어그램의 이름을 쓰시오.</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>시퀀스 다이어그램(Sequence Diagram)</code></pre>
+    <p>시퀀스 다이어그램은 UML의 행위(동적) 다이어그램 중 하나로, 객체를 세로선(라이프라인)으로 나타내고 시간의 흐름에 따라 객체 간에 주고받는 메시지를 가로 화살표로 표현합니다. 활성화 구간(activation bar)을 통해 특정 객체가 언제부터 언제까지 실행 상태인지도 나타낼 수 있어 시스템의 동작 순서를 세밀하게 분석할 때 사용됩니다. 비슷한 상호작용을 표현하는 커뮤니케이션 다이어그램과 자주 비교되는데, 커뮤니케이션 다이어그램은 시간 순서보다 객체 간의 연결 관계(링크)를 중심으로 표현한다는 차이가 있습니다. 정보처리기사 실기에서는 UML 다이어그램을 구조적 다이어그램과 행위적 다이어그램으로 분류하는 문제와 함께 자주 출제되므로 분류 기준을 명확히 알아두어야 합니다.</p>
+    
+<div class="related">
+  <div class="related-title">📎 함께 암기하기</div>
+  <ul><li>클래스 다이어그램: 시스템의 정적 구조를 클래스와 관계로 표현하는 구조적 다이어그램</li>
+<li>커뮤니케이션 다이어그램: 객체 간 메시지를 링크 중심으로 표현하는 행위 다이어그램</li>
+<li>유스케이스 다이어그램: 시스템과 액터 간의 기능적 상호작용을 표현하는 행위 다이어그램</li>
+<li>상태 다이어그램: 객체의 상태 변화를 이벤트에 따라 표현하는 행위 다이어그램</li>
+<li>액티비티 다이어그램: 업무 처리 흐름을 순서도 형태로 표현하는 행위 다이어그램</li></ul>
+</div>
+
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q2</h3><div class="badge">용어 단답</div><p>데이터베이스에서 참조하는 테이블의 기본키(또는 후보키)에 없는 값은 외래키 칼럼에 입력할 수 없도록 보장하여, 두 테이블 간의 참조 관계가 항상 일관되게 유지되도록 하는 무결성 제약조건의 이름을 쓰시오.</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>참조 무결성(Referential Integrity)</code></pre>
+    <p>참조 무결성은 외래키(Foreign Key) 값이 반드시 참조되는 테이블의 기본키 값 중 하나와 일치하거나 NULL이어야 한다는 제약조건으로, 이를 통해 존재하지 않는 참조 대상을 가리키는 &#x27;고아 레코드&#x27;가 생기지 않도록 보장합니다. 이 제약조건이 위반되는 상황은 참조하는 테이블에 없는 값을 자식 테이블에 삽입하려 하거나, 부모 테이블의 레코드를 삭제했는데 이를 참조하는 자식 레코드가 남아있을 때 발생하며, 이를 방지하기 위해 CASCADE, SET NULL, RESTRICT 같은 참조 동작 옵션을 지정할 수 있습니다. 개체 무결성(Entity Integrity)이 기본키는 NULL이 될 수 없고 중복될 수 없다는 규칙인 것과 달리, 참조 무결성은 테이블 간의 관계를 다루는 제약조건이라는 점에서 구분해야 합니다. 정보처리기사 실기에서는 도메인 무결성, 개체 무결성, 참조 무결성을 구분하는 문제와 CASCADE/SET NULL 옵션의 동작 차이를 묻는 문제가 함께 출제되는 경향이 있습니다.</p>
+    
+<div class="related">
+  <div class="related-title">📎 함께 암기하기</div>
+  <ul><li>개체 무결성: 기본키는 NULL이 될 수 없고 중복되지 않아야 함</li>
+<li>도메인 무결성: 속성 값이 정의된 도메인(자료형, 범위) 내에 있어야 함</li>
+<li>외래키(Foreign Key): 다른 테이블의 기본키를 참조하는 속성</li>
+<li>CASCADE: 부모 레코드 삭제/수정 시 자식 레코드도 연쇄적으로 삭제/수정되는 옵션</li>
+<li>NOT NULL 제약조건: 특정 칼럼에 NULL 값 입력을 금지하는 제약</li></ul>
+</div>
+
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<a class="nav-link" href="../glossary.html">📚 지금까지 나온 용어 정리 보기</a>
+</body></html>
