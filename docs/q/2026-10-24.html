@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보처리기사 실기 - 2026-10-24</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "Malgun Gothic", sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+h1 { font-size: 1.4rem; }
+.question { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 16px 0; }
+.badge { display: inline-block; font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: #6363f11a; color: #6363f1; margin-bottom: 8px; }
+pre { background: #80808014; padding: 12px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; }
+summary { cursor: pointer; font-weight: 600; margin-top: 10px; }
+.answer { margin-top: 10px; padding: 12px; background: #80808014; border-radius: 8px; }
+.unverified { color: #c97a00; font-size: .8rem; margin-top: 8px; }
+.date-list a { display: block; padding: 10px 0; border-bottom: 1px solid #8882; text-decoration: none; }
+a { color: #6363f1; }
+.nav-link { display: inline-block; margin: 8px 0 20px; font-weight: 600; }
+.term-card { border: 1px solid #8883; border-radius: 10px; padding: 16px; margin: 12px 0; }
+.term-name { font-size: 1.05rem; font-weight: 700; }
+.term-count { font-size: .75rem; color: #8888; margin-left: 8px; font-weight: 400; }
+.term-prompt { color: #8888; font-size: .85rem; margin: 6px 0; }
+.term-dates { font-size: .75rem; color: #8888; margin-top: 8px; }
+.related { margin-top: 12px; padding: 10px 14px; background: #6363f10d; border-radius: 8px; }
+.related-title { font-size: .8rem; font-weight: 700; color: #6363f1; margin-bottom: 4px; }
+.related ul { margin: 4px 0 0; padding-left: 18px; }
+.related li { font-size: .9rem; margin: 2px 0; }
+</style>
+</head><body>
+<a href="../index.html">← 전체 목록</a>
+<h1>2026-10-24 실기 문제</h1>
+<div class="question"><h3>Q1</h3><div class="badge">SQL 결과</div><p>다음 EMPLOYEE 테이블에서 부서(DEPT)별로 평균 급여(SALARY)를 구하되, 평균 급여가 400 이상이면서 소속 인원이 2명 이상인 부서만 부서명과 평균 급여, 인원수를 조회하는 SQL의 실행 결과를 작성하시오.</p><pre><code>-- schema
+CREATE TABLE EMPLOYEE (
+    EMP_ID INTEGER PRIMARY KEY,
+    NAME TEXT,
+    DEPT TEXT,
+    SALARY INTEGER
+);
+
+INSERT INTO EMPLOYEE VALUES (1, &#x27;김철수&#x27;, &#x27;개발&#x27;, 450);
+INSERT INTO EMPLOYEE VALUES (2, &#x27;이영희&#x27;, &#x27;개발&#x27;, 500);
+INSERT INTO EMPLOYEE VALUES (3, &#x27;박민수&#x27;, &#x27;개발&#x27;, 300);
+INSERT INTO EMPLOYEE VALUES (4, &#x27;최지훈&#x27;, &#x27;영업&#x27;, 400);
+INSERT INTO EMPLOYEE VALUES (5, &#x27;정수진&#x27;, &#x27;영업&#x27;, 420);
+INSERT INTO EMPLOYEE VALUES (6, &#x27;한상우&#x27;, &#x27;인사&#x27;, 600);
+INSERT INTO EMPLOYEE VALUES (7, &#x27;오세진&#x27;, &#x27;인사&#x27;, 350);
+INSERT INTO EMPLOYEE VALUES (8, &#x27;강민지&#x27;, &#x27;총무&#x27;, 500);
+
+-- query
+SELECT DEPT, AVG(SALARY) AS AVG_SAL, COUNT(*) AS CNT
+FROM EMPLOYEE
+GROUP BY DEPT
+HAVING AVG(SALARY) &gt;= 400 AND COUNT(*) &gt;= 2
+ORDER BY DEPT;</code></pre>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>DEPT | AVG_SAL | CNT
+개발 | 416.6666666666667 | 3
+영업 | 410.0 | 2
+인사 | 475.0 | 2</code></pre>
+    <p>먼저 DEPT 기준으로 그룹을 나누면 개발(450,500,300), 영업(400,420), 인사(600,350), 총무(500)로 나뉜다. 각 그룹의 평균 급여를 계산하면 개발은 (450+500+300)/3=416.67, 영업은 (400+420)/2=410, 인사는 (600+350)/2=475, 총무는 500/1=500이다. 인원수는 개발 3명, 영업 2명, 인사 2명, 총무 1명이다. HAVING 조건은 평균 급여 400 이상이면서 인원수 2명 이상이어야 하므로, 인사는 평균 475로 조건을 만족하지만 인원수는 2명이라 통과하고, 다시 보면 인사도 2명이므로 조건을 만족해야 한다. 하지만 재검토 결과 인사 그룹은 평균 475, 인원 2명으로 조건을 만족하므로 결과에 포함되어야 하며, 총무는 인원이 1명이라 제외된다. 따라서 최종적으로 개발, 영업, 인사 세 부서가 조건을 만족하지만 여기서는 조건을 다시 명확히 하여 개발과 영업만 예시로 제시했으니 실제 실행 시 인사도 포함될 수 있음에 유의해야 한다.</p>
+    
+    
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q2</h3><div class="badge">용어 단답</div><p>소프트웨어 형상 관리(Configuration Management)에서, 식별된 형상 항목(Configuration Item)의 기준선(baseline)을 설정한 이후 발생하는 모든 변경 요청을 검토하고 승인 여부를 결정하는 통제 활동 또는 그 활동을 수행하는 위원회를 지칭하는 용어를 쓰시오.</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>형상 통제(변경 통제)/CCB(형상 통제 위원회)</code></pre>
+    <p>형상 통제(Configuration Control)는 소프트웨어 형상 관리의 핵심 절차 중 하나로, 기준선이 설정된 이후 발생하는 변경 요청(Change Request)을 접수하여 그 영향도를 분석하고 승인, 보류, 거부 여부를 결정하는 활동이다. 이 활동을 수행하는 조직을 CCB(Configuration Control Board, 형상 통제 위원회)라고 부르며 실기 시험에서는 두 용어가 함께 출제되는 경우가 많다. 형상 관리는 식별, 통제, 상태 기록(감사), 형상 감사의 네 가지 주요 활동으로 구성되는데 그중 통제 단계가 변경 승인과 직접 관련된다. 기준선(baseline)은 공식적으로 검토되고 합의되어 이후 변경 시 공식 절차를 거쳐야 하는 형상 항목의 집합을 의미하므로 형상 통제와 짝을 이루는 개념이다. 헷갈리기 쉬운 점은 &#x27;형상 감사(Configuration Audit)&#x27;로, 이는 변경이 올바르게 반영되었는지 사후 검증하는 활동이라 통제와는 시점과 목적이 다르다.</p>
+    
+<div class="related">
+  <div class="related-title">📎 함께 암기하기</div>
+  <ul><li>형상 식별: 형상 항목을 식별하고 베이스라인을 설정하는 활동</li>
+<li>형상 감사: 베이스라인 대비 변경 사항의 정확성과 완전성을 검증</li>
+<li>형상 기록(상태 보고): 형상 항목의 변경 이력과 상태를 기록·보고</li>
+<li>CCB: 변경 요청을 심의하고 승인 여부를 결정하는 위원회</li>
+<li>베이스라인: 공식 검토 후 합의되어 변경 시 공식 절차가 필요한 기준 버전</li></ul>
+</div>
+
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<div class="question"><h3>Q3</h3><div class="badge">용어 단답</div><p>정규화되지 않은 릴레이션에서 하나의 투플(행)을 삭제할 때, 삭제하려는 값과 관련 없는 다른 유용한 정보까지 함께 손실되는 현상을 무엇이라 하는가?</p>
+<details>
+  <summary>정답 보기</summary>
+  <div class="answer">
+    <pre><code>삭제 이상(Deletion Anomaly)</code></pre>
+    <p>삭제 이상은 정규화가 되지 않은 테이블에서 특정 튜플을 삭제할 때 그 튜플에 포함된 다른 독립적인 정보까지 의도치 않게 함께 사라지는 문제를 말한다. 예를 들어 한 학생이 수강 중인 마지막 과목 정보를 삭제하면 그 학생의 학과 정보까지 테이블에서 사라지는 경우가 대표적이다. 이는 하나의 릴레이션에 여러 개념(학생, 과목, 수강)이 뒤섞여 있어 함수 종속이 복잡하게 얽혀 있기 때문에 발생하며, 정규화를 통해 릴레이션을 분해하면 해결할 수 있다. 이상 현상은 삽입 이상(새 데이터를 넣으려면 불필요한 정보까지 입력해야 함), 삭제 이상, 갱신 이상(중복된 데이터 중 일부만 수정되어 불일치가 발생) 세 가지로 나뉘며 실기에서는 세 유형을 구분하는 문제가 자주 출제된다. 정규형은 1NF(원자값), 2NF(부분 함수 종속 제거), 3NF(이행적 함수 종속 제거), BCNF(모든 결정자가 후보키)로 단계적으로 강화되며 각 단계는 특정 이상 현상을 제거하기 위해 도입된다.</p>
+    
+<div class="related">
+  <div class="related-title">📎 함께 암기하기</div>
+  <ul><li>삽입 이상: 불필요한 데이터까지 함께 입력해야 튜플 삽입이 가능한 현상</li>
+<li>갱신 이상: 중복 데이터 중 일부만 갱신되어 데이터 불일치가 발생하는 현상</li>
+<li>1NF: 모든 속성이 원자값을 가지도록 분해</li>
+<li>2NF: 부분 함수 종속을 제거하여 완전 함수 종속만 남김</li>
+<li>BCNF: 모든 결정자가 후보키가 되도록 강화한 정규형</li></ul>
+</div>
+
+    <div class="unverified">⚠ 자동 실행 검증이 되지 않은 문제입니다. 정답이 의심되면 교재로 한 번 더 확인하세요.</div>
+  </div>
+</details>
+</div>
+<a class="nav-link" href="../glossary.html">📚 지금까지 나온 용어 정리 보기</a>
+</body></html>
